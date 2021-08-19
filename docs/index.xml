@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BD103&#39;s Blog</title>
-    <link>https://bd103.thedev.id/</link>
+    <link>https://bd103.github.io/</link>
     <description>Recent content on BD103&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Aug 2021 12:41:33 -0400</lastBuildDate><atom:link href="https://bd103.thedev.id/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Aug 2021 12:41:33 -0400</lastBuildDate><atom:link href="https://bd103.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New Website</title>
-      <link>https://bd103.thedev.id/posts/new-website/</link>
+      <link>https://bd103.github.io/posts/new-website/</link>
       <pubDate>Thu, 19 Aug 2021 12:41:33 -0400</pubDate>
       
-      <guid>https://bd103.thedev.id/posts/new-website/</guid>
+      <guid>https://bd103.github.io/posts/new-website/</guid>
       <description>Hello, and welcome to my new website / blog!
 Why did you change? I (drastically) changed my website for a number of reasons.
  My old website had a weird style and never got updated I wanted a blog that I could actually use I saw Hugo used by a number of websites and got inspired  What will this mean for the future? Look forward to new posts and updates :)</description>
