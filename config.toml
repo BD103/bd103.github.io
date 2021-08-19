@@ -1,0 +1,5 @@
+baseURL = "https://bd103.thedev.id/"
+languageCode = "en-us"
+title = "BD103's Blog"
+theme = "photophobia"
+publishdir = "docs"

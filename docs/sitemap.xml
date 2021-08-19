@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://bd103.thedev.id/</loc>
+    <lastmod>2021-08-19T12:41:33-04:00</lastmod>
+  </url><url>
+    <loc>https://bd103.thedev.id/posts/new-website/</loc>
+    <lastmod>2021-08-19T12:41:33-04:00</lastmod>
+  </url><url>
+    <loc>https://bd103.thedev.id/posts/</loc>
+    <lastmod>2021-08-19T12:41:33-04:00</lastmod>
+  </url><url>
+    <loc>https://bd103.thedev.id/categories/</loc>
+  </url><url>
+    <loc>https://bd103.thedev.id/tags/</loc>
+  </url>
+</urlset>
