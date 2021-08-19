@@ -1,4 +1,4 @@
-baseURL = "http://bd103.github.io"
+baseURL = "https://bd103.github.io"
 languageCode = "en-us"
 title = "BD103's Blog"
 theme = "photophobia"
