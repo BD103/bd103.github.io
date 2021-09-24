@@ -12,7 +12,6 @@ remote_theme: abhinavs/moonwalk
 
 plugins:
   - jekyll-feed
-  - jekyll-soopr-seo-tag
 
 theme_config:
   appearance: "dark"
