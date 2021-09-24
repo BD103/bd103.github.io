@@ -1,0 +1,30 @@
+title: BD103's Blog
+author: BD103
+email: dont@stalk.me
+description: >- # this means to ignore newlines until "baseurl:"
+  BD103 is an active programmer. They are proficient in Python, Java, and Web Design.
+  This is his blog. You will find a lot of random content. :)
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+github_username:  BD103
+
+remote_theme: abhinavs/moonwalk
+plugins:
+  - jekyll-feed
+
+theme_config:
+  appearance: "dark"
+  back_home_text: "Head back home..."
+  date_format: "%m-%d-%Y"
+  show_description: true
+  show_navbar: true
+  show_footer: true
+  show_projects: false
+  show_old_projects: false
+  show_blog: true
+
+  home:
+    title_projects: Projects and Stuff
+    title_misc_list: Details
+    title_blog: Blog
+    title_old_projects: Old Projects
