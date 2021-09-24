@@ -9,8 +9,10 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  BD103
 
 remote_theme: abhinavs/moonwalk
+
 plugins:
   - jekyll-feed
+  - jekyll-soopr-seo-tag
 
 theme_config:
   appearance: "dark"
