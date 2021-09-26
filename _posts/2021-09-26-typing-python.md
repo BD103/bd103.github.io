@@ -55,7 +55,7 @@ from typing import Any, Union
 
 just_anything: dict[str, Any] = {"a": 3, "b": "py", "c": True}
 
-def okStopPlease(x: Union[str, int]) -> str:
+def say_hi(x: Union[str, int]) -> str:
 	return "hi, " + x
 ```
 
@@ -64,7 +64,7 @@ The `Any` type is the default type. Create a new variable without any hinting, i
 ```python
 from typing import Optional
 
-def forWhen(y: Optional[int]=None):
+def for_when(y: Optional[int]=None):
 	pass
 ```
 
@@ -80,10 +80,10 @@ Python 3.10 is coming out soon! With it comes a whole lot of stuff, but there ar
 # A new union operator!
 from typing import Union
 
-def squareOld(num: Union[int, float]) -> Union[int, float]:
+def square_old(num: Union[int, float]) -> Union[int, float]:
 	return num ** 2
 
-def squareNew(num: int | float) -> int | float:
+def square_new(num: int | float) -> int | float:
 	return num ** 2
 ```
 
