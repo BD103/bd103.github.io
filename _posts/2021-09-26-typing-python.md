@@ -83,6 +83,7 @@ from typing import Union
 def square_old(num: Union[int, float]) -> Union[int, float]:
 	return num ** 2
 
+# Works exactly the same as square_old
 def square_new(num: int | float) -> int | float:
 	return num ** 2
 ```
