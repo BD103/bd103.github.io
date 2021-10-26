@@ -2,7 +2,7 @@
 layout: post
 title:  "New Website"
 date:   2021-09-23 22:05:53 +0000
-tags: announcement
+tags: info
 ---
 
 Hello, and welcome to my new website / blog!
