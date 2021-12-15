@@ -1,2 +1,2 @@
 language = "nix"
-run = "bundle exec jekyll serve -H 0.0.0.0"
+run = "bundle exec jekyll serve -q -H 0.0.0.0"
