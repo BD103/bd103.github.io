@@ -55,4 +55,6 @@ There are many Minecraft mappings out there. The most popular are:
 
 Use Yarn mappings when possible. They are actively maintained and are published under the [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/). If you want to use Yarn with Forge, I recommend looking in to the [Architectury](https://github.com/architectury) project. (You can also see [my question](https://github.com/FabricMC/yarn/issues/2883) on this subject.) If you have any more questions, feel free to [ask me here](https://github.com/BD103/BD103/issues). See you around!
 
+-----
+
 _I apologize if this post is difficult to read / understand. I wrote it a while ago (November 26) but am only now posting it December 15. Please report any errors or inconsistencies in [the issues section](https://github.com/BD103/bd103.github.io/issues) of my website's code. Thanks!_
