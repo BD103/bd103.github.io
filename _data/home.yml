@@ -1,13 +1,19 @@
 navbar_entries:
   - title: About
     url: about
-  
+
   - title: Blog
     url: blog
-  
+
+  - title: Python Package
+    url: BD103-Python
+
+  - title: Milkshakes
+    url: Milkshakes
+
 footer_entries:
   - title: Github
     url: https://github.com/BD103/bd103.github.io
-  
+
   - title: Feed
     url: feed.xml
