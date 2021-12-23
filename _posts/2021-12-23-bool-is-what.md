@@ -69,7 +69,7 @@ False
 
 Curious. Just because 1 and True have the same value does not mean that they have the same id.
 
-After some more invesitgation, I found [this paragraph](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) in the Python docs.
+After some more investigation, I found [this paragraph](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) in the Python docs.
 
 > There are three distinct numeric types: integers, floating point numbers, and complex numbers.
 > **In addition, Booleans are a subtype of integers.**
