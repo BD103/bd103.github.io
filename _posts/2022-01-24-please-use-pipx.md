@@ -1,5 +1,7 @@
 Hello, and welcome back to another blog post. **Please use Pipx!**
 
+![Pipx Logo](https://raw.githubusercontent.com/pypa/pipx/main/logo.png)
+
 ## What is it?
 
 Pipx is a tool for installing command-line Python projects in isolated environments, meaining that it has the pros of Pip but it doesn't have dependency conflict.
