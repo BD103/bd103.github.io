@@ -72,18 +72,20 @@ Using the `Optional` keyword is when the variable can either be `None` or the ty
 
 ## New in 3.10
 
-> _Note:_ This version is not out, so the examples **probably will not work**! You have been warned.
+> ~~**Note:** This version is not out, so the examples **probably will not work**! You have been warned.~~
+>
+> **Update:** Python 3.10 has been released! You can use all the new features by downloading it [here](https://www.python.org/downloads/).
 
-Python 3.10 is coming out soon! With it comes a whole lot of stuff, but there are some [specific things](https://docs.python.org/3.10/whatsnew/3.10.html#new-features-related-to-type-hints) that are very exciting!
+~~Python 3.10 is coming out soon!~~ With Python 3.10's release comes a whole lot of stuff, but there are some [specific things](https://docs.python.org/3.10/whatsnew/3.10.html#new-features-related-to-type-hints) that are very exciting! To be more specific, a new union operator that can be used in typing.
 
 ```python
-# A new union operator!
 from typing import Union
 
+# 3.9 and older
 def square_old(num: Union[int, float]) -> Union[int, float]:
 	return num ** 2
 
-# Works exactly the same as square_old
+# 3.10+
 def square_new(num: int | float) -> int | float:
 	return num ** 2
 ```
