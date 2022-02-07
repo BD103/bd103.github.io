@@ -58,9 +58,10 @@ The following are a list of bookmarklets I have come across in my journey throug
 
 ## Credits
 
-Sadly not all credit can go to where credit is due, sense I can not remember everything. Some ones that I do remember are:
+Sadly not all credit can go to where credit is due, since I cannot remember everything. Some ones that I do remember are:
 
 - [Gunner Basil](https://www.gbasil.dev/bookmarklets)
+- [Ahmad Sharif](https://superuser.com/a/1499930) for Forceful Pasting
 
 *I also edited and created a few myself (¬､¬)*
 
