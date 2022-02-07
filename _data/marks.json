@@ -9,6 +9,11 @@
       "name": "Kill Element",
       "desc": "Click any element to remove it",
       "data": "javascript:for(var i=0; i<(document.getElementsByTagName('a')).length; i++) {(document.getElementsByTagName('a')[i]).style.pointerEvents = 'none';}function handler(e) {e = e || window.event;var target = e.target || e.srcElement;target.style.display = 'none';document.removeEventListener('click', handler, false);cursor('default');for(var i=0; i<(document.getElementsByTagName('a')).length; i++) {(document.getElementsByTagName('a')[i]).style.pointerEvents = 'initial';}}document.addEventListener('click', handler, false);cursor('crosshair');function cursor(cur) { document.body.style.cursor = cur; }"
+    },
+    {
+      "name": "Forceful Pasting",
+      "desc": "This forcefully allows pasting, even if a site tries to disable it with Javascript",
+      "data": "javascript:(function()%7Bvar allowPaste %3D function(e)%7Be.stopImmediatePropagation()%3Breturn true%3B%7D%3Bdocument.addEventListener('paste'%2C allowPaste%2C true)%7D)()"
     }
   ],
   "fun": [
