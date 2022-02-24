@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Please Use Pipx"
+date: 2022-01-24 12:00:00 +0000
+tags: guide
+---
+
 Hello, and welcome back to another blog post. **Please use Pipx!**
 
 ![Pipx Logo](https://raw.githubusercontent.com/pypa/pipx/main/logo.png)
