@@ -29,13 +29,13 @@ These cookies persist between browser sessions. They are deleted once they expir
 
 There are many modifiers and attributes that a server can specify for a cookie.
 
-|Modifier|Description|
-|-|-|
-|Expiration|Tells the browser when this cookie should be removed.|
-|Domain|Tells the browser which websites this cookie should be sent to.|
-|Path|Tells the browser which pages on the specified site should recieve this cookie.|
-|Secure|Requires the browser to only send this cookie over an encrypted connection. This prevents programs from "intercepting" connections and reading the contents of the cookie.|
-|HttpOnly|Prevents client scripts from accessing the cookie. This means that while you can still see the cookie, any code being run on your computer cannot.|
+| Modifier   | Description                                                                                                                                                                |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Expiration | Tells the browser when this cookie should be removed.                                                                                                                      |
+| Domain     | Tells the browser which websites this cookie should be sent to.                                                                                                            |
+| Path       | Tells the browser which pages on the specified site should recieve this cookie.                                                                                            |
+| Secure     | Requires the browser to only send this cookie over an encrypted connection. This prevents programs from "intercepting" connections and reading the contents of the cookie. |
+| HttpOnly   | Prevents client scripts from accessing the cookie. This means that while you can still see the cookie, any code being run on your computer cannot.                         |
 
 ## How to view cookies for a site
 

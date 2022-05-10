@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "New Website"
-date:   2021-09-23 22:05:53 +0000
+title: "New Website"
+date: 2021-09-23 22:05:53 +0000
 tags: info
 ---
 

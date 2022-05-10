@@ -23,8 +23,7 @@ Or can you?
 
 Pipx allows you to run these tools from the command-line without worrying about dependency conflicts because each tool has a separate [virtual environment](https://docs.python.org/3/library/venv.html).
 
-> "Install and Run Python Applications in Isolated Environments"
-> -[Pipx Website](https://pypa.github.io/pipx/)
+> "Install and Run Python Applications in Isolated Environments" -[Pipx Website](https://pypa.github.io/pipx/)
 
 ## Use Cases
 
@@ -77,7 +76,7 @@ I used [this project](https://pypi.org/project/pipx-in-pipx/) to install Pipx on
 
 To do this, run the following command:
 
-```console
+```shell
 $ python -m pip install pipx-in-pipx
 ```
 
@@ -86,28 +85,29 @@ This will take longer to load than most packages, but **this is intentional**.
 There are a few side-effects of doing this method, namely:
 
 - Running `pipx uninstall-all` will also uninstall Pipx. This is intentional.
-	- You can fix this by installing `pipx-in-pipx` again
+  - You can fix this by installing `pipx-in-pipx` again
 - The Python version used by Pipx will be the Python version you used to run the install command.
 
-> "[pipx](https://pipxproject.github.io/pipx/)  has a handy feature to uninstall  _all_  [pipx](https://pipxproject.github.io/pipx/)-managed tools. Because you have now made  [pipx](https://pipxproject.github.io/pipx/)  manage itself, running  pipx  uninstall-all  _will also_  uninstall  [pipx](https://pipxproject.github.io/pipx/).
-> This is not a bug, but a feature. By installing  [pipx](https://pipxproject.github.io/pipx/)  using  pipx-in-pipx, you have expressed an intent that you  _want_  [pipx](https://pipxproject.github.io/pipx/)  to manage itself. If that’s not what you want, this is not the tool for you.
-> If you at any point uninstall your  [pipx](https://pipxproject.github.io/pipx/)-managed  [pipx](https://pipxproject.github.io/pipx/), you can simply  pip install  pipx-in-pipx  again to rebuild it."
-> -[Pipx-in-Pipx PyPI Page](https://pypi.org/project/pipx-in-pipx/)
+> "[pipx](https://pipxproject.github.io/pipx/) has a handy feature to uninstall _all_ [pipx](https://pipxproject.github.io/pipx/)-managed tools. Because you have now made [pipx](https://pipxproject.github.io/pipx/) manage itself, running pipx uninstall-all _will also_ uninstall [pipx](https://pipxproject.github.io/pipx/).
+> This is not a bug, but a feature. By installing [pipx](https://pipxproject.github.io/pipx/) using pipx-in-pipx, you have expressed an intent that you _want_ [pipx](https://pipxproject.github.io/pipx/) to manage itself. If that’s not what you want, this is not the tool for you.
+> If you at any point uninstall your [pipx](https://pipxproject.github.io/pipx/)-managed [pipx](https://pipxproject.github.io/pipx/), you can simply pip install pipx-in-pipx again to rebuild it." -[Pipx-in-Pipx PyPI Page](https://pypi.org/project/pipx-in-pipx/)
 
 ### Simulate Pipx-in-Pipx
 
 If you're unsure about installing a weird package the does a "slightly (but only slightly) evil" thing, you can simulate it yourself! All you need to do is install Pipx in a virtualenv, install Pipx in Pipx, then ensure the path.
 
-```console
+```shell
 # Create and set up virtualenv
 $ python -m venv .venv
 $ source .venv/bin/activate
 (.venv) $ python -m pip install -U pip setuptools wheel
 (.venv) $ python -m pip install -U pipx
+
 # Install Pipx and adjust path
 (.venv) $ pipx install pipx
 (.venv) $ pipx ensurepath
 (.venv) $ deactivate
+
 # Test everything worked
 $ pipx --version
 1.0.0
@@ -117,7 +117,7 @@ If everything works correctly, you should be able to run Pipx outside of the vir
 
 > If you still can't access Pipx outside of the virtualenv, you can set the path manually.
 >
-> ```console
+> ```shell
 > (.venv) $ pipx ensurepath
 > Success! Added /home/user/.local/bin to the PATH environment variable.
 > ...

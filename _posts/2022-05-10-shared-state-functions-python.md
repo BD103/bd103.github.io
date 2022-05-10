@@ -68,10 +68,10 @@ def count():
 
     while True:
         yield x
-		x += 1
+        x += 1
 
 def bar(msg: str, _count=count()):
-	print(f"[{next(_count)}] {msg}")
+    print(f"[{next(_count)}] {msg}")
 ```
 
 1. We create a iterator called `count()`. Every time we call `next(my_count)`, it will return the next value in a sequence of numbers. It would return 0, then 1, then 2, etc.
@@ -104,7 +104,7 @@ Another way to implement this patter would be to have a global variable that `ba
 _BAZ_COUNT = count()
 
 def baz(msg: str):
-	print(f"[{next(_BAZ_COUNT)}] {msg}")
+    print(f"[{next(_BAZ_COUNT)}] {msg}")
 ```
 
 This would still work the same, except for the fact than any part of the program can change `_BAZ_COUNT`. That doesn't mean changing the count isn't possible in the previous example. The function caller could easily call `bar(_count=another_count)`.

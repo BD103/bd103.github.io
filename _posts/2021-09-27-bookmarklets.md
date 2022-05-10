@@ -53,6 +53,7 @@ The following are a list of bookmarklets I have come across in my journey throug
 ## Tests
 
 <script>var x = 0;</script>
+
 <button type="button" onclick="document.getElementById('autoclick-count').innerHTML = 'Count: ' + x; x++;">Click!</button>
 <span id="autoclick-count">Click the button!</span>
 
@@ -63,9 +64,9 @@ Sadly not all credit can go to where credit is due, since I cannot remember ever
 - [Gunner Basil](https://www.gbasil.dev/bookmarklets)
 - [Ahmad Sharif](https://superuser.com/a/1499930) for Forceful Pasting
 
-*I also edited and created a few myself (¬､¬)*
+_I also edited and created a few myself (¬､¬)_
 
------
+---
 
 Cya,
 

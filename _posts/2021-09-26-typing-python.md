@@ -21,7 +21,7 @@ y = 6
 
 # This would raise an error in a type checker
 # But cPython will not doing anything about it
-z: bool = "a" 
+z: bool = "a"
 ```
 
 Basic type hinting is `var_name: var_type`. This works in almost all instances of defining variables. You'll notice that variable `z` is special. Since this is just type _hinting_, it is not strict. If you break your hints, Python will not care.
@@ -30,12 +30,12 @@ In the case that you use a linter, this may raise an error. Make sure to try you
 
 ```python
 def example_func(param1: str, param2: int=5) -> bool:
-	print(param1)
-	# If param2 is greater than 5, return True
-	return param2 > 5
+    print(param1)
+    # If param2 is greater than 5, return True
+    return param2 > 5
 ```
 
-This example gives a bit more *functionality*. (Laugh at my jokes, please.) Here you can see you can give parameters the same kind of type hinting as normal variables. This is actually more common than the previous. A lot of popular packages and libraries hint their functions but not their normal variables.
+This example gives a bit more _functionality_. (Laugh at my jokes, please.) Here you can see you can give parameters the same kind of type hinting as normal variables. This is actually more common than the previous. A lot of popular packages and libraries hint their functions but not their normal variables.
 
 You can also see the `->`. This is a new figure that specifies what kind of variables the function returns. Here, for instance, it is a string.
 
@@ -56,7 +56,7 @@ from typing import Any, Union
 just_anything: dict[str, Any] = {"a": 3, "b": "py", "c": True}
 
 def say_hi(x: Union[str, int]) -> str:
-	return "hi, " + x
+    return "hi, " + x
 ```
 
 The `Any` type is the default type. Create a new variable without any hinting, it has the `Any` type. This type can be anything. The `Union` type means "either." So in the example, `x` can either be a string or an integer.
@@ -65,7 +65,7 @@ The `Any` type is the default type. Create a new variable without any hinting, i
 from typing import Optional
 
 def for_when(y: Optional[int]=None):
-	pass
+    pass
 ```
 
 Using the `Optional` keyword is when the variable can either be `None` or the type specified. `Optional[type]` is the same as `Union[type, None]`.
@@ -83,16 +83,16 @@ from typing import Union
 
 # 3.9 and older
 def square_old(num: Union[int, float]) -> Union[int, float]:
-	return num ** 2
+    return num ** 2
 
 # 3.10+
 def square_new(num: int | float) -> int | float:
-	return num ** 2
+    return num ** 2
 ```
 
 The `|` symbol has been added! It will replace the `Union` type, and makes writing functions a lot easier. (It can also merge two dictionaries together with `{dict1 | dict2}`!)
 
------
+---
 
 Thank you for reading my blog, and I hope that this tutorial has helped you! (At least now whenever someone asks me what `->` does I can send them this.) If you have any questions, feel free to [raise a question on Github](https://github.com/BD103/bd103.github.io/issues). Thanks, and see you!
 

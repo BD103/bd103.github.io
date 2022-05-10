@@ -41,7 +41,7 @@ def smart_encode(self, o: t.Any) -> t.Union[str, list[str]]:
         )
 ```
 
-*Aha!* We found it. The first line detects whether it is a number or not. To fix this, let's detect whether it is a bool or not.
+_Aha!_ We found it. The first line detects whether it is a number or not. To fix this, let's detect whether it is a bool or not.
 
 ```python
 >>> isinstance(True, int)
@@ -50,7 +50,7 @@ True
 False
 ```
 
-*Just because a boolean is an integer doesn't mean that an integer is a boolean.*
+_Just because a boolean is an integer doesn't mean that an integer is a boolean._
 
 ## Implications
 

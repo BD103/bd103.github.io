@@ -3,6 +3,7 @@ layout: post
 title: "The Ramblings of Fabric and Forge"
 date: 2021-11-26 15:10:13 +0000
 tags: talk
+published: false
 ---
 
 I have been playing Minecraft for a very long time. The exact time is hard to calculate, but I remember playing Pocket Edition before andesite, granite, and diorite.
@@ -44,17 +45,17 @@ This is perfectly fine and good for everyone but modders. People who want to edi
 There are many Minecraft mappings out there. The most popular are:
 
 - Offical Mappings (MojMaps)
-    - These just recently have been published with Minecraft snapshots and recent versions. It is nice that Mojang is willing to accept that modders need source code, but it has a **restrictive license**.
-    - This is not legal advice. Do what you want, but I caution that you stay away from these mappings until we are positive they are safe. For more information, [read this article on it](http://cpw.github.io/MinecraftMappingData.html).
+  - These just recently have been published with Minecraft snapshots and recent versions. It is nice that Mojang is willing to accept that modders need source code, but it has a **restrictive license**.
+  - This is not legal advice. Do what you want, but I caution that you stay away from these mappings until we are positive they are safe. For more information, [read this article on it](http://cpw.github.io/MinecraftMappingData.html).
 - MCP (Searge Mappings)
-    - If I'm to be completely honest, I don't know a lot about MCP. What I do know is that they have been around the longest and were developed by Searge, one of the Minecraft developers.
+  - If I'm to be completely honest, I don't know a lot about MCP. What I do know is that they have been around the longest and were developed by Searge, one of the Minecraft developers.
 - Yarn (Fabric Mappings)
-    - Yarn mappings are developed for the use in the Fabric loader. It is under one of the most unrestrictive licenses in the world, and supports every snapshot from around 1.14 onwards. There is a strict [naming convention](https://github.com/FabricMC/yarn/blob/1.18.1/CONVENTIONS.md), so you can easily guess what a method does. They are my preferred mappings since they are also heavily documented. ~ YAY ~
+  - Yarn mappings are developed for the use in the Fabric loader. It is under one of the most unrestrictive licenses in the world, and supports every snapshot from around 1.14 onwards. There is a strict [naming convention](https://github.com/FabricMC/yarn/blob/1.18.1/CONVENTIONS.md), so you can easily guess what a method does. They are my preferred mappings since they are also heavily documented. ~ YAY ~
 
 ### TL;DR
 
 Use Yarn mappings when possible. They are actively maintained and are published under the [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/). If you want to use Yarn with Forge, I recommend looking in to the [Architectury](https://github.com/architectury) project. (You can also see [my question](https://github.com/FabricMC/yarn/issues/2883) on this subject.) If you have any more questions, feel free to [ask me here](https://github.com/BD103/BD103/issues). See you around!
 
------
+---
 
 _I apologize if this post is difficult to read / understand. I wrote it a while ago (November 26) but am only now posting it December 15. Please report any errors or inconsistencies in [the issues section](https://github.com/BD103/bd103.github.io/issues) of my website's code. Thanks!_

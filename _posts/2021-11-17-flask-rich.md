@@ -44,8 +44,10 @@ If you are using a virtual environment, try this:
 ```shell
 # Create venv
 python -m venv .venv
+
 # Activate
 source .venv/bin/activate
+
 # Install
 python -m pip install -U pip
 python -m pip install -U flask-rich
@@ -85,6 +87,7 @@ You can then make this global by running the following (not recommended):
 ```shell
 poetry build
 cd dist/
+
 # Replace the asterisks with the version
 pip install -U Flask_Rich-*.*.*-py3-none-any.whl
 ```
@@ -116,10 +119,10 @@ If you use a more complex project structure and want to avoid circular imports, 
 
 ```
 project/
-  __init__.py
-  app.py
-  bridge.py
-  ...
+    __init__.py
+    app.py
+    bridge.py
+    ...
 ```
 
 ```python
@@ -136,12 +139,12 @@ from flask import Flask
 from .bridge import rich
 
 def create_app(name: str) -> Flask:
-  app = Flask(name)
-  rich.init_app(app)
+    app = Flask(name)
+    rich.init_app(app)
 
-  ...
+    ...
 
-  return app
+    return app
 ```
 
 ### Configuration
