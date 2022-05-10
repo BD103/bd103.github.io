@@ -1,2 +1,8 @@
-language = "nix"
 run = "bundle exec jekyll serve -q -H 0.0.0.0"
+language = "nix"
+hidden = [
+    "_site"
+]
+
+[nix]
+channel = "stable-21_11"

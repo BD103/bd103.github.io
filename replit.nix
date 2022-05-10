@@ -1,6 +1,10 @@
 { pkgs }: {
-  deps = [
-    pkgs.ruby
-    pkgs.vim
-  ];
+    deps = [
+        pkgs.ruby
+        pkgs.bundler
+
+        pkgs.nodePackages.prettier
+
+        pkgs.vim
+    ];
 }
