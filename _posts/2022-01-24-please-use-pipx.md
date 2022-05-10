@@ -43,7 +43,7 @@ As soon as I realized Pipx worked with Poetry, I was instantly sold. Poetry is m
 
 Instead, just run:
 
-```console
+```shell
 $ pipx install poetry
 ```
 

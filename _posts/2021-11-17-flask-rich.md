@@ -36,21 +36,21 @@ Installing Flask-Rich with PIP is very easy. If you want it global (available to
 
 ```shell
 # Also updates an existing version if you already have it
-python -m pip install -U flask-rich
+$ python -m pip install -U flask-rich
 ```
 
 If you are using a virtual environment, try this:
 
 ```shell
 # Create venv
-python -m venv .venv
+$ python -m venv .venv
 
 # Activate
-source .venv/bin/activate
+$ source .venv/bin/activate
 
 # Install
-python -m pip install -U pip
-python -m pip install -U flask-rich
+$ python -m pip install -U pip
+$ python -m pip install -U flask-rich
 ```
 
 ### Poetry
@@ -58,7 +58,7 @@ python -m pip install -U flask-rich
 This environment is even easier than PIP! Make sure you have an existing pyproject.toml file with `poetry init`:
 
 ```shell
-poetry add flask-rich
+$ poetry add flask-rich
 ```
 
 For more information on using Poetry, [check out their website here](https://python-poetry.org/).
@@ -73,23 +73,23 @@ If you want the most bleeding-edge tech, you can clone the repository with Git. 
 
 ```shell
 # Git
-git clone https://github.com/BD103/Flask-Rich.git
-cd Flask-Rich/
+$ git clone https://github.com/BD103/Flask-Rich.git
+$ cd Flask-Rich/
 
 # Poetry
-poetry lock
-poetry install
-poetry shell
+$ poetry lock
+$ poetry install
+$ poetry shell
 ```
 
 You can then make this global by running the following (not recommended):
 
 ```shell
-poetry build
-cd dist/
+$ poetry build
+$ cd dist/
 
 # Replace the asterisks with the version
-pip install -U Flask_Rich-*.*.*-py3-none-any.whl
+$ pip install -U Flask_Rich-*.*.*-py3-none-any.whl
 ```
 
 ## Usage
