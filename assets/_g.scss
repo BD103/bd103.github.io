@@ -1,0 +1,17 @@
+@use "sass:color";
+
+$primary: #0c5;
+$primary-light: color.adjust($primary, $lightness: 50%, $saturation: -30%);
+$primary-dark: color.adjust($primary, $lightness: -15%, $saturation: 20%);
+
+$background-color: white;
+
+$text-color: #333;
+$text-color-strong: black;
+$text-color-weak: #555;
+$text-color-primary: $primary;
+
+$border-radius: 30px;
+$border-color: black;
+
+$transition-delay: 200ms;

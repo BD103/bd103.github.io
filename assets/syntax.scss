@@ -1,0 +1,19 @@
+:root {
+    // TODO: Don't hardcode colors
+    --shiki-token-keyword: #0c5;
+    --shiki-token-comment: #666;
+    --shiki-token-constant: #070;
+}
+
+// Code blocks
+pre {
+    max-width: 40rem;
+    overflow: scroll;
+}
+
+// Inline code
+p code {
+    color: g.$primary-dark;
+    background-color: g.$primary-light;
+    padding: 0.1rem 0.25rem;
+}
