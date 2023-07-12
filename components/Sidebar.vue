@@ -11,4 +11,8 @@
     </ul>
 
     <p><NuxtLink to="https://github.com/BD103/bd103.github.io" target="_blank">Source Code</NuxtLink></p>
+    <p>
+        <NuxtLink to="/feed.xml" target="_blank">RSS</NuxtLink>,
+        <NuxtLink to="/atom.xml" target="_blank">Atom</NuxtLink>
+    </p>
 </template>

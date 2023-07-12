@@ -14,8 +14,23 @@ export default defineNuxtConfig({
         }
     },
     devtools: { enabled: true },
+    feed: {
+        sources: [
+            {
+                path: "/feed.xml",
+                type: "rss2",
+                cacheTime: 60 * 60, // TODO: 1 hour
+            },
+            {
+                path: "/atom.xml",
+                type: "atom1",
+                cacheTime: 60 * 60, // TODO: 1 hour
+            },
+        ],
+    },
     modules: [
         "@nuxt/content",
+        "nuxt-module-feed",
     ],
     typescript: {
         // Take Over Mode is enabled
