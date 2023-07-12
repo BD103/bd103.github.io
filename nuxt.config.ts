@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     typescript: {
         // Take Over Mode is enabled
         shim: false,
+        strict: true,
     },
     vite: {
         css: {
