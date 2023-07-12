@@ -15,6 +15,11 @@
                     </NuxtLink>
                 </li>
                 <li>
+                    <NuxtLink to="/history">
+                        History
+                    </NuxtLink>
+                </li>
+                <li>
                     <NuxtLink to="https://github.com/BD103" target="_blank">
                         Github
                     </NuxtLink>
