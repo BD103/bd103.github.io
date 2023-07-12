@@ -7,13 +7,6 @@
                 Home
             </NuxtLink>
         </li>
-        <DevOnly>
-            <li>
-                <NuxtLink to="">
-                    About
-                </NuxtLink>
-            </li>
-        </DevOnly>
         <li>
             <NuxtLink to="/blog">
                 Blog
