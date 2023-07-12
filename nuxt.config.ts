@@ -14,6 +14,9 @@ export default defineNuxtConfig({
         },
     },
     devtools: { enabled: true },
+    eslint: {
+        lintOnStart: false,
+    },
     feed: {
         sources: [
             {
