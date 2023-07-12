@@ -6,13 +6,17 @@
     "clean": "nuxt clean",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "lint": "eslint .",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "@nuxt/content": "^2.7.0",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "@nuxtjs/eslint-module": "^4.1.0",
     "@types/node": "^18.16.18",
+    "eslint": "^8.44.0",
     "normalize.css": "^8.0.1",
     "nuxt": "^3.6.1",
     "nuxt-module-feed": "^1.0.3",

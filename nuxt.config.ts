@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     modules: [
         "@nuxt/content",
         "nuxt-module-feed",
+        "@nuxtjs/eslint-module",
     ],
     typescript: {
         // Take Over Mode is enabled
