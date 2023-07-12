@@ -1,13 +1,12 @@
 import type { NitroCtx } from "nuxt-module-feed";
 import type { Feed } from "feed";
 
-export default defineNitroPlugin((nitro) => {
-    nitro.hooks.hook("feed:generate", async ({ feed }: NitroCtx) => {
-        await createFeed(feed);
-    });
-});
+// @ts-expect-error: Feed plugin hook does not show up in type.
+export default defineNitroPlugin(nitro => nitro.hooks.hook("feed:generate", ({ feed }: NitroCtx) => {
+    createFeed(feed);
+}));
 
-async function createFeed(feed: Feed) {
+function createFeed(feed: Feed) {
     feed.options = {
         id: "https://bd103.github.io",
         title: "BD103's Blog",
@@ -25,8 +24,8 @@ async function createFeed(feed: Feed) {
         // docs: undefined,
 
         author: {
-           name: "BD103",
-           link: "https://bd103.github.io", 
+            name: "BD103",
+            link: "https://bd103.github.io",
         },
         link: "https://bd103.github.io",
         description: "BD103's technical blog about programming!",

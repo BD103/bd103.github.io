@@ -11,7 +11,7 @@ export default defineNuxtConfig({
         highlight: {
             theme: "css-variables",
             preload: ["rust"],
-        }
+        },
     },
     devtools: { enabled: true },
     feed: {
@@ -44,7 +44,7 @@ export default defineNuxtConfig({
             preprocessorOptions: {
                 scss: {
                     // Automatically import the global variables from _g.scss
-                    additionalData: `@use "~/assets/g";`,
+                    additionalData: "@use \"~/assets/g\";",
                 },
             },
         },
