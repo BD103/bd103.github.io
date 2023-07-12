@@ -4,7 +4,9 @@
 
         <ul>
             <li v-for="post of allPosts" :key="post._path">
-                <NuxtLink :to="post._path">{{ post.title }}</NuxtLink>
+                <NuxtLink :to="post._path">
+                    {{ post.title }}
+                </NuxtLink>
             </li>
         </ul>
 

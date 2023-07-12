@@ -11,9 +11,12 @@ export default defineNuxtConfig({
         highlight: {
             theme: "css-variables",
             preload: ["rust"],
-        }
+        },
     },
     devtools: { enabled: true },
+    eslint: {
+        lintOnStart: false,
+    },
     feed: {
         sources: [
             {
@@ -31,6 +34,7 @@ export default defineNuxtConfig({
     modules: [
         "@nuxt/content",
         "nuxt-module-feed",
+        "@nuxtjs/eslint-module",
     ],
     typescript: {
         // Take Over Mode is enabled
@@ -43,7 +47,7 @@ export default defineNuxtConfig({
             preprocessorOptions: {
                 scss: {
                     // Automatically import the global variables from _g.scss
-                    additionalData: `@use "~/assets/g";`,
+                    additionalData: "@use \"~/assets/g\";",
                 },
             },
         },

@@ -9,9 +9,21 @@
         <p>Some of the topics I use and talk about the most include:</p>
 
         <ul>
-            <li><NuxtLink to="https://rust-lang.org" target="_blank">Rust</NuxtLink></li>
-            <li><NuxtLink to="https://nuxt.com" target="_blank">Nuxt</NuxtLink></li>
-            <li><NuxtLink to="https://kotlinlang.org" target="_blank">Kotlin</NuxtLink></li>
+            <li>
+                <NuxtLink to="https://rust-lang.org" target="_blank">
+                    Rust
+                </NuxtLink>
+            </li>
+            <li>
+                <NuxtLink to="https://nuxt.com" target="_blank">
+                    Nuxt
+                </NuxtLink>
+            </li>
+            <li>
+                <NuxtLink to="https://kotlinlang.org" target="_blank">
+                    Kotlin
+                </NuxtLink>
+            </li>
             <li>And more! :)</li>
         </ul>
 
@@ -19,11 +31,17 @@
 
         <ul>
             <li v-for="post of recentPosts" :key="post._path">
-                <NuxtLink :to="post._path">{{ post.title }}</NuxtLink>
+                <NuxtLink :to="post._path">
+                    {{ post.title }}
+                </NuxtLink>
             </li>
         </ul>
 
-        <p><NuxtLink to="/blog">All posts...</NuxtLink></p>
+        <p>
+            <NuxtLink to="/blog">
+                All posts...
+            </NuxtLink>
+        </p>
 
         <h2>Dear Mobile Users</h2>
 
@@ -38,6 +56,6 @@
 const { data: recentPosts } = await useAsyncData(
     "recentPosts",
     // Query the nav and get the 5 most recent posts
-    async () => (await useBlog().nav())?.reverse().slice(0, 5)
+    async () => (await useBlog().nav())?.reverse().slice(0, 5),
 );
 </script>
