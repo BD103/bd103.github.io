@@ -1,4 +1,20 @@
 {
   "root": true,
-  "extends": ["@nuxtjs/eslint-config-typescript"]
+  "extends": ["@nuxtjs/eslint-config-typescript"],
+  "rules": {
+    "indent": ["error", 4],
+    "vue/html-indent": ["error", 4],
+
+    "quotes": ["error", "double"],
+
+    "comma-dangle": ["error", "always-multiline"],
+
+    "semi": ["error", "always"],
+
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }]
+  }
 }
