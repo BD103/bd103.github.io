@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-    kind: "note" | "warning" | "abstract" | "tip",
+    kind: "note" | "warning" | "abstract" | "tip" | "quote",
     title?: string,
 }>();
 
