@@ -153,7 +153,7 @@ Hey, you made it! Congratulations! I hope you enjoyed reading this article and l
 - [`slice::len()`](https://doc.rust-lang.org/1.71.0/src/core/slice/mod.rs.html#141-143)
 - [👀 A sneak peak at VTables](https://github.com/BD103/Blog-Examples/blob/main/ptr-metadata/src/bin/04-sneak-peak.rs)
 
-If you have any questions, feel free to comment on [my post]() in the Rust Users' Forum or contact me [by creating an issue](https://github.com/BD103/BD103/issues) in my Github repository. The source code for all examples in this post can be found [here](https://github.com/BD103/Blog-Examples/tree/main/ptr-metadata).
+If you have any questions, feel free to comment on [my post](https://users.rust-lang.org/t/introduction-to-pointer-metadata/98083) in the Rust Users' Forum or contact me [by creating an issue](https://github.com/BD103/BD103/issues) in my Github repository. The source code for all examples in this post can be found [here](https://github.com/BD103/Blog-Examples/tree/main/ptr-metadata).
 
 Cheers!
 
