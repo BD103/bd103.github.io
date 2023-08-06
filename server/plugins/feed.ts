@@ -41,4 +41,11 @@ function createFeed(feed: Feed) {
         link: "https://bd103.github.io/blog/2023-06-27-global-allocators",
         date: new Date("2023-06-27"),
     });
+
+    feed.addItem({
+        title: "Rust Pointer Metadata",
+        id: "2023-08-06-ptr-metadata",
+        link: "https://bd103.github.io/blog/2023-08-06-ptr-metadata",
+        date: new Date("2023-08-06"),
+    });
 }
