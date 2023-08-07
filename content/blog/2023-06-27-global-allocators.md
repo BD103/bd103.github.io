@@ -174,6 +174,7 @@ And that's it! Thank you for reading this article, I hope you found it interesti
 - The [`Global`](https://doc.rust-lang.org/stable/std/alloc/struct.Global.html) struct, which redirects all allocation calls to the registered global allocator
 - [Pre-RFC: Storage API](https://internals.rust-lang.org/t/pre-rfc-storage-api/18822?u=bd103)
 - [The `wg-allocators` Roadmap](https://github.com/rust-lang/wg-allocators/issues/48)
+- [`allocator_api2`](https://github.com/zakarumych/allocator-api2), for using the allocator API in stable Rust
 
 If you have any questions, feel free to comment on [my post](https://users.rust-lang.org/t/intercepting-allocations-with-the-global-allocator/96277?u=bd103) in the Rust Users' Forum or [create a new issue](https://github.com/BD103/BD103/issues) in my Github repository. The source code for all examples is available [here](https://github.com/BD103/Blog-Examples/tree/main/global-allocator).
 
