@@ -48,4 +48,11 @@ function createFeed(feed: Feed) {
         link: "https://bd103.github.io/blog/2023-08-06-ptr-metadata",
         date: new Date("2023-08-06"),
     });
+
+    feed.addItem({
+        title: "A note on probability",
+        id: "2023-10-23-probability",
+        link: "https://bd103.github.io/blog/2023-10-23-probability",
+        date: new Date("2023-10-23"),
+    });
 }

@@ -1,0 +1,48 @@
+# A note on probability
+
+A friend and I were in an argument a few days ago, and I think there is a very important lesson to take away from it. The problem goes like this:
+
+You’re taking a multiple-choice, timed exam. Each question has 4 possible options: A, B, C, and D. You have 60 seconds left and 10 questions unanswered. You won’t get punished for getting an answer wrong, so your best bet is to guess the answer. What is the best strategy for guessing the correct answer?
+
+# Pick the same answer
+
+My friend argued that the best strategy was to pick a letter, for instance B, and select all Bs. Since there is a 25% chance of each option being correct, selecting all of the same answer gives you the best odds. With 10 questions, there is a `(1 / 4) ^ 10` or 0.0000953674316% chance of getting all 10 correct, with an average of `1 / 4` or 2.5 questions being correct.
+
+While on a generic test this strategy is technically correct, the reasoning behind it is wrong. That’s where my argument comes in.
+
+# Pick random answers
+
+My argument was that there is no difference between selecting all of the same answer and guessing randomly, which my friend disagreed with.
+
+The odds of getting 2 As in a row is `0.25 * 0.25 = 0.625`, or 6.25%. But, the odds of getting an A then a B in a row **is still** `0.25 * 0.25`, or 6.25%. This applies whether you have 2, 10, or 50 questions by solving for `(1 / 4) ^ x`. Since the answer of one question is independent to the answer of another question, there’s no difference between guessing randomly or guessing the same letter.
+
+Both my strategy and my friend’s strategy have the same odds of getting answers right, so they’re both correct. (Though selecting all of the same letter is arguably easier.)
+
+# Except...
+
+There's on exception, though it is dependent on what kind of test you're taking. This exception is the "All of the above are correct" answers. I have found that when this is one of the answers, it is more likely than not that it is the correct one. Its very dependent on who created the test and probably won't work on higher-level exams, but it can work.
+
+```
+3) Select the true statement where x is true and y is false:
+
+a. x && !y
+b. y || x
+c. x ^ y
+d. All of the above are true
+```
+
+"All of the above" answers are usually the last option, D, because there needs to be options above it to actually be correct. I believe that the people creating these tests forget to add "All of the above" to questions where it would be incorrect. Instead, they only add it when it would be correct.
+
+In these cases, we can assign a higher likelihood that "All of the above" answers as correct, compared to the other 3. If each option before had a 25% change of being correct, now it is maybe more like a 24% for A, B, and C and a 28% for D.
+
+With this in mind, the situational but best strategy is selecting all Ds, because 1 or 2 of those questions may have "All of the above" as the correct answer. At worst you still have the 25% chance of being right, at best you have a 28% chance. This is the difference between 2 or 3 questions being right. While small, it still technically is the best option.
+
+# Conclusion
+
+So that was a bit of mathematics, but I think there is a very important lesson to take away from it. In cases of probability, like flipping a coin to be heads multiple times in a row, remember that the odds of getting 5 heads in a row is the same as getting 4 heads and 1 tails. The odds are only different when comparing between getting 5 heads in a row and _not_ getting 5 heads in a row.
+
+But more broadly, I think the most important lesson is to pay attention to simple problems because they often have more depth than you initially realized. Your first assumptions can be incorrect, but if you dig deep and truly consider all the options then you can reach the correct conclusion.
+
+---
+
+If you enjoyed this small article, then please consider subscribing to the <a href="/feed.xml" target="_blank">RSS feed</a>. I post about technical things, usually programming related. (Though this time it was mathematics!) I'm very active on Github, so consider checking out [some of my other projects](https://github.com/BD103). If you found an issue with this post, you can [create an issue](https://github.com/BD103/bd103.github.io) on the repository page. Thank you for stopping by my corner of the internet, and I hope you have a wonderful rest of your day. :)
