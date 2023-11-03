@@ -55,4 +55,11 @@ function createFeed(feed: Feed) {
         link: "https://bd103.github.io/blog/2023-10-23-probability",
         date: new Date("2023-10-23"),
     });
+
+    feed.addItem({
+        title: "Announcing TickLowerPerm",
+        id: "2023-11-03-announcing-ticklowerperm",
+        link: "https://bd103.github.io/blog/2023-11-03-announcing-ticklowerperm",
+        date: new Date("2023-11-03"),
+    });
 }
