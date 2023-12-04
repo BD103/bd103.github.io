@@ -8,7 +8,7 @@ The mod is called TickLowerPerm[^0] It is a [Fabric](https://fabricmc.net/) mod 
 
 You can download the mod on [Modrinth](https://modrinth.com/mod/ticklowerperm), or you can see the code on [Github](https://github.com/BD103/TickLowerPerm). It’s the first mod that I’ve ever published, but it works well! (Mainly due to how simple it is.) I can pretty much guarantee that it will be compatible with all other mods, because it is a singular [mixin](https://github.com/BD103/TickLowerPerm/blob/f07f9b4859b52f306c342dbf7632ba3c113b8db4/src/main/java/io/github/bd103/ticklowerperm/mixin/TickCommandMixin.java) that changes one constant.
 
-I plan on updating the mod for every new snapshot until 1.21 is released[^1]. I'll continue to support major versions of Minecraft afterwards, but I don't plan on targeting snapshots once `/tick` has been stabilized.
+I plan on updating the mod for every new snapshot until 1.20.3 is released[^1]. I'll continue to support major versions of Minecraft afterwards, but I don't plan on targeting snapshots once `/tick` has been stabilized.
 
 [^1]: Usually "updating" just requires adding the new version to `fabric.mod.json` and testing it. I don't think I'll ever need to modify the mixin file unless Mojang developers majorly change the `TickCommand` class.
 
