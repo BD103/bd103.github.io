@@ -1,5 +1,9 @@
 # Announcing TickLowerPerm
 
+::callout{kind="note"}
+TickLowerPerm has been released for stable 1.20.3! You can check it out on [Modrinth](https://modrinth.com/mod/ticklowerperm).
+::
+
 Hey! I made a [Minecraft](https://www.minecraft.net) mod!
 
 The mod is called TickLowerPerm[^0] It is a [Fabric](https://fabricmc.net/) mod that lowers the permission required for the new `/tick` command introduced in snapshot [23w43a](https://minecraft.wiki/w/Java_Edition_23w43a). The makes it so that command blocks and data packs can run the command, opening up a whole new realm of possibilities for mini-games and challenge maps!
