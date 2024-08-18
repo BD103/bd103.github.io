@@ -62,4 +62,11 @@ function createFeed(feed: Feed) {
         link: "https://bd103.github.io/blog/2023-11-03-announcing-ticklowerperm",
         date: new Date("2023-11-03"),
     });
+
+    feed.addItem({
+        title: "4 Years of Bevy",
+        id: "2024-08-18-4-years-of-bevy",
+        link: "https://bd103.github.io/blog/2024-08-18-4-years-of-bevy",
+        date: new Date("2024-08-18"),
+    });
 }

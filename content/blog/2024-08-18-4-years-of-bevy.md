@@ -1,0 +1,98 @@
+# 4 Years of Bevy
+
+It's Bevy's 4th birthday! If you haven't already, read [Cart's post here](https://bevyengine.org/news/bevys-fourth-birthday/). As part of this milestone, I would like to reflect on my journey in the Bevy developer community.
+
+## Wait... Bevy?!
+
+Yeah! I contribute to [Bevy](https://bevyengine.org), an open-source game engine written in [Rust](https://www.rust-lang.org/). I'm a relatively new contributor, having started in November of 2023[^1], but I've accomplished a lot since then. I was inspired after reading the [0.12 announcement post](https://bevyengine.org/news/bevy-0-12/), so I found an issue labeled `D-Good-First-Issue` and tried my best to complete it!
+
+[^1]: This is excluding the one time in September of 2022 where I opened [a PR](https://github.com/bevyengine/bevy/pull/5022) to Bevy that got closed due to immature plugin dependencies.
+
+The change was simple, the review process went well, and it was merged only a day later. I was really excited that I had the chance to contribute to this cool piece of software that I looked up to.
+
+## Finding my place in it all
+
+It wasn't until December where I began working on the aspect of Bevy that I now specialize in: Github Actions. I modified the workflow that publishes <https://dev-docs.bevyengine.org> to upload an artifact instead of force-pushing to the `gh-pages` branch. It took a few attempts, but in the end its result was safer and _far less cursed_.
+
+::callout{kind="note"}
+Github Actions is a continuous integration platform used primarily to test and lint code. It lets you use Github-hosted runners for free for public projects, which I was all for! I setup a lot of CI for my previous hobby projects, so I was already familiar with it before entering the Bevy scene.
+::
+
+The ranks of Bevy contributors are chock-full of ECS enthusiasts and rendering ninjas, but how many CI wizards are there? Not many[^2], and so I found my role. I spent a lot of time improve the quality of the CI jobs and their associated `ci` tool.
+
+[^2]: But not none! I can think of a few off of the top of my head, the most prominent being [François](https://github.com/mockersf).
+
+## What I'm proud of
+
+Then again, I don't just hack around with YAML until [the rectangle of lights acts to my liking](https://xkcd.com/722/). Of all the things I've done, I'm most proud of the following:
+
+### [`bevy-bencher`](https://github.com/TheBevyFlock/bevy-bencher)
+
+I wrote an automated system on Github Actions and <https://bencher.dev> that runs daily benchmarks on Bevy's main branch. It can catch performance regressions, file size changes, and more. In the coming months I hope to:
+
+- Expand on the benchmarks themselves: we aren't tracking enough critical functions!
+- Benchmark every commit, instead of just benchmarking daily.
+- Introduce the [`iai-callgrind`](https://github.com/iai-callgrind/iai-callgrind) harness to track instruction count, not just wall time.[^3]
+
+[^3]: I used to daily-drive MacOS, which didn't support Valgrind, so I originally couldn't work on this. I've since built a PC that runs Linux, so there's nothing blocking me now!
+
+### [`flag-frenzy`](https://github.com/TheBevyFlock/flag-frenzy)
+
+`flag-frenzy` is a tool built to test combinations of Bevy's feature flags. Bevy [has a *lot* of features](https://github.com/bevyengine/bevy/blob/423285cf1cbd86d85db066dbfe26de4fd68333d9/Cargo.toml#L57-L353), and it's really easy to write code that doesn't account for a specific combination. Though there are many popular tools that can test the combinatorial features explosions in Cargo projects, `flag-frenzy` stands out due to its:
+
+- **Memory efficiency**: `flag-frenzy` lazily computes combinations instead of doing it all at once, avoiding large[^4] memory requirements!
+- **Expressive feature configuration**: `flag-frenzy` lets you specify advanced feature requirements using an expressive [TOML DSL](https://github.com/TheBevyFlock/flag-frenzy/blob/ee347bb795b70494fa03809982d3af9b572b9796/docs/4-rules.md).
+- **Work chunking**: Inspired by `cargo-all-features`, `flag-frenzy` lets you [split up work into chunks](https://github.com/TheBevyFlock/flag-frenzy/blob/ee347bb795b70494fa03809982d3af9b572b9796/docs/2-cli.md#dividing-up-work) that you can distribute across multiple machines.
+- **Colorful output**: `flag-frenzy` outputs parsable information using ANSI terminal colors, and it summarizes information in a failure report at the end of the program.
+
+[^4]: I believe it is a factorial increase in memory usage, but I haven't done the math. Feel free to prove me wrong and I'll update this!
+
+### [0.14 Migration Guide](https://bevyengine.org/learn/migration-guides/0-13-to-0-14/)
+
+I wrote the majority of the migration guide for 0.13 to 0.14. I edited [128 different entries](https://github.com/bevyengine/bevy-website/tree/main/release-content/0.14/migration-guides) over the course of [16 pull requests](https://github.com/bevyengine/bevy-website/issues/1396). It was a monumental effort that took over a month, but I am so happy with the final result.
+
+I had a bit of burn-out after this (understandably so!), so I want to thank [Trial](https://github.com/TrialDragon) for reviewing and merging follow-up changes to the guide after I took a break. I've since recovered, so if you find an issue with the guide then feel free to ping me [on Github](https://github.com/BD103)!
+
+### [Contributor's Guide](https://bevyengine.org/contributing/)
+
+I, along with [Nth](https://github.com/nthtensor) and a few others in the working group, have been writing and editing the (soon to be released) Contributor's Guide. Our hope is to consolidate development resources into a single source, improving the on-boarding experience for new contributors, and going into more depth than the existing resources.
+
+At the time of writing, it's very close to being published! [Alice](https://github.com/alice-i-cecile) has been taking the reigns in getting the final changes merged, so all that's left is copy-editing and cleanup.
+
+---
+
+I'm really proud of all the work I put into Bevy, even though it doesn't get much of the spotlight. The only time I got on the glorious release notes was to [deprecate dynamic plugins](https://bevyengine.org/news/bevy-0-14/#deprecate-dynamic-plugins), but I don't mind. There are plenty of talented and wonderful people who deserve recognition just as much as me!
+
+## A thank you letter
+
+The Bevy community is truly a wonderful place to be. So many kind and welcoming people helped me, and I want to take some time to say thank you.
+
+### [Alice](https://github.com/alice-i-cecile)
+
+Alice, you are _hands down_ the best maintainer I have ever worked with. You bring enthusiasm to your work every day and are a staple in the Bevy community. Whether it be a quick review, better wording in documentation, or even arcane Bevy lore, I know I can always reach out to you. Your merge train is a fun way to catch up with all the latest changes, and is something I look forward to each week.
+
+Thank you for all that you do!
+
+### [François](https://github.com/mockersf)
+
+François, you don't get enough credit for the credit you deserve. Your infrastructure and behind-the-scenes work is inspirational, and is the reason you're the unofficial SME-CI. Pixel Eagle, the screenshot testing platform that you built from scratch, is incredibly useful. Not only does it catch bugs, but you also submit PRs that fix them too!
+
+It's been a pleasure working alongside you.
+
+### [Trial](https://github.com/TrialDragon)
+
+Trial, you were one of the first people that I feel like I actually worked with on Bevy. I fondly remember us both working on the website over the span of 2 months, trading reviews and keeping the momentum going. Your expertise with Zola is unmatched, and you have a knowledge of the website's templates and macros that I envy.
+
+Though you may not have realized how much it meant to me as a new contributor, thank you.
+
+---
+
+In the end, 3 thank-you's cannot describe how grateful I am to this community. It takes a true village to keep a project this scale running, so an additional thank you is required to [Cart](https://github.com/cart), [Jan](https://github.com/janhohenheim), [IceSentry](https://github.com/icesentry), [Brezak](https://github.com/brezak), [Jondolf](https://github.com/Jondolf), [Talin](https://github.com/viridia), [Chris](https://github.com/ChristopherBiscardi), [NiseVoid](https://github.com/nisevoid), [Charlotte](https://github.com/tychedelia), [pcwalton](https://github.com/pcwalton), [MrGVSV](https://github.com/MrGVSV), [SkiFire](https://github.com/SkiFire13), [Jasmine](https://github.com/JMS55), [James](https://github.com/james7132), [rparret](https://github.com/rparrett), [Aevyrie](https://github.com/aevyrie), [Joy](https://github.com/maniwani), [Nth](https://github.com/nthtensor), and so many more! You all rock!
+
+If you want to build something awesome with Rust or get into the game development scene, please consider contributing to Bevy! Check out [the issue tracker](https://github.com/bevyengine/bevy/issues?q=is%3Aopen+is%3Aissue+-label%3AX-Controversial+label%3AD-Trivial%2CD-Straightforward), specifically issues labeled `D-Trivial` and `D-Straightforward`. They're how I and so many others got started, so I highly recommend it!
+
+Bevy has been life-changing. I've met so many wonderful people, worked on so many fun things, and helped so many others to do the same. It's truly an era that I will look back on with joy and pride.
+
+Chat with you on [Discord](discord.gg/bevy),
+
+\~ BD103
