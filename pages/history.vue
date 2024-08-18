@@ -4,6 +4,12 @@
 
         <p>A list of notable changes made to this website.</p>
 
+        <HistoryEntry date="August 18, 2024">
+            I switched the website to have a dark gray background and white text instead of white background and black text.
+            My eyes were tired of being blinded, and dark mode looks a lot better in my opinion!
+            This was done after working on my blog post on <NuxtLink to="/blog/2024-08-18-4-years-of-bevy">Bevy's 4th birthday</NuxtLink>.
+        </HistoryEntry>
+
         <HistoryEntry date="June 30, 2023">
             After a full year, I get an idea for writing a blog post on <NuxtLink to="/blog/2023-06-27-global-allocators">custom global allocators in Rust</NuxtLink>.
             In that time, I gained a lot of experience in writing websites with <NuxtLink to="https://nuxt.com">Nuxt</NuxtLink>.
