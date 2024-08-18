@@ -4,7 +4,7 @@ $primary: #0c5;
 $primary-light: color.adjust($primary, $lightness: 50%, $saturation: -30%);
 $primary-dark: color.adjust($primary, $lightness: -15%, $saturation: 20%);
 
-$background-color: white;
+$background-color: #e4f0e9;
 
 $text-color: #333;
 $text-color-strong: black;
