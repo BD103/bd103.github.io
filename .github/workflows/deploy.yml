@@ -3,7 +3,7 @@ name: Deploy
 on:
   # Update on pushes to main
   push:
-    branches: ["main"]
+    branches: [main]
 
   # Allow running workflow manually
   workflow_dispatch:
@@ -16,7 +16,7 @@ permissions:
 
 # Only run one at a time, but don't cancel in-progress deployments
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -25,18 +25,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 9
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: "pnpm"
+          node-version: 18
+          cache: pnpm
       
       - name: Build site
         run: |
@@ -44,9 +44,9 @@ jobs:
           pnpm generate
       
       - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ".output/public"
+          path: .output/public
 
   # Download build's artifact and publish site
   deploy:
@@ -57,4 +57,4 @@ jobs:
     needs: build
     steps:
       - name: Deploy to Github Pages
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
