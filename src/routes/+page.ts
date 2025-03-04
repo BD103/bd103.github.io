@@ -25,7 +25,7 @@ export const load: PageLoad = () => {
   for (const path in pageMetadata) {
     posts.push({
       title: pageMetadata[path].title,
-      href: path.substring(0, path.length - "/+page.svx".length)
+      href: path.substring(0, path.length - "/+page.svx".length),
     });
   }
 
