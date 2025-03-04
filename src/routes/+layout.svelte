@@ -2,7 +2,7 @@
   let { children } = $props();
 </script>
 
-<div class="grid">
+<div class="container">
   <nav>
     <h1>BD103</h1>
 
@@ -64,15 +64,19 @@
     }
   }
 
-  .grid {
+  .container {
+    max-width: 60em;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
 
   /* When on mobile, switch to a single-column grid. */
-  @media (width <= 500px) {
-    .grid {
-      grid-template-columns: 1fr;
+  @media (width <= 820px) {
+    .container {
+      grid-template-columns: 1fr !important;
     }
   }
 </style>
