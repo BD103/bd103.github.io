@@ -2,11 +2,19 @@
 title: Intercepting Allocations with the Global Allocator
 ---
 
+<script lang="ts">
+import Callout from "$lib/Callout.svelte";
+</script>
+
 # Intercepting Allocations with the Global Allocator
 
-<!-- ::callout{kind="abstract" title="PREFACE"}
-This post is directed towards programmers experienced with the [Rust](https://www.rust-lang.org) programming language that are interested in manual memory management. I will not explain some concepts like pointers, statics, etc. If you want to learn how to program in Rust, you can find a helpful page [here](https://www.rust-lang.org/learn).
-:: -->
+<Callout kind="important">
+  {#snippet body()}
+
+    This post is directed towards programmers experienced with the [Rust](https://www.rust-lang.org) programming language that are interested in manual memory management. I will not explain some concepts like pointers, statics, etc. If you want to learn how to program in Rust, you can find a helpful page [here](https://www.rust-lang.org/learn).
+
+  {/snippet}
+</Callout>
 
 It is possible to replace the global heap allocator used by [`Box<T>`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html), [`Vec<T>`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html), and more. This is useful if you want to use a custom allocator like [jemalloc](https://jemalloc.net) for the features it provides, or if you are working in a `#![no_std]` context without an OS allocator.
 
@@ -44,9 +52,13 @@ Take `alloc()` for example. It takes a [`Layout`](https://doc.rust-lang.org/stab
 
 If you are running on a computer that the standard library supports, then you have access to the [`System`](https://doc.rust-lang.org/stable/std/alloc/struct.System.html) default global allocator. If you don't specify a global allocator, then this will be used instead.
 
-<!-- ::callout{kind="tip"}
-`System` uses libc's `malloc` and `free` functions on Unix platforms, while it uses `HeapAlloc` and associated functions on Windows.
-:: -->
+<Callout kind="tip">
+  {#snippet body()}
+
+    `System` uses libc's `malloc` and `free` functions on Unix platforms, while it uses `HeapAlloc` and associated functions on Windows.
+
+  {/snippet}
+</Callout>
 
 Lucky for us, `System` already implements `GlobalAlloc`. Without changing anything, here's an overly verbose program that manually registers the `System` allocator:
 
@@ -66,9 +78,13 @@ fn main() {
 
 To register a global allocator, you initialize it in a [static item](https://doc.rust-lang.org/reference/items/static-items.html) and annotate it with the `#[global_allocator]` attribute. There may only be one global allocator in a binary, but there is no restriction on where the static is and what visibility it has.
 
-<!-- ::callout{kind="warning"}
-It is actually possible for a dependency crate to register a global allocator without the consumer knowing of it. This is **very** bad practice, as the end-user has no control over it. Please don't do this, or at least [feature-gate](https://doc.rust-lang.org/cargo/reference/features.html) it.
-:: -->
+<Callout kind="caution">
+  {#snippet body()}
+
+    It is actually possible for a dependency crate to register a global allocator without the consumer knowing of it. This is **very** bad practice, as the end-user has no control over it. Please don't do this, or at least [feature-gate](https://doc.rust-lang.org/cargo/reference/features.html) it.
+
+  {/snippet}
+</Callout>
 
 ## Wrapping `System`
 
@@ -163,11 +179,15 @@ This allocator keeps a bit of internal state, a `u64` number to be exact. This n
 
 Realistically that is all the knowledge you need to understand this allocator. You may have spotted the `AtomicU64` though with its `load()` and `fetch_add()` calls. This is an advanced synchronization primitive that prevents data races in concurrency. Since the global allocator is used by the entire program, it is perfectly possible for it to be used by multiple threads. Our `AtomicU64` ensures that every allocation is counted, no matter where it was called from.
 
-As much as I would love to talk about them, threads and data races are out of the scope of this article. (It's getting long enough as it is!) If you want to learn more about this fascinating subject, please see the [`std::thread`](https://doc.rust-lang.org/stable/std/thread/index.html) module and [Mara Bos's fantastic book](https://marabos.nl/atomics/). 
+As much as I would love to talk about them, threads and data races are out of the scope of this article. (It's getting long enough as it is!) If you want to learn more about this fascinating subject, please see the [`std::thread`](https://doc.rust-lang.org/stable/std/thread/index.html) module and [Mara Bos's fantastic book](https://marabos.nl/atomics/).
 
-<!-- ::callout{kind="note"}
-If we wanted to follow best practices, the `AtomicU64` would be stored in a separate static and `Counter` would remain a zero-sized-type (ZST). I felt that the example provided would be easier for a beginner to understand, even if it is not perfect.
-:: -->
+<Callout kind="caution">
+  {#snippet body()}
+
+    If we wanted to follow best practices, the `AtomicU64` would be stored in a separate static and `Counter` would remain a zero-sized-type (ZST). I felt that the example provided would be easier for a beginner to understand, even if it is not perfect.
+
+  {/snippet}
+</Callout>
 
 ## Towards the Future
 
