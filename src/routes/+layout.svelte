@@ -8,10 +8,9 @@
 
     <ul>
       <li><a href="/">Home</a></li>
-      <li>Blog</li>
-      <li>History</li>
-      <li>Github</li>
-      <li>Source Code</li>
+      <li><a href="/history">History</a></li>
+      <li><a href="https://github.com/BD103">Github</a></li>
+      <li><a href="https://github.com/BD103/bd103.github.io">Source Code</a></li>
       <li>RSS, Atom</li>
     </ul>
   </nav>

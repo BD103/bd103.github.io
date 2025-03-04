@@ -8,7 +8,7 @@ Welcome to my website and blog! I'm BD103, and I'm an open-sourced contributor w
 
 I've been an active contributor and community member of [Bevy](https://bevyengine.org), a game engine written in [Rust](https://www.rust-lang.org), since November 2023. You'll find many of my projects and blog posts are related to Bevy and Rust in general!
 
-## Recent Posts
+## Posts
 
 <ul>
   {#each data.posts as post}

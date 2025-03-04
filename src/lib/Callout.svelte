@@ -2,8 +2,8 @@
   import type { Snippet } from "svelte";
 
   interface Props {
-    kind: "note" | "tip" | "important" | "warning" | "caution",
-    body: Snippet,
+    kind: "note" | "tip" | "important" | "warning" | "caution";
+    body: Snippet;
   }
 
   const { kind, body }: Props = $props();
