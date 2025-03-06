@@ -105,6 +105,6 @@ If you want to build something awesome with Rust or get into the game developmen
 
 Bevy has been life-changing. I've met so many wonderful people, worked on so many fun things, and helped so many others to do the same. It's truly an era that I will look back on with joy and pride.
 
-Chat with you on [Discord](discord.gg/bevy),
+Chat with you on [Discord](https://discord.gg/bevy),
 
 \~ BD103
