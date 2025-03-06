@@ -11,7 +11,7 @@
       <li><a href="/history">History</a></li>
       <li><a href="https://github.com/BD103">Github</a></li>
       <li><a href="https://github.com/BD103/bd103.github.io">Source Code</a></li>
-      <li>RSS, Atom</li>
+      <li><a href="/feed.xml">RSS</a>, <a href="/atom.xml">Atom</a></li>
     </ul>
   </nav>
 

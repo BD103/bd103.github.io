@@ -3,6 +3,7 @@
  */
 export interface Post extends PostMetadata {
   href: string;
+  date: Date;
 }
 
 /**
@@ -35,6 +36,7 @@ export function loadPosts(): Post[] {
     posts.push({
       title: pageMetadata[path].title,
       href: path.substring("../routes".length, path.length - "/+page.svx".length),
+      date: new Date(path.substring("../routes/blog/".length, "../routes/blog/YYYY-MM-DD".length)),
     });
   }
 
