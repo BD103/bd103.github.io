@@ -2,6 +2,10 @@
   let { children } = $props();
 </script>
 
+<svelte:head>
+  <title>BD103's Blog</title>
+</svelte:head>
+
 <div class="container">
   <nav>
     <h1>BD103</h1>
