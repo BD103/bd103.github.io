@@ -66,6 +66,18 @@
     a:hover {
       color: var(--primary-hover);
     }
+
+    .token.comment {
+      color: #a7a7a7;
+    }
+
+    .token.constant {
+      color: #80f880;
+    }
+
+    .token.keyword {
+      color: #0c5;
+    }
   }
 
   .container {
