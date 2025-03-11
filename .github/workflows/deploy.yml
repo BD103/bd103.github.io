@@ -30,23 +30,23 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 23
           cache: pnpm
       
       - name: Build site
         run: |
           pnpm install
-          pnpm generate
+          pnpm build
       
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .output/public
+          path: build
 
   # Download build's artifact and publish site
   deploy:
@@ -57,4 +57,5 @@ jobs:
     needs: build
     steps:
       - name: Deploy to Github Pages
+        id: deployment
         uses: actions/deploy-pages@v4

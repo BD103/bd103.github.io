@@ -1,0 +1,178 @@
+---
+title: Rust Pointer Metadata
+---
+
+<script lang="ts">
+import Callout from "$lib/Callout.svelte";
+</script>
+
+# Rust Pointer Metadata
+
+Welcome back! In my [last blog post](https://bd103.github.io/blog/2023-06-27-global-allocators) I talked about overriding the global allocator. It was reasonably successful, even getting mentioned in [This Month in Rust OSDev](https://rust-osdev.com/this-month/2023-06/) without me suggesting it! That success has inspired me to write about another really interesting feature in the [Rust](https://www.rust-lang.org/) programming language called pointer metadata.
+
+<Callout kind="caution">
+  {#snippet body()}
+
+Some examples in this blog post use the unstable feature [`ptr_metadata`](https://github.com/rust-lang/rust/issues/81513) with Nightly Rust. I have tested all of them with `rustc 1.72.0-nightly (101fa903b 2023-06-04)`, but it may fail to compile if you use a different version. For more information, please see [the Rustup documentation](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust).
+
+  {/snippet}
+</Callout>
+
+## What is a pointer?
+
+A pointer is simply a number that points to a location in memory. There are two different types in Rust: [references](https://doc.rust-lang.org/std/primitive.reference.html) and [raw pointers](https://doc.rust-lang.org/std/primitive.pointer.html). References uphold certain restrictions that prevent programmers from making common mistakes as seen in the C and C++ languages[^0]. Raw pointers have none of these restrictions, and thus require [`unsafe`](https://doc.rust-lang.org/std/keyword.unsafe.html) to access the underlying memory.
+
+[^0]: See [the Book](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) on the Rust Borrow Checker. I'd hope that the reader would know about Rust ownership rules, but I don't really know who my audience is yet. \:P
+
+After getting compiled, references and raw pointers are semantically equivalent and look the same. They are only treated differently by the compiler. From this point onward when I refer to a "pointer," I will be talking about both references and raw pointers.
+
+## Data Representation
+
+All pointers are unsigned integers that represent a location in memory. (I fear the day where someone decides to represent them with floating point numbers.) The amount of bits they use is platform-dependent, but guaranteed to always be the same size as a [`usize`](https://doc.rust-lang.org/std/primitive.usize.html).
+
+> "The pointer-sized unsigned integer type."
+>
+> ~ [Rust `usize` Documentation](https://doc.rust-lang.org/std/primitive.usize.html)
+
+I use an Apple M1 CPU, which has a 64-bit architecture. This means that all `usize`s compiled on my computer will be 64 bits long. 64-bit pointers are the most common nowadays, but some older computers (specifically Windows ones) may use 32-bit pointers instead.
+
+All that I've said so far about the data representation of pointers is mostly language-independent, but what comes next is Rust specific. Pointers in Rust can either one `usize` or **two** `usize`s. This means that any pointer can be twice the normal size, depending on the type of data it points to.
+
+```rust
+use std::mem::size_of;
+
+fn main() {
+    // `usize` and pointers are the same size...
+    assert_eq!(size_of::<usize>(), size_of::<&bool>());
+    assert_eq!(size_of::<usize>(), size_of::<*const u8>());
+
+    // ...until they're not?!
+    assert_ne!(size_of::<usize>(), size_of::<&str>());
+}
+```
+
+In the above example, `&str` is not the size of a `usize`! On my machine where a `usize` is 8 bytes[^1], the size of `&str` is 16 bytes. The reason behind this sudden increase is size is because of a special property called _pointer metadata_.
+
+[^1]: Or 64 bits, as stated previously. `bits = 8 * bytes`
+
+## Intro to Pointer Metadata
+
+Pointer metadata is an optional feature that allows pointers to store additional data about themselves. Where a normal pointer just stores its address, a pointer with metadata stores its address and an extra `usize` of information.
+
+A brief terminology break: pointers with metadata are called **fat pointers**, while ones without are called **thin pointers**.
+
+Due to their increase in size, Rust only uses fat pointers in places where it cannot infer certain information at compile time. The most popular, and currently only, use of pointer metadata is when combined with _dynamically sized types_.
+
+## DSTs
+
+Dynamically sized types, or DSTs, fit the requirements for pointer metadata perfectly. Their size is unknown to the compiler, so it delegates the size to be calculated and stored at runtime. Here is a list of commonly used DSTs:
+
+- [Slices `&[T]`](https://doc.rust-lang.org/std/primitive.slice.html)
+- [String slices `&str`](https://doc.rust-lang.org/std/primitive.str.html)
+- [Trait objects `&dyn Trait`](https://doc.rust-lang.org/std/keyword.dyn.html)
+- Structures that wrap the above DSTs[^2]
+
+[^2]: See [object safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety) in the Rust Reference. You can created structures that wrap DSTs as long as it doesn't contain more than one DST (along with a bunch of other restrictions).
+
+All DSTs are required to be used behind a pointer so that the compiler can embed the metadata necessary to actually use them.
+
+```rust
+fn main() {
+    // Has a known size to the compiler.
+    let source: [u8; 5] = [2, 4, 8, 16, 32];
+
+    // Has an unknown size to the compiler.
+    let dst: &[u8] = &source[0..3];
+
+    // And yet we can somehow still find its size as runtime.
+    assert_eq!(dst.len(), 3);
+}
+```
+
+<Callout kind="note">
+  {#snippet body()}
+
+You may argue that the compiler could infer that `dst` is 3 bytes, but imagine scenarios where this wouldn't be possible. A good one that I can think of is taking a `&[u8]` as a function argument. The function needs to work with any slice, no matter its size.
+
+  {/snippet}
+</Callout>
+
+## What metadata is stored?
+
+I've evaded this question long enough. What metadata is actually being stored in fat pointers to facilitate DSTs? This is type dependent, so here's a quick list:
+
+- For slices, the metadata is a number describing the length.
+- For `str` slices, the metadata is a number describing the length, specifically in bytes.
+- For trait objects, the metadata is a pointer to a static VTable used in [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch).
+- For structs that wrap DSTs[^2], their metadata is the metadata of the wrapped DST.
+
+And that's it! For all slices, the metadata can be thought of as the length. Trait objects are a bit more complex, but I hope to cover them in a later blog post.
+
+## Reading Metadata
+
+The unstable [`std::ptr::metadata`](https://doc.rust-lang.org/stable/std/ptr/fn.metadata.html) function can be used to read the metadata of any pointer.
+
+```rust
+#![feature(ptr_metadata)]
+
+use std::ptr::metadata;
+
+fn main() {
+    let slice: &[u8] = &[1, 2, 3];
+    assert_eq!(metadata(slice), 3);
+
+    let string = "Boo!";
+    assert_eq!(metadata(string), 4);
+
+    // Create a DST wrapper type.
+    struct Wrapper<T: ?Sized> {
+        foo: bool,
+        bar: T,
+    }
+
+    // The metadata is the size of `bar`.
+    let wrapper: &Wrapper<[bool]> = &Wrapper {
+        foo: true,
+        bar: [false, true],
+    };
+    // `bar` has a length of 2.
+    assert_eq!(metadata(wrapper), 2);
+
+    // Thin pointers have no metadata, so they're metadata is a unit type.
+    let thin: u8 = 2;
+    assert_eq!(metadata(&thin), ());
+}
+```
+
+`metadata` works in combination with the [`Pointee`](https://doc.rust-lang.org/stable/std/ptr/trait.Pointee.html) trait, which supplies an associated type for the metadata.
+
+```rust
+pub trait Pointee {
+    type Metadata: Copy + Send + Sync + Ord + Hash + Unpin;
+}
+```
+
+`Pointee` is implemented for every type. For most, `Metadata` will be the [unit `()`](https://doc.rust-lang.org/std/primitive.unit.html) type. It only differs for dynamically sized types, which range from just the raw `usize` to the more complicated [`DynMetadata<Dyn>`](https://doc.rust-lang.org/stable/std/ptr/struct.DynMetadata.html) type.
+
+## Conclusion
+
+Hey, you made it! Congratulations! I hope you enjoyed reading this article and learned a little more about Rust. I found pointer metadata interesting because it exposes fun implementation details that aren't known to the average Rustacean. As per usual, here are a few more links to dive into related to pointer metadata:
+
+- [RFC 2580](https://rust-lang.github.io/rfcs/2580-ptr-meta.html)
+- [Pointer Metadata Tracking Issue](https://github.com/rust-lang/rust/issues/81513)
+- [`metadata<T>(*const T)`](https://doc.rust-lang.org/std/ptr/fn.metadata.html)
+- [`Pointee`](https://doc.rust-lang.org/std/ptr/trait.Pointee.html)
+- [`DynMetadata<Dyn>`](https://doc.rust-lang.org/std/ptr/struct.DynMetadata.html)
+- [Private `PtrRepr` and `PtrComponents`](https://doc.rust-lang.org/1.71.0/src/core/ptr/metadata.rs.html#138-149)
+- [`slice::len()`](https://doc.rust-lang.org/1.71.0/src/core/slice/mod.rs.html#141-143)
+- [👀 A sneak peak at VTables](https://github.com/BD103/Blog-Examples/blob/main/ptr-metadata/src/bin/04-sneak-peak.rs)
+
+If you have any questions, feel free to comment on [my post](https://users.rust-lang.org/t/introduction-to-pointer-metadata/98083) in the Rust Users' Forum or contact me [by creating an issue](https://github.com/BD103/BD103/issues) in my Github repository. The source code for all examples in this post can be found [here](https://github.com/BD103/Blog-Examples/tree/main/ptr-metadata).
+
+Cheers!
+
+<div>
+    <a href="https://rustacean.net/" target="_blank">
+        <img src="https://www.rustacean.net/assets/rustacean-flat-happy.svg" alt="Ferris the happy crab" width="200rem" />
+    </a>
+</div>

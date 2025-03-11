@@ -1,25 +1,41 @@
 {
-  "name": "bd103-blog",
+  "name": "bd103-website",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "clean": "nuxt clean",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "lint": "eslint .",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepare": "svelte-kit sync || echo ''",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "format": "prettier --write .",
+    "lint": "prettier --check . && eslint ."
   },
   "devDependencies": {
-    "@nuxt/content": "^2.7.0",
-    "@nuxt/devtools": "latest",
-    "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@nuxtjs/eslint-module": "^4.1.0",
-    "@types/node": "^18.16.18",
-    "eslint": "^8.44.0",
-    "normalize.css": "^8.0.1",
-    "nuxt": "^3.6.1",
-    "nuxt-module-feed": "^1.0.3",
-    "sass": "^1.63.6"
+    "@eslint/compat": "^1.2.7",
+    "@eslint/js": "^9.22.0",
+    "@sveltejs/adapter-static": "^3.0.8",
+    "@sveltejs/kit": "^2.19.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-svelte": "^3.1.0",
+    "feed": "^4.2.2",
+    "globals": "^16.0.0",
+    "mdsvex": "^0.12.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-svelte": "^3.3.3",
+    "remark-footnotes": "^2.0.0",
+    "svelte": "^5.22.6",
+    "svelte-check": "^4.1.5",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1",
+    "vite": "^6.2.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
