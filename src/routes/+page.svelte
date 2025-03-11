@@ -18,7 +18,7 @@
 <h2>Posts</h2>
 
 <ul>
-  {#each data.posts as post}
+  {#each data.posts as post (post.href)}
     <li><a href={post.href}>{post.title}</a></li>
   {/each}
 </ul>
