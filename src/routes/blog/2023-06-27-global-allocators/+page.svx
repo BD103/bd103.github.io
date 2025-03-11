@@ -42,11 +42,11 @@ pub unsafe trait GlobalAlloc {
 
 Any struct that wants to become a global allocator has to be able to both allocate and deallocate regions of memory. It can approach this in many different ways, but all implementations use a pointer and a size to represent memory.
 
-Take `alloc()` for example. It takes a [`Layout`](https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html), which represents a size and alignment[^alignment] for a block of memory. It then returns a pointer to the first byte (`u8`) of the freshly allocated memory.
+Take `alloc()` for example. It takes a [`Layout`](https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html), which represents a size and alignment[^0] for a block of memory. It then returns a pointer to the first byte (`u8`) of the freshly allocated memory.
 
 `dealloc()` is the inverse of this. It takes the pointer and the layout, then internally deallocates the memory block based on the given information.
 
-[^alignment]: Alignment is used for structure packing. While it can be useful for implementing an allocator from scratch, that is out of scope for this article. For more information, you may find this [Wikipedia article](https://en.wikipedia.org/wiki/Data_structure_alignment) interesting.
+[^0]: Alignment is used for structure packing. While it can be useful for implementing an allocator from scratch, that is out of scope for this article. For more information, you may find this [Wikipedia article](https://en.wikipedia.org/wiki/Data_structure_alignment) interesting.
 
 ## The `System` Allocator
 

@@ -12,9 +12,9 @@ It's Bevy's 4th birthday! If you haven't already, read [Cart's post here](https:
 
 ## Wait... Bevy?!
 
-Yeah! I contribute to [Bevy](https://bevyengine.org), an open-source game engine written in [Rust](https://www.rust-lang.org/). I'm a relatively new contributor, having started in November of 2023[^1], but I've accomplished a lot since then. I was inspired after reading the [0.12 announcement post](https://bevyengine.org/news/bevy-0-12/), so I found an issue labeled `D-Good-First-Issue` and tried my best to complete it!
+Yeah! I contribute to [Bevy](https://bevyengine.org), an open-source game engine written in [Rust](https://www.rust-lang.org/). I'm a relatively new contributor, having started in November of 2023[^0], but I've accomplished a lot since then. I was inspired after reading the [0.12 announcement post](https://bevyengine.org/news/bevy-0-12/), so I found an issue labeled `D-Good-First-Issue` and tried my best to complete it!
 
-[^1]: This is excluding the one time in September of 2022 where I opened [a PR](https://github.com/bevyengine/bevy/pull/5022) to Bevy that got closed due to immature plugin dependencies.
+[^0]: This is excluding the one time in September of 2022 where I opened [a PR](https://github.com/bevyengine/bevy/pull/5022) to Bevy that got closed due to immature plugin dependencies.
 
 The change was simple, the review process went well, and it was merged only a day later. I was really excited that I had the chance to contribute to this cool piece of software that I looked up to.
 
@@ -30,9 +30,9 @@ Github Actions is a continuous integration platform used primarily to test and l
   {/snippet}
 </Callout>
 
-The ranks of Bevy contributors are chock-full of ECS enthusiasts and rendering ninjas, but how many CI wizards are there? Not many[^2], and so I found my role. I spent a lot of time improve the quality of the CI jobs and their associated `ci` tool.
+The ranks of Bevy contributors are chock-full of ECS enthusiasts and rendering ninjas, but how many CI wizards are there? Not many[^1], and so I found my role. I spent a lot of time improve the quality of the CI jobs and their associated `ci` tool.
 
-[^2]: But not none! I can think of a few off of the top of my head, the most prominent being [François](https://github.com/mockersf).
+[^1]: But not none! I can think of a few off of the top of my head, the most prominent being [François](https://github.com/mockersf).
 
 ## What I'm proud of
 
@@ -44,20 +44,20 @@ I wrote an automated system on Github Actions and <https://bencher.dev> that run
 
 - Expand on the benchmarks themselves: we aren't tracking enough critical functions!
 - Benchmark every commit, instead of just benchmarking daily.
-- Introduce the [`iai-callgrind`](https://github.com/iai-callgrind/iai-callgrind) harness to track instruction count, not just wall time.[^3]
+- Introduce the [`iai-callgrind`](https://github.com/iai-callgrind/iai-callgrind) harness to track instruction count, not just wall time.[^2]
 
-[^3]: I used to daily-drive MacOS, which didn't support Valgrind, so I originally couldn't work on this. I've since built a PC that runs Linux, so there's nothing blocking me now!
+[^2]: I used to daily-drive MacOS, which didn't support Valgrind, so I originally couldn't work on this. I've since built a PC that runs Linux, so there's nothing blocking me now!
 
 ### [`flag-frenzy`](https://github.com/TheBevyFlock/flag-frenzy)
 
 `flag-frenzy` is a tool built to test combinations of Bevy's feature flags. Bevy [has a *lot* of features](https://github.com/bevyengine/bevy/blob/423285cf1cbd86d85db066dbfe26de4fd68333d9/Cargo.toml#L57-L353), and it's really easy to write code that doesn't account for a specific combination. Though there are many popular tools that can test the combinatorial features explosions in Cargo projects, `flag-frenzy` stands out due to its:
 
-- **Memory efficiency**: `flag-frenzy` lazily computes combinations instead of doing it all at once, avoiding large[^4] memory requirements!
+- **Memory efficiency**: `flag-frenzy` lazily computes combinations instead of doing it all at once, avoiding large[^3] memory requirements!
 - **Expressive feature configuration**: `flag-frenzy` lets you specify advanced feature requirements using an expressive [TOML DSL](https://github.com/TheBevyFlock/flag-frenzy/blob/ee347bb795b70494fa03809982d3af9b572b9796/docs/4-rules.md).
 - **Work chunking**: Inspired by `cargo-all-features`, `flag-frenzy` lets you [split up work into chunks](https://github.com/TheBevyFlock/flag-frenzy/blob/ee347bb795b70494fa03809982d3af9b572b9796/docs/2-cli.md#dividing-up-work) that you can distribute across multiple machines.
 - **Colorful output**: `flag-frenzy` outputs parsable information using ANSI terminal colors, and it summarizes information in a failure report at the end of the program.
 
-[^4]: I believe it is a factorial increase in memory usage, but I haven't done the math. Feel free to prove me wrong and I'll update this!
+[^3]: I believe it is a factorial increase in memory usage, but I haven't done the math. Feel free to prove me wrong and I'll update this!
 
 ### [0.14 Migration Guide](https://bevyengine.org/learn/migration-guides/0-13-to-0-14/)
 
