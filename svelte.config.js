@@ -1,5 +1,5 @@
 import adapter from "@sveltejs/adapter-static";
-import gfm from "remark-gfm";
+import footnotes from "remark-footnotes";
 import { mdsvex } from "mdsvex";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
@@ -10,7 +10,9 @@ const config = {
   preprocess: [
     vitePreprocess(),
     mdsvex({
-      remarkPlugins: [gfm],
+      // We use `remark-footnotes` v2.0.0, since `remark-gfm` and later versions of
+      // `remark-footnotes` don't work with `mdsvex`.
+      remarkPlugins: [footnotes],
       smartypants: {
         quotes: true,
         ellipses: true,
