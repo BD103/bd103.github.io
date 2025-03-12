@@ -1,0 +1,22 @@
+/* Global site variables. */
+:global {
+  :root {
+    --primary: #0c5;
+    --primary-hover: #00a344;
+
+    --background-color: #383a39;
+
+    --text-color: #e7e7e7;
+    --text-color-strong: #fff;
+    --text-color-weak: #b1b1b1;
+
+    --font-family: "DM Serif Display", Georgia, serif;
+
+    --line-height: 1.5;
+
+    --border-radius: 30px;
+    --border-color: black;
+
+    --transition-delay: 200ms;
+  }
+}
