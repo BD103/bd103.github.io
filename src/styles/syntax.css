@@ -1,14 +1,28 @@
-/* Prism syntax highlighting theme. */
+/* 
+Prism syntax highlighting theme.
+
+Based on <https://prismjs.com/tokens>.
+*/
 :global {
-  .token.comment {
-    color: #a7a7a7;
-  }
+  .token {
+    &.keyword {
+      color: var(--sand-light);
+    }
 
-  .token.constant {
-    color: #80f880;
-  }
+    &.string,
+    &.char,
+    &.number,
+    &.boolean {
+      color: var(--sand-lighter);
+    }
 
-  .token.keyword {
-    color: #0c5;
+    &.comment,
+    &.punctuation {
+      color: var(--floral-light);
+    }
+
+    &.attribute {
+      color: var(--turquoise-light);
+    }
   }
 }

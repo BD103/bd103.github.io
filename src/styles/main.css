@@ -10,7 +10,7 @@
     background-attachment: fixed;
 
     /* Text */
-    color: var(--floral-white);
+    color: var(--floral-lighter);
     font-size: 13pt;
     font-family: var(--font-family);
     line-height: var(--line-height);

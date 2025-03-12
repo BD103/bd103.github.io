@@ -10,7 +10,8 @@
     --turquoise-dark: lab(29 -16 1);
     --turquoise-darker: lab(15 -16 1);
 
-    --floral-white: lab(90 10 10);
+    --floral-lighter: lab(90 10 10);
+    --floral-light: lab(70 10 10);
 
     /* Text */
     --font-family: "DM Serif Display", Georgia, serif;
