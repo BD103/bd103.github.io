@@ -1,8 +1,17 @@
 /* Site-wide styles. */
 :global {
   body {
-    background-color: var(--background-color);
-    color: var(--text-color);
+    /* Fallback color for parts that the gradient does not cover. */
+    background-color: var(--turquoise-dark);
+
+    /* Background gradient */
+    background-image: var(--background);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    /* Text */
+    color: var(--floral-white);
+    font-size: 13pt;
     font-family: var(--font-family);
     line-height: var(--line-height);
   }
@@ -10,15 +19,16 @@
   h1,
   h2,
   strong {
-    color: var(--text-color-strong);
+    color: var(--sand-light);
+    font-weight: bold;
   }
 
   a {
-    color: var(--primary);
-    transition: color var(--transition-delay);
+    color: var(--sand-lighter);
+    transition: color 200ms;
   }
 
   a:hover {
-    color: var(--primary-hover);
+    color: var(--turquoise-light);
   }
 }
