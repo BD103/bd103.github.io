@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -37,12 +37,12 @@ jobs:
         with:
           node-version: 23
           cache: pnpm
-      
+
       - name: Build site
         run: |
           pnpm install
           pnpm build
-      
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:

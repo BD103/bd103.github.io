@@ -1,0 +1,24 @@
+/* Site-wide styles. */
+:global {
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    line-height: var(--line-height);
+  }
+
+  h1,
+  h2,
+  strong {
+    color: var(--text-color-strong);
+  }
+
+  a {
+    color: var(--primary);
+    transition: color var(--transition-delay);
+  }
+
+  a:hover {
+    color: var(--primary-hover);
+  }
+}
