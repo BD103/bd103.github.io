@@ -19,5 +19,9 @@
 </div>
 
 <style>
-  /* TODO */
+  .callout {
+    background-color: var(--sand-darker);
+    box-shadow: 0.5em 0.5em 0 var(--turquoise-darker);
+    padding: 1em 1em;
+  }
 </style>
