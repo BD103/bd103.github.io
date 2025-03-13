@@ -23,6 +23,10 @@
     font-weight: bold;
   }
 
+  h1, h2, h3 {
+    text-shadow: 0.1em 0.1em 0 var(--turquoise-darker);
+  }
+
   a {
     color: var(--sand-lighter);
     transition: color 200ms;
