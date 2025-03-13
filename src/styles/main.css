@@ -35,4 +35,9 @@
   a:hover {
     color: var(--turquoise-light);
   }
+
+  pre {
+    max-width: 40em;
+    overflow-x: scroll;
+  }
 }
