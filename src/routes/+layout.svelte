@@ -42,4 +42,9 @@
       grid-template-columns: 1fr !important;
     }
   }
+
+  /* Prevent elements that cannot wrap from stealing screen space from the nav bar. */
+  .container main {
+    max-width: 40em;
+  }
 </style>

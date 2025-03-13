@@ -1,22 +1,24 @@
 /* Global site variables. */
 :global {
   :root {
-    --primary: #0c5;
-    --primary-hover: #00a344;
+    /* Colors */
+    --sand-lighter: lab(90 21 35);
+    --sand-light: lab(80 21 35);
+    --sand-dark: lab(60 26 43);
+    --sand-darker: lab(40 26 43);
 
-    --background-color: #383a39;
+    --turquoise-light: lab(80 -25 10);
+    --turquoise-dark: lab(29 -16 1);
+    --turquoise-darker: lab(15 -16 1);
 
-    --text-color: #e7e7e7;
-    --text-color-strong: #fff;
-    --text-color-weak: #b1b1b1;
+    --floral-lighter: lab(90 10 10);
+    --floral-light: lab(70 10 10);
 
+    /* Text */
     --font-family: "DM Serif Display", Georgia, serif;
-
     --line-height: 1.5;
 
-    --border-radius: 30px;
-    --border-color: black;
-
-    --transition-delay: 200ms;
+    /* Background */
+    --background: linear-gradient(to bottom right, var(--turquoise-dark), var(--turquoise-darker));
   }
 }
