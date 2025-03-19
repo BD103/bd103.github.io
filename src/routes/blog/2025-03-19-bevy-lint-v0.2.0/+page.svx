@@ -2,12 +2,43 @@
 title: Announcing bevy_lint v0.2.0
 ---
 
+<script lang="ts">
+// The adjective the reader feels best describes themselves. The later 2 have special surprises! :)
+let adjective =  $state("punctual");
+
+$effect(() => {
+  document.body.classList.toggle("bright", adjective === "bright");
+  document.body.classList.toggle("loud", adjective === "questionably loud");
+});
+</script>
+
+<style>
+:global {
+  /* Clear the gradient background, make it bright yellow instead, and make the text black. 😎 */
+  body.bright {
+    background-image: none;
+    background-color: yellow;
+    color: black;
+  }
+
+  /* Make all text fully uppercase. (If you're going to yell at me, I'll yell back!) */
+  body.loud {
+    text-transform: uppercase;
+  }
+}
+</style>
+
 # Announcing `bevy_lint` v0.2.0
 
-Hello there, my dear <select><option>punctual</option><option>splendiforous</option><option>bright</option><option>questionably loud</option></select> reader! I hope your day has been going exceptionally well.
-
-<!-- TODO: bright -> make background white -->
-<!-- TODO: questionably loud -> make everything uppercase -->
+<span>
+    Hello there, my dear
+    <select bind:value={adjective}>
+        <option>punctual</option>
+        <option>splendiforous</option>
+        <option>bright</option>
+        <option>questionably loud</option>
+    </select> reader! I hope your day has been going exceptionally well.
+</span>
 
 I have returned from my 6 month[^1] writing hiatus to give you a very special announcement: today is the official release of `bevy_lint` v0.2.0! With it comes some very exciting features that I can't wait to talk about!
 
