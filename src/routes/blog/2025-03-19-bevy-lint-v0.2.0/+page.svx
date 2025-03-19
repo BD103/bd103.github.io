@@ -42,11 +42,11 @@ $effect(() => {
 
 I have returned from my 6 month[^1] writing hiatus to give you a very special announcement: today is the official release of `bevy_lint` v0.2.0! With it comes some very exciting features that I can't wait to talk about!
 
-[^1]: Oh wow, has it actually been 6 months? I feel like I just wrote [4 Years of Bevy](TODO) yesterday!
+[^1]: Oh wow, has it actually been 6 months? I feel like I just wrote [4 Years of Bevy](/blog/2024-08-18-4-years-of-bevy) yesterday!
 
 `bevy_lint` is a custom linter for the [Bevy game engine](https://bevyengine.org), similar to [Clippy](https://doc.rust-lang.org/clippy/), that can be used to enforce Bevy-specific idioms, catch common mistakes, and help you write better code. In order to avoid repeating myself, I highly recommend you check out [its documentation](https://thebevyflock.github.io/bevy_cli/bevy_lint/index.html) for an extended description, installation guide, and user guide.
 
-[`bevy_lint` v0.1.0](https://github.com/TheBevyFlock/bevy_cli/releases/tag/lint-v0.1.0) released mid-November of 2024, so it's been a good 4 months since then. In that time, I and several others have added many new features and improvements (all of which you can view [in the changelog](github.com/TheBevyFlock/bevy_cli/blob/main/bevy_lint/CHANGELOG.md)). Let's take a look at the highlights!
+[`bevy_lint` v0.1.0](https://github.com/TheBevyFlock/bevy_cli/releases/tag/lint-v0.1.0) released mid-November of 2024, so it's been a good 4 months since then. In that time, I and several others have added many new features and improvements (all of which you can view [in the changelog](https://github.com/TheBevyFlock/bevy_cli/blob/main/bevy_lint/CHANGELOG.md)). Let's take a look at the highlights!
 
 ## Configure lints in `Cargo.toml`
 
