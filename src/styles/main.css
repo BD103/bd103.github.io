@@ -39,7 +39,9 @@
   }
 
   pre {
-    max-width: 40em;
+    background-color: var(--turquoise-darker);
+    font-size: 11pt;
+    padding: 1em;
     overflow-x: scroll;
   }
 }
