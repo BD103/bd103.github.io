@@ -6,6 +6,25 @@
 
 <p>A list of notable changes made to this website.</p>
 
+<HistoryEntry date="2025-03-13">
+  {#snippet body()}
+    I changed the primary color palette to be peach orange and dark turquoise, which looks really
+    nice and is quite unique compared to the original green and gray! I also switched the font to be
+    serif instead of sans-serif, since I think it looks nicer. The website should also be <i
+      >slightly</i
+    > better on mobile, but I'm still learning!
+  {/snippet}
+</HistoryEntry>
+
+<HistoryEntry date="2025-03-11">
+  {#snippet body()}
+    I rewrote the website from the ground up using <a href="https://svelte.dev/">Svelte</a>. This
+    was after I ran into some issues building the website earlier in the week due to outdated and
+    broken dependencies. Overall, things should still appear the same, even if the framework beneath
+    it is different. :)
+  {/snippet}
+</HistoryEntry>
+
 <HistoryEntry date="2024-08-18">
   {#snippet body()}
     I switched the website to have a dark gray background and white text instead of white background
