@@ -1,0 +1,274 @@
+---
+title: Announcing bevy_lint v0.2.0
+---
+
+# Announcing `bevy_lint` v0.2.0
+
+Hello there, my dear <select><option>punctual</option><option>splendiforous</option><option>bright</option><option>questionably loud</option></select> reader! I hope your day has been going exceptionally well.
+
+<!-- TODO: bright -> make background white -->
+<!-- TODO: questionably loud -> make everything uppercase -->
+
+I have returned from my 6 month[^1] writing hiatus to give you a very special announcement: today is the official release of `bevy_lint` v0.2.0! With it comes some very exciting features that I can't wait to talk about!
+
+[^1]: Oh wow, has it actually been 6 months? I feel like I just wrote [4 Years of Bevy](TODO) yesterday!
+
+`bevy_lint` is a custom linter for the [Bevy game engine](https://bevyengine.org), similar to [Clippy](https://doc.rust-lang.org/clippy/), that can be used to enforce Bevy-specific idioms, catch common mistakes, and help you write better code. In order to avoid repeating myself, I highly recommend you check out [its documentation](https://thebevyflock.github.io/bevy_cli/bevy_lint/index.html) for an extended description, installation guide, and user guide.
+
+[`bevy_lint` v0.1.0](https://github.com/TheBevyFlock/bevy_cli/releases/tag/lint-v0.1.0) released mid-November of 2024, so it's been a good 4 months since then. In that time, I and several others have added many new features and improvements (all of which you can view [in the changelog](github.com/TheBevyFlock/bevy_cli/blob/main/bevy_lint/CHANGELOG.md)). Let's take a look at the highlights!
+
+## Configure lints in `Cargo.toml`
+
+If you were an early adopter of `bevy_lint`, the following header may be familiar to you:
+
+```rust
+// Register `bevy` as a tool.
+#![cfg_attr(bevy_lint, feature(register_tool), register_tool(bevy))]
+
+// Enable pedantic lints.
+#![cfg_attr(bevy_lint, warn(bevy::pedantic)))]
+```
+
+In v0.1.0, the only way to toggle lints was to write the above in your crate root (`lib.rs` or `main.rs`). This was clearly a lot of boilerplate, so in [#251](https://github.com/TheBevyFlock/bevy_cli/pull/251) I added support for configuring lints in `Cargo.toml`:
+
+```toml
+# Much nicer! :)
+[package.metadata.bevy_lint]
+pedantic = "warn"
+```
+
+This feature was heavily inspired by Cargo's builtin [`[lints]` section](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section), which lets you configure Rust and Clippy's lints from `Cargo.toml`. I initially wanted to support this table instead of using `[package.metadata]`, but Cargo emits a warning that cannot be silenced when you add `[lints.bevy]` to `Cargo.toml`:
+
+```
+warning: /path/to/Cargo.toml: unrecognized lint tool `lints.bevy`, specifying unrecognized tools may break in the future.
+supported tools: cargo, clippy, rust, rustdoc
+```
+
+On the positive side, however, using `[package.metadata]` means `bevy_lint` has direct control over how lints are applied. I took advantage of this by adding support for merging workspace-level lints with crate-level lints (a feature that Cargo does not natively support yet):
+
+```toml
+# This will be applied to all crates in the workspace.
+[workspace.metadata.bevy_lint]
+pedantic = "warn"
+panicking_methods = "deny"
+
+[package.metadata.bevy_lint]
+# This enables an extra lint just for this crate.
+insert_unit_bundle = "forbid"
+# This overrides the workspace lint level.
+panicking_methods = "allow"
+```
+
+## Bevy 0.15 Support
+
+As of [#191](https://github.com/TheBevyFlock/bevy_cli/pull/191), the linter now officially supports [Bevy 0.15](https://bevyengine.org/news/bevy-0-15/)[^2]. Unfortunately, that also means dropping support for Bevy 0.14. There are plans to eventually [support multiple versions](https://github.com/TheBevyFlock/bevy_cli/issues/138), but as of right now we can only support one.
+
+[^2]: Which is somewhat funny, since the engine has already published the release candidates for Bevy 0.16! I guess we'll have to release v0.3.0 a bit faster next time, so we don't fall behind the rest of the ecosystem :)
+
+## Many New Lints
+
+`bevy_lint` has three new lints! (All of which were implemented by outside contributors. Thank you!)
+
+### `borrowed_reborrowable`
+
+First, `borrowed_reborrowable` warns against creating references to types that themselves are actually references, such as `Commands` and `Mut`. Instead, it recommends you use the convenient `reborrow()` method that many structures provide, which lets you convert `&mut T` into `T` for re-borrowable types:
+
+```rust
+fn system(mut commands: Commands) {
+    // `Commands` internally contains an `&mut T` already, so creating a reference results in
+    // `&mut &mut T`:
+    helper_function(&mut commands);
+}
+
+fn helper_function(commands: &mut Commands) {
+    // ...
+}
+```
+
+Use instead:
+
+```rust
+fn system(mut commands: Commands) {
+    // Convert `&mut Commands` to `Commands`.
+    helper_function(commands.reborrow());
+}
+
+fn helper_function(mut commands: Commands) {
+    // ...
+}
+```
+
+### `insert_unit_bundle`
+
+Second, `insert_unit_bundle` warns against spawning a [unit `()`](https://doc.rust-lang.org/stable/std/primitive.unit.html). Even though `()` is [technically a bundle](https://docs.rs/bevy/0.15.3/bevy/ecs/bundle/trait.Bundle.html#impl-Bundle-for-()), trying to spawn it does nothing. (`commands.spawn(())` is equivalent to `commands.spawn_empty()`, although the latter is more efficient.) In practice, this lint catches occurrences where you assume a function returns a component that you can spawn, when in reality it just returns a unit `()`:
+
+```rust
+fn spawn(mut commands: Commands) {
+    commands.spawn(());
+
+    commands.spawn((
+        Name::new("Decal"),
+        // This is likely a mistake! `Transform::rotate_z()` returns a unit `()`, not a
+        // `Transform`! As such, no `Transform` will be inserted into the entity.
+        Transform::from_translation(Vec3::new(0.75, 0.0, 0.0))
+            .rotate_z(PI / 4.0),
+    ));
+}
+```
+
+Use instead:
+
+```rust
+fn spawn(mut commands: Commands) {
+    // `Commands::spawn_empty()` is preferred if you do not need any components.
+    commands.spawn_empty();
+
+    commands.spawn((
+        Name::new("Decal"),
+        // `Transform::with_rotation()` returns a `Transform`, which was likely the intended
+        // behavior.
+        Transform::from_translation(Vec3::new(0.75, 0.0, 0.0))
+            .with_rotation(Quat::from_rotation_z(PI / 4.0)),
+    ));
+}
+```
+
+### `duplicate_bevy_dependencies`
+
+Finally, `duplicate_bevy_dependencies` checks if you're depending on multiple versions of Bevy in the same crate. Since [Cargo lets projects use several major versions of the same crate](https://doc.rust-lang.org/cargo/reference/resolver.html#semver-compatibility), it is really easy to accidentally pull in more than one version of `bevy`. A common example of this is when your project depends on a 3rd-party plugin that uses an older version of Bevy:
+
+```toml
+[dependencies]
+bevy = "0.15"
+# This version of `leafwing-input-manager` actually requires Bevy 0.14!
+leafwing-input-manager = "0.15"
+```
+
+While at first using the above dependencies will appear as if nothing is wrong, trying to mix `leafwing-input-manager`'s types with a newer version of Bevy will result in an error:
+
+```rust
+use bevy::prelude::*;
+use leafwing_input_manager::plugin::AccumulatorPlugin;
+
+fn main() {
+    App::new()
+        // Error: `AccumulatorPlugin` does not implement `Plugin`!
+        .add_plugins(AccumulatorPlugin)
+        .run();
+}
+```
+
+Developers who first run into this error likely think: "That doesn't make since! `AccumulatorPlugin` is definitely a `Plugin`!" While that may be true, `AccumularPlugin` only implements Bevy 0.14's `Plugin` trait, not Bevy 0.15's `Plugin` trait, which was expected. The Rust compiler treats those two traits as distinct, which is why it raised an error.
+
+<details>
+    <summary>See a real life example of this error...</summary>
+
+```shell
+$ cargo check
+error[E0277]: the trait bound `AccumulatorPlugin: Plugins<_>` is not satisfied
+   --> src/main.rs:6:22
+    |
+6   |         .add_plugins(AccumulatorPlugin)
+    |          ----------- ^^^^^^^^^^^^^^^^^ the trait `app::plugin::sealed::Plugins<_>` is not implemented for `AccumulatorPlugin`
+    |          |
+    |          required by a bound introduced by this call
+    |
+note: there are multiple different versions of crate `bevy_app` in the dependency graph
+   --> ~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_app-0.15.3/src/plugin.rs:136:5
+    |
+136 |       pub trait Plugins<Marker> {
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^ this is the required trait
+    |
+   ::: src/main.rs:1:5
+    |
+1   |   use bevy::prelude::*;
+    |       ---- one version of crate `bevy_app` used here, as a dependency of crate `bevy_internal`
+2   |   use leafwing_input_manager::plugin::AccumulatorPlugin;
+    |       ---------------------- one version of crate `bevy_app` used here, as a dependency of crate `bevy_internal`
+    |
+   ::: ~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/leafwing-input-manager-0.15.1/src/plugin.rs:320:1
+    |
+320 |   pub struct AccumulatorPlugin;
+    |   ---------------------------- this type doesn't implement the required trait
+    |
+   ::: ~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_app-0.14.2/src/app.rs:26:1
+    |
+26  | / bevy_ecs::define_label!(
+27  | |     /// A strongly-typed class of labels used to identify an [`App`].
+28  | |     AppLabel,
+29  | |     APP_LABEL_INTERNER
+30  | | );
+    | |_- this is the found trait
+    = help: you can use `cargo tree` to explore your dependency tree
+    = note: required for `AccumulatorPlugin` to implement `Plugins<_>`
+note: required by a bound in `bevy::prelude::App::add_plugins`
+   --> ~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_app-0.15.3/src/app.rs:548:52
+    |
+548 |     pub fn add_plugins<M>(&mut self, plugins: impl Plugins<M>) -> &mut Self {
+    |                                                    ^^^^^^^^^^ required by this bound in `App::add_plugins`
+
+For more information about this error, try `rustc --explain E0277`.
+```
+
+</details>
+
+To fix this, you can update your dependencies to all use the same version of Bevy. Many 3rd-party plugins provide a "compatibility table" that makes it easy to reference which plugins versions work with which Bevy versions:
+
+```toml
+[dependencies]
+bevy = "0.15"
+leafwing-input-manager = "0.16"
+```
+
+## Fixed `bevy_lint` on Windows
+
+As you may know, the linter requires [Rustup](https://rustup.rs/) to be installed in order to function. Internally, [it was calling the following command](https://github.com/TheBevyFlock/bevy_cli/blob/61954e35d2cb56beae53325afaaacd21647b7b55/bevy_lint/src/bin/main.rs#L24-L37) to make Cargo check over projects with `bevy_lint`:
+
+```shell
+$ export RUSTC_WORKSPACE_WRAPPER=path/to/bevy_lint_driver
+$ rustup run nightly-2025-02-20 cargo check
+```
+
+`rustup run` is great because it handles setting the `PATH` and `LD_LIBRARY_PATH` variables for us. These environmental variables are crucial in helping `bevy_lint_driver` discover `librustc_driver.so`, the dynamic library that the linter uses to interface with the compiler.
+
+As I daily drive both Linux and MacOS, I made sure to test the linter on those platforms to ensure it worked correctly. Unfortunately I didn't test it on Windows, as I just assumed that it would work the same!
+
+_It did not work the same._[^3]
+
+[^3]: Which, looking back, makes complete sense. Linux and MacOS are much more similar to each other than Windows, so if any of them were going to operate differently, it was going to be Windows. I hoped `rustup run` would hide any of these details so I wouldn't need to worry about it, but unfortunately that isn't the case.
+
+When trying to call `bevy_lint` v0.1.0 on Windows, it raises the following error:
+
+```powershell
+> bevy_lint
+error: process didn't exit successfully: `\\?\C:\Users\USER\.cargo\bin\bevy_lint_driver.exe C:\Users\USER\.rustup\toolchains\nightly-2024-11-14-aarch64-pc-windows-msvc\bin\rustc.exe -vV` (exit code: 0xc0000135, STATUS_DLL_NOT_FOUND)
+Check failed: exit code: 101.
+```
+
+The error says `STATUS_DLL_NOT_FOUND`; somehow `bevy_lint_driver` wasn't able to find `rustc_driver.dll`. It took quite some time and a bit of digging for me to discover the issue, but I eventually stumbled upon [this forum post](https://internals.rust-lang.org/t/help-test-windows-behavior-between-rustup-and-cargo/20237). Turns out `rustup run` _does not_ modify the `PATH` variable by default on Windows, since it breaks [proxies](https://rust-lang.github.io/rustup/concepts/proxies.html).
+
+Thankfully, there is a quick fix: setting `RUSTUP_WINDOWS_PATH_ADD_BIN=1` forces Rustup to modify the `PATH`:
+
+```powershell
+> set RUSTUP_WINDOWS_PATH_ADD_BIN=1
+> bevy_lint
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.42s
+```
+
+This is now automatically set in v0.2.0, so Windows should now work without any extra steps. Nice!
+
+## Conclusion
+
+There are several other changes that I have not covered, but I highly recommend reading them in [the changelog](https://github.com/TheBevyFlock/bevy_cli/blob/main/bevy_lint/CHANGELOG.md). I also recommend looking at [the migration guide](https://github.com/TheBevyFlock/bevy_cli/blob/main/bevy_lint/MIGRATION.md) if you used to use v0.1.0 and are planning on upgrading.
+
+I would also like to thank several contributors who helped develop the v0.2.0 release of the linter:
+
+- [DaAlbrecht](https://github.com/DaAlbrecht), who [implemented `insert_unit_bundle`](https://github.com/TheBevyFlock/bevy_cli/pull/210), added support for [linting qualified methods](https://github.com/TheBevyFlock/bevy_cli/pull/253), merged [`panicking_query_methods` and `panicking_world_methods`](https://github.com/TheBevyFlock/bevy_cli/pull/271), reviewed several PRs, and helped many on Discord
+- [TimJentzsch](https://github.com/TimJentzsch), who has been hard at work building the linter's sibling project, the [Bevy CLI](https://github.com/TheBevyFlock/bevy_cli). Tim has provided valuable feedback and is a consistent reviewer of PRs.
+- [MrGVSV](https://github.com/MrGVSV), who [wrote the `borrowed_reborrowable`](https://github.com/TheBevyFlock/bevy_cli/pull/164) lint. (He's also the driving force behind `bevy_reflect`!)
+
+If you would like to try contributing yourself, please check out the [Contributor's Guide](https://github.com/TheBevyFlock/bevy_cli/tree/main/bevy_lint/docs)! We're super welcome to new contributors, and love any help we can get!
+
+That's all for today. Thank you for your time!
+
+\- BD103 :)
