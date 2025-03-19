@@ -23,7 +23,9 @@
     font-weight: bold;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     text-shadow: 0.1em 0.1em 0 var(--turquoise-darker);
   }
 
