@@ -36,15 +36,21 @@
     grid-template-columns: 1fr 2fr;
   }
 
+  /* Prevent elements that cannot wrap from stealing screen space from the nav bar. */
+  .container main {
+    max-width: 40em;
+  }
+
   /* When on mobile, switch to a single-column grid. */
   @media (width <= 820px) {
     .container {
       grid-template-columns: 1fr !important;
     }
+
+    .container main {
+      /* 90% of the viewport width */
+      max-width: 90vw;
+    }
   }
 
-  /* Prevent elements that cannot wrap from stealing screen space from the nav bar. */
-  .container main {
-    max-width: 40em;
-  }
 </style>
