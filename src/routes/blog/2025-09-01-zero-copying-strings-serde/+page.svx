@@ -4,7 +4,7 @@ title: Be Careful Zero-Copying Strings with serde
 
 # Be Careful Zero-Copying Strings with `serde`
 
-When deserializing a string using `serde`, it is possible to use a borrowed `&str` instead of an owned `String`:
+When deserializing a string using [`serde`](https://serde.rs/), it is possible to use a borrowed [`&str`](https://doc.rust-lang.org/stable/std/primitive.str.html) instead of an owned [`String`](https://doc.rust-lang.org/stable/std/string/struct.String.html):
 
 ```rust
 use serde::Deserialize;
@@ -12,7 +12,7 @@ use serde_json;
 
 #[derive(Deserialize)]
 struct Foo<'a> {
-	// This string is borrowed.
+    // This string is borrowed.
     text: &'a str,
 }
 
@@ -20,7 +20,7 @@ fn main() {
     let json = r#"{ "text": "Hello, world!" }"#;
 
     let foo: Foo = serde_json::from_str(json).unwrap();
-    
+
     println!("{}", foo.text); // Hello, world!
 }
 ```
