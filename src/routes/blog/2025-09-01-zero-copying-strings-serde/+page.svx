@@ -1,0 +1,80 @@
+---
+title: Be Careful Zero-Copying Strings with serde
+---
+
+# Be Careful Zero-Copying Strings with `serde`
+
+When deserializing a string using `serde`, it is possible to use a borrowed `&str` instead of an owned `String`:
+
+```rust
+use serde::Deserialize;
+use serde_json;
+
+#[derive(Deserialize)]
+struct Foo<'a> {
+	// This string is borrowed.
+    text: &'a str,
+}
+
+fn main() {
+    let json = r#"{ "text": "Hello, world!" }"#;
+
+    let foo: Foo = serde_json::from_str(json).unwrap();
+    
+    println!("{}", foo.text); // Hello, world!
+}
+```
+
+The borrowed string is a reference to a portion of the original serialized data. In this case, `foo.text` refers to a slice of the `json` variable that contains the text `Hello, world!`.
+
+This process is called zero-copy deserialization, and can be more efficient than allocating a new `String` and copying the data to it. Be warned, however; **some strings cannot be deserialized into `&str`, and must be deserialized into a `String` instead**.
+
+The specific case where I found this out was when I was deserializing text with backslashes in it:
+
+```rust
+let json = r#"{ "text": "Go to C:\\Users\\bd\\Desktop" }"#;
+
+let foo: Foo = serde_json::from_str(json).unwrap();
+
+println!("{}", foo.text);
+```
+
+Instead of printing `Go to C:\Users\bd\Desktop` as I expected, it instead panicked!
+
+```
+thread 'main' panicked at src/main.rs:12:47:
+called `Result::unwrap()` on an `Err` value: Error("invalid type: string \"Go to C:\\\\Users\\\\bd\\\\Desktop\", expected a borrowed string", line: 1, column: 34)
+```
+
+When deserializing the text, `serde_json` needs to convert `Go to C:\\Users\\bd\\Desktop` to `Go to C:\Users\bd\Desktop`. The only way it can do that is by *allocating a new string*. `serde_json` can't do that here, however, because we told it not to by using zero-copy deserialization!
+
+In order to fix this, you need to replace the borrowed `&str` with an owned `String`[^1]. It can be slower than zero-copy deserialization, but it supports *all* possible data inputs:
+
+```rust
+use serde::Deserialize;
+use serde_json;
+
+#[derive(Deserialize)]
+struct Foo {
+    text: String,
+}
+
+fn main() {
+    let json = r#"{ "text": "Go to C:\\Users\\bd\\Desktop" }"#;
+
+    let foo: Foo = serde_json::from_str(json).unwrap();
+
+    println!("{}", foo.text); // Go to C:\Users\bd\Desktop
+}
+```
+
+This kind of issue will arise when deserializing other escape codes in JSON, such as `\n` and `\t`. It can also occur when using other types that can be zero-copied, such as `&Path`[^2]. Next time you consider using zero-copy deserialization, be sure you're ok with limiting what data you can support.
+
+**Further Reading:**
+
+- [Deserializer lifetimes](https://serde.rs/lifetimes.html)
+- [JSON string with backslashes does not deserialize into borrowed `&str`](https://github.com/serde-rs/serde/issues/1746)
+
+[^1]: You can also use `Cow<str>`, but it will allocate a new `String` even if the text can be zero-copied, so it has the same effect as just using `String` directly.
+
+[^2]: Be especially careful about using this type. Since it cannot deserialize backslashes, you're essentially eliminating support for Windows paths.
