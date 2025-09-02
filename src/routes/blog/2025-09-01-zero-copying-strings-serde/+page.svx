@@ -68,13 +68,13 @@ fn main() {
 }
 ```
 
-This kind of issue will arise when deserializing other escape codes in JSON, such as `\n` and `\t`. It can also occur when using other types that can be zero-copied, such as `&Path`[^2]. Next time you consider using zero-copy deserialization, be sure you're ok with limiting what data you can support.
+This kind of issue will arise when deserializing other escape codes in JSON, such as `\n` and `\t`. It can also occur when using other types that can be zero-copied, such as [`&Path`](https://doc.rust-lang.org/stable/std/path/struct.Path.html)[^2]. Next time you consider using zero-copy deserialization, be sure you're ok with limiting what data you can support.
 
 **Further Reading:**
 
 - [Deserializer lifetimes](https://serde.rs/lifetimes.html)
 - [JSON string with backslashes does not deserialize into borrowed `&str`](https://github.com/serde-rs/serde/issues/1746)
 
-[^1]: You can also use `Cow<str>`, but it will allocate a new `String` even if the text can be zero-copied, so it has the same effect as just using `String` directly.
+[^1]: You can also use [`Cow<str>`](https://doc.rust-lang.org/stable/std/borrow/enum.Cow.html), but it will allocate a new `String` even if the text can be zero-copied, so it has the same effect as just using `String` directly.
 
 [^2]: Be especially careful about using this type. Since it cannot deserialize backslashes, you're essentially eliminating support for Windows paths.
