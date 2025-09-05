@@ -48,7 +48,7 @@ called `Result::unwrap()` on an `Err` value: Error("invalid type: string \"Go to
 
 When deserializing the text, `serde_json` needs to convert `Go to C:\\Users\\bd\\Desktop` to `Go to C:\Users\bd\Desktop`. The only way it can do that is by *allocating a new string*. `serde_json` can't do that here, however, because we told it not to by using zero-copy deserialization!
 
-In order to fix this, you need to replace the borrowed `&str` with an owned `String`[^1]. It can be slower than zero-copy deserialization, but it supports *all* possible data inputs:
+In order to fix this, you need to replace the borrowed `&str` with an owned `String`. It can be slower than zero-copy deserialization, but it supports *all* possible data inputs:
 
 ```rust
 use serde::Deserialize;
@@ -68,13 +68,49 @@ fn main() {
 }
 ```
 
-This kind of issue will arise when deserializing other escape codes in JSON, such as `\n` and `\t`. It can also occur when using other types that can be zero-copied, such as [`&Path`](https://doc.rust-lang.org/stable/std/path/struct.Path.html)[^2]. Next time you consider using zero-copy deserialization, be sure you're ok with limiting what data you can support.
+This kind of issue will arise when deserializing other escape codes in JSON, such as `\n` and `\t`. It can also occur when using other types that can be zero-copied, such as [`&Path`](https://doc.rust-lang.org/stable/std/path/struct.Path.html)[^1]. Next time you consider using zero-copy deserialization, be sure you're ok with limiting what data you can support.
 
-**Further Reading:**
+## Further Reading:
 
 - [Deserializer lifetimes](https://serde.rs/lifetimes.html)
 - [JSON string with backslashes does not deserialize into borrowed `&str`](https://github.com/serde-rs/serde/issues/1746)
 
-[^1]: You can also use [`Cow<str>`](https://doc.rust-lang.org/stable/std/borrow/enum.Cow.html), but it will allocate a new `String` even if the text can be zero-copied, so it has the same effect as just using `String` directly.
+## Addendum
 
-[^2]: Be especially careful about using this type. Since it cannot deserialize backslashes, you're essentially eliminating support for Windows paths.
+As [@korrat](https://github.com/korrat) has [helpfully pointed out](https://github.com/BD103/bd103.github.io/issues/15), [`Cow<str>`](https://doc.rust-lang.org/stable/std/borrow/enum.Cow.html) can be used as a compromise between `&str` and `String`. If you annotate a field with `#[serde(borrow)]`, it will first try to zero-copy deserialize the string, but will fall back to cloning the data if it needs to be modified.
+
+As a result, `Cow<str>` should be preferred as it offers performance improvements without restricting what data can be deserialized:
+
+```rust
+use serde::Deserialize;
+use serde_json;
+
+use std::borrow::Cow;
+
+#[derive(Deserialize)]
+struct Foo<'a> {
+    // Try to borrow the string when possible, but clone it when necessary.
+    #[serde(borrow)]
+    text: Cow<'a, str>,
+}
+
+fn main() {
+    // No changes need to be made, the string can be borrowed.
+    let json = r#"{ "text": "Hello, world!" }"#;
+
+    let foo: Foo = serde_json::from_str(json).unwrap();
+
+    assert!(matches!(foo.text, Cow::Borrowed(_)));
+
+    // Changes need to be made, the string must be owned.
+    let json = r#"{ "text": "Hello,\nworld!" }"#;
+
+    let foo: Foo = serde_json::from_str(json).unwrap();
+
+    assert!(matches!(foo.text, Cow::Owned(_)));
+}
+```
+
+In the initial release of this post, I incorrectly wrote that `Cow<str>` does not support zero-copy deserialization. This isn't the case, you just need to annotate the `Cow<str>` field with `#[serde(borrow)]`. Don't forget that attribute, or `Cow<str>` will just be equivalent to `String`! See [the `serde` docs](https://serde.rs/lifetimes.html#borrowing-data-in-a-derived-impl) for more information and examples.
+
+[^1]: Be especially careful about using this type. Since it cannot deserialize backslashes, you're essentially eliminating support for Windows paths.
