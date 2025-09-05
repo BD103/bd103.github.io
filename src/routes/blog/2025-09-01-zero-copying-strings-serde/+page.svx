@@ -89,7 +89,7 @@ use std::borrow::Cow;
 
 #[derive(Deserialize)]
 struct Foo<'a> {
-	// Try to borrow the string when possible, but clone it when necessary.
+    // Try to borrow the string when possible, but clone it when necessary.
     #[serde(borrow)]
     text: Cow<'a, str>,
 }
@@ -100,20 +100,14 @@ fn main() {
 
     let foo: Foo = serde_json::from_str(json).unwrap();
 
-    match foo.text {
-        Cow::Borrowed(_) => println!("Borrowed"),
-        Cow::Owned(_) => unreachable!(),
-    }
+    assert!(matches!(foo.text, Cow::Borrowed(_)));
 
     // Changes need to be made, the string must be owned.
     let json = r#"{ "text": "Hello,\nworld!" }"#;
-    
+
     let foo: Foo = serde_json::from_str(json).unwrap();
 
-    match foo.text {
-	    Cow::Borrowed(_) => unreachable!(),
-        Cow::Owned(_) => println!("Owned"),
-    }
+    assert!(matches!(foo.text, Cow::Owned(_)));
 }
 ```
 
