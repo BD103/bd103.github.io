@@ -33,6 +33,9 @@
     "typescript-eslint": "^8.26.1",
     "vite": "^6.2.1"
   },
+  "engines": {
+    "node": "^24.7.0"
+  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
