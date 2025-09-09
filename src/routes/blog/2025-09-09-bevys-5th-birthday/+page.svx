@@ -1,0 +1,90 @@
+---
+title: "Bevy's 5th Birthday: Year of the Linter"
+---
+
+<script lang="ts">
+import nerdSniping from "$lib/images/2025-09-09-nerd-sniping.png";
+</script>
+
+# Bevy's 5th Birthday: Year of the Linter
+
+[Bevy](https://bevy.org/) is an open-source game engine built in Rust. On August 10th, 2025, the project lead Cart [celebrated Bevy's 5th birthday with a blog post](https://bevy.org/news/bevys-fifth-birthday/), and I wanted to do the same!
+
+## Hi, I'm BD103
+
+For those uninitiated, I'm BD103! I'm a programmer who's been working on Bevy for a little under 2 years, at this point. [Last year](./2024-08-18-4-years-of-bevy) I talked about how I got involved with Bevy and how I found my place working on the CI infrastructure. This year, you’re in for a treat, as I took my work in a fun, new direction!
+
+## Nerd Snipe of the Year
+
+In late August of 2024, one of the maintainers, [Alice](https://github.com/alice-i-cecile), was helping a contributor find larger, independent projects to work on related to Bevy. One of the ideas she mentioned was a Bevy CLI, a command-line tool that would help users setup and manage their Bevy projects.
+
+Now the idea of a Bevy CLI has been around for quite some time, with [an issue opened about it in late 2020](https://github.com/bevyengine/bevy/issues/436). When I saw Alice mention a Bevy CLI, I did some digging and found that specific issue. In the issue description it listed several possible commands, but one of which really caught my attention:
+
+> - `bevy lint` - possibly checks the project for best practices?
+
+So...
+
+<a href="https://xkcd.com/356/"><img src={nerdSniping} /></a>
+
+## Thankfully I Did Not Get Run Over by a Truck[^1]
+
+The concept of a Bevy linter led me down a _looooong_ rabbit hole, but I hit the bottom with a skip in my step and a plan of action in my head. I joined the newly-created [Bevy CLI working group](https://discord.com/channels/691052431525675048/1278871953721262090) and wrote [a design document](https://hackmd.io/@bevy/ryelRBqiiR) for the linter based on the architecture of [Clippy](https://github.com/rust-lang/rust-clippy). Once I got a thumbs-up 👍 from the working group, I got to work contributing my design to the new [`TheBevyFlock/bevy_cli`](https://github.com/TheBevyFlock/bevy_cli) repository.
+
+From late August to mid-November, I and a few others worked on the linter until we got it to a place where [it could be released as v0.1.0](https://github.com/TheBevyFlock/bevy_cli/releases/tag/lint-v0.1.0). That release came with 6 lints, live documentation, and lots of infrastructure set up for future releases.
+
+## Briefly Being Famous
+
+4 days after releasing v0.1.0, I went on the [7th Bevy Meetup livestream](https://www.youtube.com/watch?v=Ao2gXd_CgUc) and presented a talk on the linter. In my talk I went into the architecture behind the linter, and gave examples building up a new linter from scratch using the same method. You can [see the demo code and slides here](https://github.com/BD103/Bevy-Meetup-7), if you're curious. It was great working with the host [Stephan](https://github.com/extrawurst), and I really enjoyed presenting alongside speakers [Zac](https://github.com/bushrat011899) and [Koe](https://github.com/UkoeHB)!
+
+## The Next 3 Releases
+
+After the first release, I and a few others in the working group published [v0.2.0 in March of 2025](https://github.com/TheBevyFlock/bevy_cli/releases/tag/lint-v0.2.0), [v0.3.0 in April of 2025](https://github.com/TheBevyFlock/bevy_cli/releases/tag/lint-v0.3.0), and [v0.4.0 in August of 2025](https://github.com/TheBevyFlock/bevy_cli/releases/tag/lint-v0.4.0). While these releases did add several new lints, much of my personal work focused on other aspects of the linter:
+
+- Upgrading to support new versions of Bevy and Rust
+- Fixing and improving existing lints, renaming and merging them when it made sense
+- Writing and refining our external and internal documentation
+- Adding support for configuring lints in `Cargo.toml`
+- Assisting with writing [RFC 3808](https://github.com/rust-lang/rfcs/pull/3808) in order to make it easier to configure lints within code
+- Improving support for running the linter in Github Actions
+- Adding the ability to auto-fix warnings with the `--fix` flag
+
+This has been a trend in my work for a while. While I do enjoy writing new features, I tend to spend a lot more time looking over existing code and trying my best to improve it. I would like to write more lints, as I'm not satisfied with [our current selection](https://thebevyflock.github.io/bevy_cli/api/bevy_lint/lints/index.html), but that's a project for a later date.
+
+## Thank You
+
+The Bevy community is such a kind and welcoming place, and I'd be remiss to not mention my co-maintainers who I've worked with in the Bevy CLI working group for the past year!
+
+### [Tim](https://github.com/TimJentzsch)
+
+Tim, you are the driving force behind the CLI since its earliest days in the working group. Many of the largest features, including [easy web support](https://thebevyflock.github.io/bevy_cli/cli/web.html) and [the upcoming `getrandom` fix](https://github.com/TheBevyFlock/bevy_cli/pull/547), were implemented by of you. You've truly left your mark on the Bevy community[^2], and it's been wonderful working alongside you!
+
+### [David](https://github.com/DaAlbrecht)
+
+David, you were the first outside contributor to _continuously_ work on the CLI and linter. Although we've had several one-off contributions from others, you both started and stuck with the project. Unlike Tim who specializes in the CLI and myself who specializes in the linter, you've worked on and improved both. You're knowledge of both tools has made you super valuable in the review process, and it's been really fun getting to know you!
+
+## In Conclusion
+
+I'm truly grateful to have been given the opportunity to work on Bevy and within its ecosystem. While the project itself is cool[^3], **the people are why I stayed**.
+
+If you use Bevy and haven't given it a shot yet, I'd really appreciate it if you [tried out the CLI and linter for yourself](https://thebevyflock.github.io/bevy_cli/)! They're both unofficial right now, but we're working on upstreaming them into an official product in the near future.
+
+If you'd like to support my work, you can do so indirectly by [donating to the Bevy Foundation](https://bevy.org/donate/) or by [purchasing some sweet official merch](https://merch.bevy.org). I'm not in a position to take donations myself, but [the people working for the foundation](https://bevy.org/community/people/) are wonderful and highly deserving of any support you can give them.
+
+If you'd like to see more posts by community members on Bevy's 5th Birthday, I've enjoyed reading through these:
+
+- [Cart's Perspective](https://bevy.org/news/bevys-fifth-birthday/)
+- [Charlotte's Perspective](https://www.charlotte.fyi/posts/bevys-fifth-bday)
+- [Rin's Perspective](https://rinoxide.substack.com/p/bevys-fifth-birthday-the-editor)
+- [Jasmine's Perspective](https://jms55.github.io/posts/2025-09-03-bevy-fifth-birthday/)
+
+There are also several more [in the community submissions issue on Github](https://github.com/bevyengine/bevy-website/issues/2202) that I highly recommend checking out!
+
+That's all from me for now! If you'd like to chat, I'm @bd103 [on Discord](https://discord.gg/bevy) and [@bd103@hachyderm.io](https://hachyderm.io/@bd103) on Mastodon. Until next time,
+
+\- BD103
+
+[^1]: But any future work I may have done on the engine itself did get run over by the said metaphorical truck. I was officially nerd-sniped.
+
+[^2]: This is especially true for the jammers who participated in the [6th Bevy Game jam](https://itch.io/jam/bevy-jam-6). The CLI combined with [`bevy_new_2d`](https://github.com/TheBevyFlock/bevy_new_2d) *drastically* decreased the difficulty of making a new Bevy game from scratch.
+
+[^3]: Game engines are really fun to build, especially when you want to make one that's both efficient and ergonomic!
