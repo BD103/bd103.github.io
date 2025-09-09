@@ -52,5 +52,4 @@
       max-width: 90vw;
     }
   }
-
 </style>
