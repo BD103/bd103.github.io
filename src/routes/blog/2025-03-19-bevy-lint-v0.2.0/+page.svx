@@ -4,7 +4,7 @@ title: Announcing bevy_lint v0.2.0
 
 <script lang="ts">
 // The adjective the reader feels best describes themselves. The later 2 have special surprises! :)
-let adjective =  $state("punctual");
+let adjective = $state("punctual");
 
 $effect(() => {
   document.body.classList.toggle("bright", adjective === "bright");
