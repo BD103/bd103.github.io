@@ -24,7 +24,9 @@ Now the idea of a Bevy CLI has been around for quite some time, with [an issue o
 
 So...
 
-<a href="https://xkcd.com/356/"><img src={nerdSniping} /></a>
+<a href="https://xkcd.com/356/" aria-label="XKCD 356 Truck">
+  <img src={nerdSniping} alt="A comic panel of a truck running someone over" />
+</a>
 
 ## Thankfully I Did Not Get Run Over by a Truck[^1]
 
