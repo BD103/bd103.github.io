@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import HistoryEntry from "$lib/HistoryEntry.svelte";
 </script>
 
@@ -30,7 +31,7 @@
     I switched the website to have a dark gray background and white text instead of white background
     and black text. My eyes were tired of being blinded, and dark mode looks a lot better in my
     opinion! This was done after working on my blog post on <a
-      href="/blog/2024-08-18-4-years-of-bevy">Bevy's 4th birthday</a
+      href={resolve("/blog/2024-08-18-4-years-of-bevy")}>Bevy's 4th birthday</a
     >.
   {/snippet}
 </HistoryEntry>
@@ -38,7 +39,7 @@
 <HistoryEntry date="2024-06-30">
   {#snippet body()}
     After a full year, I get an idea for writing a blog post on <a
-      href="/blog/2023-06-27-global-allocators">custom global allocators in Rust</a
+      href={resolve("/blog/2023-06-27-global-allocators")}>custom global allocators in Rust</a
     >. In that time, I gained a lot of experience in writing websites with
     <a href="https://nuxt.com">Nuxt</a>. I take this opportunity to completely rewrite the website
     using it and the <a href="https://content.nuxtjs.org">Content module</a>.

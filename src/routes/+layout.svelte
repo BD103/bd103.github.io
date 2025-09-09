@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+
   let { children } = $props();
 </script>
 
@@ -11,11 +13,11 @@
     <h1>BD103</h1>
 
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/history">History</a></li>
+      <li><a href={resolve("/")}>Home</a></li>
+      <li><a href={resolve("/history")}>History</a></li>
       <li><a href="https://github.com/BD103">Github</a></li>
       <li><a href="https://github.com/BD103/bd103.github.io">Source Code</a></li>
-      <li><a href="/feed.xml">RSS</a>, <a href="/atom.xml">Atom</a></li>
+      <li><a href={resolve("/feed.xml")}>RSS</a>, <a href={resolve("/atom.xml")}>Atom</a></li>
     </ul>
   </nav>
 

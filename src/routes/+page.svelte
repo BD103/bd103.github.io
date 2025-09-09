@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+
   let { data } = $props();
 </script>
 
@@ -19,6 +21,13 @@
 
 <ul>
   {#each data.posts as post (post.href)}
-    <li><a href={post.href}>{post.title}</a></li>
+    <li>
+      <a
+        href={resolve(
+          /* @ts-expect-error: string is guaranteed to match expected paths */
+          post.href,
+        )}>{post.title}</a
+      >
+    </li>
   {/each}
 </ul>
