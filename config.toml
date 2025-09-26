@@ -1,22 +1,18 @@
-# serene v5.4.1
-#
-# - docs: https://github.com/isunjn/serene/blob/latest/USAGE.md
-# - check for updates: https://github.com/isunjn/serene/releases
-#
-#=========================================================================================
-
-base_url = "https://example.com"
-title = "xxxx"
-description = "xxxx xxxx xxxx"
+base_url = "https://bd103.github.io"
+title = "BD103's Blog"
+# description = "xxxx xxxx xxxx"
 default_language = "en"
 theme = "serene"
-output_dir = "public"
-compile_sass = true
-minify_html = false # Keep this false, as it may cause issues with some styles
-build_search_index = false # Keep this false, search is temporarily unsupported
+# Keep this false, as it may cause issues with some styles
+minify_html = false
+# Search is temporarily unsupported
+build_search_index = false
 generate_feeds = true
 feed_filenames = ["feed.xml", "atom.xml"]
-taxonomies = [{ name = "tags" }, { name = "categories" }]
+taxonomies = [
+  { name = "tags" },
+  { name = "categories" },
+]
 
 [markdown]
 highlight_code = true
@@ -37,10 +33,7 @@ paths = "on"
 taxonomies = "on"
 anchors = "on"
 
-#=========================================================================================
-
 [extra]
-
 sections = [
   { name = "posts", path = "/posts", is_external = false },
   # { name = "tags", path = "/tags", is_external = false },
@@ -51,12 +44,8 @@ blog_section_path = "/posts"
 back_link_text = "Back" # Text of the back button
 force_theme = false # false | "light" | "dark"
 
-footer_copyright = "© 2025 <your-name>"
+footer_copyright = "©2025 BD103"
 footer_credits = true # Whether to show "Built with zola and serene" in footer
 
 not_found_error_text = "404 Not Found"
 not_found_recover_text = "« back to home »"
-
-reaction = false # Whether to enable anonymous emoji reactions (Note: You need to set up a working api endpoint to enable this feature)
-reaction_align = "right" # "left" | "center" | "right"
-reaction_endpoint = "https://example.com/api/reaction"
