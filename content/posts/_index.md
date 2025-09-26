@@ -1,19 +1,17 @@
 +++
-title = "My Blog"
-description = "My blog site."
+title = "BD103's Blog - Posts"
+# description = ""
 sort_by = "date"
 template = "blog.html"
 page_template = "post.html"
 insert_anchor_links = "right"
-generate_feeds = true
+generate_feeds = false
 
 [extra]
-lang = "en"
-
 title = "Posts"
-subtitle = "I write about ...."
+subtitle = "All of my latest writings, fresh off the press!"
 
-date_format = "%b %-d, %Y"
+date_format = "%Y-%m-%d"
 
 categorized = false # posts can be categorized
 back_to_top = true # show back-to-top button
