@@ -2,27 +2,26 @@
 template = 'home.html'
 
 [extra]
-lang = 'en'
-
 # Show footer in home page
-footer = false
+footer = true
 
 # If you don't want to display id/bio/avatar, simply comment out that line
-name = "Jhon Wick"
-id = "jhonwick"
-bio = "dog person, killer"
-avatar = "img/avatar.webp"
+name = "BD103"
+id = "bd103"
+bio = "Rust enthusiast and Bevy contributor"
+# avatar = "img/avatar.webp"
 links = [
-    { name = "GitHub", icon = "github", url = "https://github.com/<your-username>" },
-    { name = "Twitter", icon = "twitter", url = "https://twitter.com/<your-username>" },
-    { name = "Email", icon = "email", url = "mailto:<your-email-address>" },
+    { name = "GitHub", icon = "github", url = "https://github.com/BD103" },
+    { name = "Mastodon", icon = "mastodon", url = "https://hachyderm.io/@bd103" },
 ]
 
 # Show a few recent posts in home page
-recent = false
+recent = true
 recent_max = 15
 recent_more_text = "more »"
-date_format = "%b %-d, %Y"
+date_format = "%Y-%m-%d"
 +++
 
-Hi, I'm ...
+Welcome to my website! I'm BD103, and I'm an open-sourced contributor with a strong interest in game development, tooling, and infrastructure.
+
+I've been an active contributor and community member of [Bevy](https://bevy.org), a game engine written in [Rust](https://rust-lang.org), since November 2023. You'll find many of my projects and blog posts are related to Bevy and Rust in general!
