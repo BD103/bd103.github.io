@@ -9,7 +9,7 @@ footer = true
 name = "BD103"
 id = "bd103"
 bio = "Rust enthusiast and Bevy contributor"
-# avatar = "img/avatar.webp"
+avatar = "img/avatar.png"
 links = [
     { name = "GitHub", icon = "github", url = "https://github.com/BD103" },
     { name = "Mastodon", icon = "mastodon", url = "https://hachyderm.io/@bd103" },
