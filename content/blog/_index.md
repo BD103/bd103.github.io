@@ -1,6 +1,6 @@
 +++
 title = "BD103's Blog - Posts"
-# description = ""
+description = "All of my latest writings, fresh off the press!"
 sort_by = "date"
 template = "blog.html"
 page_template = "post.html"
@@ -23,11 +23,12 @@ comment = false
 copy = true
 
 outdate_alert = false
-outdate_alert_days = 12
+# About 2 months.
+outdate_alert_days = 60
 outdate_alert_text_before = "This article was last updated "
 outdate_alert_text_after = " days ago and may be out of date."
 
-# Set the defaults for 
+# Set the defaults for extra properties
 math = false
 mermaid = false
 featured = false

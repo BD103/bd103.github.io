@@ -10,8 +10,6 @@ tags = ["bevy", "bevy_lint", "rust"]
 featured = true
 +++
 
-# Bevy's 5th Birthday: Year of the Linter
-
 [Bevy](https://bevy.org/) is an open-source game engine built in Rust. On August 10th, 2025, the project lead Cart [celebrated Bevy's 5th birthday with a blog post](https://bevy.org/news/bevys-fifth-birthday/), and I wanted to do the same!
 
 ## Hi, I'm BD103

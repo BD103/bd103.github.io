@@ -38,6 +38,8 @@ sections = [
   { name = "Posts", path = "/blog", is_external = false },
   { name = "Tags", path = "/tags", is_external = false },
   { name = "Source", path = "https://github.com/BD103/bd103.github.io", is_external = true },
+  { name = "RSS", path = "/feed.xml", is_external = false },
+  { name = "Atom", path = "/atom.xml", is_external = false },
 ]
 blog_section_path = "/blog"
 
