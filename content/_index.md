@@ -2,10 +2,8 @@
 template = 'home.html'
 
 [extra]
-# Show footer in home page
+# Show footer in home page.
 footer = true
-
-# If you don't want to display id/bio/avatar, simply comment out that line
 name = "BD103"
 id = "bd103"
 bio = "Rust enthusiast and Bevy contributor"
@@ -15,7 +13,7 @@ links = [
     { name = "Mastodon", icon = "mastodon", url = "https://hachyderm.io/@bd103" },
 ]
 
-# Show a few recent posts in home page
+# Show a few recent posts in home page.
 recent = true
 recent_max = 15
 recent_more_text = "more »"

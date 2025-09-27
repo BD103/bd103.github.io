@@ -13,14 +13,23 @@ subtitle = "All of my latest writings, fresh off the press!"
 
 date_format = "%Y-%m-%d"
 
-categorized = false # posts can be categorized
-back_to_top = true # show back-to-top button
-toc = true # show table-of-contents
-comment = false # enable comment
-copy = true # show copy button in code block
+# Do not categorize posts, we use tags instead.
+categorized = false
+back_to_top = true
+toc = true
+# Disable comments.
+comment = false
+# Show copy button in code blocks.
+copy = true
 
 outdate_alert = false
 outdate_alert_days = 12
 outdate_alert_text_before = "This article was last updated "
 outdate_alert_text_after = " days ago and may be out of date."
+
+# Set the defaults for 
+math = false
+mermaid = false
+featured = false
+reaction = false
 +++
