@@ -2,6 +2,7 @@
 title = "4 Years of Bevy"
 description = "Reflecting on my contributions to the Bevy game engine on its 4th birthday"
 date = 2024-08-18
+updated = 2025-09-28
 
 [taxonomies]
 tags = ["bevy", "rust"]
@@ -60,7 +61,7 @@ I wrote the majority of the migration guide for 0.13 to 0.14. I edited [128 diff
 
 I had a bit of burn-out after this (understandably so!), so I want to thank [Trial](https://github.com/TrialDragon) for reviewing and merging follow-up changes to the guide after I took a break. I've since recovered, so if you find an issue with the guide then feel free to ping me [on Github](https://github.com/BD103)!
 
-### [Contributor's Guide](https://bevyengine.org/contributing/)
+### [Contributor's Guide](https://bevy.org/learn/contribute/introduction/)
 
 I, along with [Nth](https://github.com/nthtensor) and a few others in the working group, have been writing and editing the (soon to be released) Contributor's Guide. Our hope is to consolidate development resources into a single source, improving the on-boarding experience for new contributors, and going into more depth than the existing resources.
 
