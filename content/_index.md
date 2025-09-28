@@ -16,7 +16,7 @@ links = [
 # Show a few recent posts in home page.
 recent = true
 recent_max = 5
-recent_more_text = "more »"
+recent_more_text = "More »"
 date_format = "%Y-%m-%d"
 +++
 
