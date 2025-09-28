@@ -21,26 +21,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - name: Install Zola
+        uses: taiki-e/install-action@v2
         with:
-          version: 10
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
+          tool: zola@0.21
 
       - name: Build site
-        run: |
-          pnpm install
-          pnpm build
+        run: zola build
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: public
 
   # Download build's artifact and publish site
   deploy:
