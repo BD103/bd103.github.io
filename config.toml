@@ -21,6 +21,9 @@ highlight_themes_css = [
 ]
 bottom_footnotes = true
 
+[slugify]
+paths_keep_dates = true
+
 [extra]
 sections = [
   { name = "Posts", path = "/blog", is_external = false },
