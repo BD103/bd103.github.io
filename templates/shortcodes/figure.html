@@ -10,7 +10,7 @@
     <figcaption>
         {% if caption %}{{ caption }}{% endif %}
         {%- if caption and via %},{% endif %}
-        {% if via %}<a href="{{via}}">via</a>{% endif %}
+        {% if via %}<a href="{{ via }}">via</a>{% endif %}
     </figcaption>
     {%- endif %}
 </figure>
