@@ -167,4 +167,4 @@ If you have any questions, feel free to comment on [my post](https://users.rust-
 
 Cheers!
 
-{{ figure(src = "https://www.rustacean.net/assets/rustacean-flat-happy.svg", alt = "Ferris the crab, Rust's unofficial mascot, smiling", caption = "Ferris the happy crab", via = "https://rustacean.net/", width = "200rem") }}
+{{ figure(src = "https://www.rustacean.net/assets/rustacean-flat-happy.svg", alt = "Ferris the crab, Rust's unofficial mascot, smiling", caption = "Ferris the happy crab", caption = "[via](https://rustacean.net/)", width = "200rem") }}
