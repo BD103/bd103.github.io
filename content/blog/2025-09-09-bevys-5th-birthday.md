@@ -14,7 +14,7 @@ featured = true
 
 ## Hi, I'm BD103
 
-For those uninitiated, I'm BD103! I'm a programmer who's been working on Bevy for a little under 2 years, at this point. [Last year](./2024-08-18-4-years-of-bevy) I talked about how I got involved with Bevy and how I found my place working on the CI infrastructure. This year, you’re in for a treat, as I took my work in a fun, new direction!
+For those uninitiated, I'm BD103! I'm a programmer who's been working on Bevy for a little under 2 years, at this point. [Last year](@/blog/2024-08-18-4-years-of-bevy.md) I talked about how I got involved with Bevy and how I found my place working on the CI infrastructure. This year, you’re in for a treat, as I took my work in a fun, new direction!
 
 ## Nerd Snipe of the Year
 
