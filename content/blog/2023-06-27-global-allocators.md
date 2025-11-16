@@ -1,7 +1,6 @@
 +++
 title = "Intercepting Allocations with the Global Allocator"
 description = "Take a look inside Rust's global allocator APIs!"
-date = 2023-06-07
 
 [taxonomies]
 tags = ["rust"]

@@ -1,7 +1,6 @@
 +++
 title = "Rust Pointer Metadata"
 description = "Take a look inside Rust's global allocator APIs!"
-date = 2023-08-06
 
 [taxonomies]
 tags = ["rust"]

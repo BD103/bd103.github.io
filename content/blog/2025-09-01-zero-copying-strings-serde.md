@@ -1,7 +1,6 @@
 +++
 title = "Be Careful Zero-Copying Strings with serde"
 description = "Going into serde's zero-copy deserialization support, and the sharp edges you may run into while using it"
-date = 2025-09-01
 
 [taxonomies]
 tags = ["rust"]

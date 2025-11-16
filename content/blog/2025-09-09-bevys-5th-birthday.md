@@ -1,7 +1,6 @@
 +++
 title = "Bevy's 5th Birthday: Year of the Linter"
 description = "Going into serde's zero-copy deserialization support, and the sharp edges you may run into while using it"
-date = 2025-09-09
 
 [taxonomies]
 tags = ["bevy", "bevy_lint", "rust"]

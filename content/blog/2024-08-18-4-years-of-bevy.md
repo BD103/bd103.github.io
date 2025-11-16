@@ -1,7 +1,6 @@
 +++
 title = "4 Years of Bevy"
 description = "Reflecting on my contributions to the Bevy game engine on its 4th birthday"
-date = 2024-08-18
 updated = 2025-09-28
 
 [taxonomies]
