@@ -1,4 +1,4 @@
-base_url = "https://bd103.github.io"
+base_url = "https://bd103.dev"
 title = "BD103's Blog"
 description = "Technical writing on Bevy, Rust, and more"
 default_language = "en"
