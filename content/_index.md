@@ -10,7 +10,7 @@ bio = "Rust enthusiast and Bevy contributor"
 avatar = "img/avatar.png"
 links = [
     { name = "GitHub", icon = "github", url = "https://github.com/BD103" },
-    { name = "Mastodon", icon = "mastodon", url = "https://hachyderm.io/@bd103" },
+    { name = "Mastodon", icon = "mastodon", url = "https://hachyderm.io/@bd103", rel_me = true },
 ]
 
 # Show a few recent posts in home page.
