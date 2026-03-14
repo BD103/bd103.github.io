@@ -27,7 +27,7 @@ Now the idea of a Bevy CLI has been around for quite some time, with [an issue o
 
 So...
 
-{{ figure(src = "/img/2025-09-09-bevys-5th-birthday/nerd-sniping.png", alt = "A comic panel of a truck running someone over", caption = "I was thoroughly nerd-sniped, [via](https://xkcd.com/356/)") }}
+{{ figure(src = "nerd-sniping.png", alt = "A comic panel of a truck running someone over", caption = "I was thoroughly nerd-sniped, [via](https://xkcd.com/356/)") }}
 
 ## Thankfully I Did Not Get Run Over by a Truck[^1]
 
