@@ -6,7 +6,7 @@ This is the source code for my personal website and blog!
 
 To build this website, you will need:
 
-- [Zola](https://www.getzola.org/) 0.21.0
+- [Zola](https://www.getzola.org/) v0.22.1
 
 ## Building
 
