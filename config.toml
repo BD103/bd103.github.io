@@ -12,14 +12,13 @@ taxonomies = [
 ]
 
 [markdown]
-highlight_code = true
-extra_syntaxes_and_themes = ["themes/serene/highlight_themes"]
-highlight_theme = "css"
-highlight_themes_css = [
-  { theme = "serene-light", filename = "hl-light.css" },
-  { theme = "serene-dark", filename = "hl-dark.css" },
-]
+github_alerts = true
 bottom_footnotes = true
+
+[markdown.highlighting]
+style = "class"
+light_theme = "catppuccin-latte"
+dark_theme = "catppuccin-mocha"
 
 [slugify]
 paths_keep_dates = true
