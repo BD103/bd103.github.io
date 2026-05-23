@@ -13,15 +13,20 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+permissions: {}
+
 jobs:
   # Build the site and publish an artifact
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: true
+          persist-credentials: false
 
       - name: Install Zola
         uses: taiki-e/install-action@v2
