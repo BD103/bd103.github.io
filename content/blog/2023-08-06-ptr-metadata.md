@@ -1,6 +1,6 @@
 +++
 title = "Rust Pointer Metadata"
-description = "Take a look inside Rust's global allocator APIs!"
+description = "Take a look inside Rust's pointer metadata APIs!"
 
 [taxonomies]
 tags = ["rust"]
