@@ -18,7 +18,7 @@ permissions: {}
 jobs:
   # Build the site and publish an artifact
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       contents: read
     steps:
@@ -43,7 +43,7 @@ jobs:
 
   # Download build's artifact and publish site
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: build
     environment:
       name: github-pages
