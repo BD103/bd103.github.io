@@ -1,6 +1,7 @@
 +++
 title = "Correctly Converting HEIC to PNG"
 description = "Discussing approaches to converting HEIC images to PNG on MacOS and iOS without 3rd-party programs or online converters"
+updated = 2026-06-04
 
 [taxonomies]
 tags = ["macos"]
@@ -47,23 +48,49 @@ When you go to save the duplicate, make sure to set "Format" to "PNG". This will
 
 {{ figure(src = "preview-save-as.png", alt = "A screenshot of the file export dialogue, asking where to save the image and in what format") }}
 
-At this point, it may look like you're done, but don't be fooled! While Preview on MacOS will show the image as normal...
+At this point, it may look like you're done, but don't be fooled! While Preview (and Safari) will show the image as normal...
 
 {{ figure(src = "preview-uncorrected.png", alt = "A screenshot of Preview displaying the image with everything looking normal") }}
 
-...trying to open the same image in a browser will result in it looking washed out and gray! While I don't know the exact reason behind this, my best guess is because the image has [high dynamic range](https://en.wikipedia.org/wiki/High_dynamic_range)[^png-hdr] and / or uses the [Display P3 color profile](https://en.wikipedia.org/wiki/DCI-P3)[^display-p3]. Either way, it doesn't look nearly as good as the original HEIC.
+...if you open the same image in Firefox or Chromium it will look washed out and gray! Preview created a PNG that only looks correct on certain platforms!
 
-[^png-hdr]: It looks like the PNG specification [only recently added support for HDR](https://www.w3.org/TR/png-3/#changes-20031110:~:text=2100%5D-,High%20Dynamic%20Range) in June 2025. Perhaps MacOS supports PNG 3.0, but Chrome and Firefox don't?
-[^display-p3]: Specifically, the image uses the `Display P3 Primaries; PQ (Adaptive Gain Curve 0974DE20B8237D0E)` color profile. Display P3 was developed by Apple, and is a variant of the DCI-P3 color space.
+<figure>
+    <img id="image-washed" src="colorsync-uncorrected-washed.png" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however the image looks much more gray than it should, lacking vibrant blues and greens">
+    <img id="image-raw" src="colorsync-uncorrected-raw.png" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however on Firefox and Chrome the image looks much more gray than it should, lacking vibrant blues and greens">
+    <figcaption>
+        <div>
+            <input type="radio" id="hidden-image-washed" name="hidden-image" value="image-raw" onchange="updateHiddenImage()" checked>
+            <label for="hidden-image-washed">What Firefox and Chromium See (Washed)</label>
+            <br />
+            <input type="radio" id="hidden-image-raw" name="hidden-image" value="image-washed" onchange="updateHiddenImage()">
+            <label for="hidden-image-raw">What Your Browser Sees (Original)</label>
+        </div>
+    </figcaption>
+</figure>
 
-<!-- This is the only image that I did not put through ImageOptim, so readers can look at the real deal and dig into the details themselves if they wish. Enjoy! -->
-{{ figure(src = "colorsync-uncorrected.png", alt = "A photograph of electricity poles, the sun, and a bird mid-flight, however the image looks much more gray than it should, lacking vibrant blues and greens") }}
+<style id="hidden-image-style"></style>
 
-To fix this, we're going to modify the PNG to use the [sRGB color profile](https://en.wikipedia.org/wiki/SRGB) instead of Display P3 using MacOS's ColorSync Utility. ColorSync Utility is a strange, oft-ignored application for managing color profiles and converting between color spaces. In order to fix our image, first open ColorSync Utility, then select File → Open and select the PNG file.
+<script>
+function updateHiddenImage() {
+    const selection = document.querySelector("input[name='hidden-image']:checked").value;
+    document.getElementById("hidden-image-style").innerText = `#${selection} { display: none }`;
+    console.info(`Hiding image #${selection}`);
+}
+
+updateHiddenImage();
+</script>
+
+While I am not positive, I believe this happens because the image has [high dynamic range](https://en.wikipedia.org/wiki/High_dynamic_range) (HDR). If you inspect the color profile of the original image, you will see `Display P3 Primaries; PQ (Adaptive Gain Curve 0974DE20B8237D0E)`. This image uses the [Display P3 color space](https://en.wikipedia.org/wiki/DCI-P3), which is normal for Apple devices, but the PQ part tells me the image is HDR. PQ stands for [perceptual quantizer](https://en.wikipedia.org/wiki/Perceptual_quantizer), and is used when calculating the brightness of HDR images.
+
+The reason I believe this image looks bad on Firefox and Chromium is because PNG [only recently added support for HDR](https://www.w3.org/TR/png-3/#changes-20031110:~:text=2100%5D-,High%20Dynamic%20Range) in June 2025 as part of the PNG 3.0 specification. If I had to guess, MacOS and Safari have native support for HDR PNGs, but Firefox and Chromium do not yet.
+
+Either way, we need to fix this so the PNG looks correct on all platforms. We're going to convert the HDR image to SDR using MacOS's ColorSync Utility. ColorSync Utility is a strange, oft-ignored application for managing color profiles and converting between color spaces. To begin, first open ColorSync Utility, then select File → Open and select the PNG file.
 
 {{ figure(src = "colorsync-open-menu.png", alt = "A screenshot of the file menu, with 'Open' highlighted" width = "300") }}
 
-In the new window, select "Match to Profile" and select the "sRGB IEC61966-2.1" color profile. Click "Apply," then save the file.
+In the new window, select "Match to Profile" and select the "sRGB IEC61966-2.1" color profile[^srgb]. Click "Apply," then save the file.
+
+[^srgb]: [sRGB](https://en.wikipedia.org/wiki/SRGB) is an SDR color space that is the standard for the web. You can generally assume any device in the last 15 years supports it, which is why I chose it here.
 
 {{ figure(src = "colorsync-match-profile.png", alt = "A screenshot of the image open in ColorSync Utility, with 'Match to Profile' and 'sRGB IEC61966-2.1' both selected") }}
 
