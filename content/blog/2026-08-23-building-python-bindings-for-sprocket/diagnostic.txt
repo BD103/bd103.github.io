@@ -1,0 +1,9 @@
+(.venv) Foxglove:sprocket bd$ python scratch.py
+error[MyRule]: oh no!
+  ┌─ file.txt:1:27
+  │
+1 │ This is the file contents.
+  │
+  │
+  = help: something went wrong
+  = fix: try this instead
