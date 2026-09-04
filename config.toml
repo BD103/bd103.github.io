@@ -36,7 +36,7 @@ blog_section_path = "/blog"
 back_link_text = "Return"
 force_theme = false
 
-footer_copyright = "©2025 BD103"
+footer_copyright = "©2026 BD103"
 # Give credit to Serene and Zola.
 footer_credits = true
 
