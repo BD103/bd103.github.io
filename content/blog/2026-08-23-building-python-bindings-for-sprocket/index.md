@@ -1,6 +1,7 @@
 +++
 title = "Building Python Bindings for Sprocket"
 description = "Reflecting on my work this summer spent building Python bindings for the Sprocket bioinformatics workflow engine"
+updated = 2026-09-16
 
 [taxonomies]
 tags = ["gsoc", "rust", "python"]
@@ -9,7 +10,7 @@ tags = ["gsoc", "rust", "python"]
 mermaid = true
 +++
 
-This summer I participated in [Google Summer of Code](https://summerofcode.withgoogle.com/), a program where students are sponsored by Google to work on open source software. My project was to write Python bindings for Sprocket, a bio-informatics workflow engine developed by St. Jude Children's Research Hospital. Specifically, I made Sprocket's [`wdl`](https://crates.io/crates/wdl) parsing and analysis library accessible from Python so that developers could take advantage of Sprocket's advanced tooling without needing to learn Rust.
+This summer I participated in [Google Summer of Code](https://summerofcode.withgoogle.com/), a program where students are sponsored by Google to work on open source software. My project was to write Python bindings for [Sprocket](https://sprocket.bio/), a bio-informatics workflow engine developed by St. Jude Children's Research Hospital. Specifically, I made Sprocket's [`wdl`](https://crates.io/crates/wdl) parsing and analysis library accessible from Python so that developers could take advantage of Sprocket's advanced tooling without needing to learn Rust.
 
 {% note(title="Note") %}
 This is my [Work Product Submission](https://developers.google.com/open-source/gsoc/help/work-product) for GSoC. While I am posting it on my blog, please know that I am required to mention certain points and that the target audience is the GSoC Admins. I hope you enjoy reading!
