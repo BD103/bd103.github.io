@@ -29,9 +29,9 @@ After getting compiled, references and raw pointers are semantically equivalent 
 
 All pointers are unsigned integers that represent a location in memory. (I fear the day where someone decides to represent them with floating point numbers.) The amount of bits they use is platform-dependent, but guaranteed to always be the same size as a [`usize`](https://doc.rust-lang.org/std/primitive.usize.html).
 
-{% quote(cite = "[Rust `usize` Documentation](https://doc.rust-lang.org/std/primitive.usize.html)") %}
+{% <quote cite = "[Rust `usize` Documentation](https://doc.rust-lang.org/std/primitive.usize.html)"> %}
 The pointer-sized unsigned integer type.
-{% end %}
+{% </quote> %}
 
 I use an Apple M1 CPU, which has a 64-bit architecture. This means that all `usize`s compiled on my computer will be 64 bits long. 64-bit pointers are the most common nowadays, but some older computers (specifically Windows ones) may use 32-bit pointers instead.
 

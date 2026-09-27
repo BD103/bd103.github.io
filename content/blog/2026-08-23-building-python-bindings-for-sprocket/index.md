@@ -22,10 +22,10 @@ This is my [Work Product Submission](https://developers.google.com/open-source/g
 
 I planned on writing the Python bindings in four stages: diagnostics, grammar, AST, and linting. The order was important, as each stage built on the work of the previous. Each stage also happens to map to a specific module in the [`wdl` crate](https://docs.rs/wdl/), which the Python bindings mirror[^python-mirroring-rust]. I took advantage of the lovely [PyO3](https://pyo3.rs/) crate to facilitate writing the bindings, as it made building the project much easier than interfacing with [Python's C API](https://docs.python.org/3/extending/index.html) directly.
 
-{% mermaid() %}
+{% <mermaid> %}
 graph LR;
   diagnostics --> grammar --> ast --> lint;
-{% end %}
+{% </mermaid> %}
 
 The first stage was writing bindings for WDL's diagnostic capabilities, which are internally powered by [`codespan-reporting`](https://crates.io/crates/codespan-reporting). All latter stages use diagnostics to report errors and warnings, so being able to handle them from Python is a boon. I originally opened [#911](https://github.com/stjude-rust-labs/sprocket/pull/911) with the diagnostics bindings, but after discussion with my mentor we landed on a better approach that reduced code duplication in [#941](https://github.com/stjude-rust-labs/sprocket/pull/941). This PR made it possible to construct and emit diagnostics to the terminal:
 

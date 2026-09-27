@@ -22,11 +22,11 @@ Using DevTools, I looked at the CSS for the background and found the following:
 
 This CSS takes advantage of a fun quirk of the [`background` property](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background):
 
-{% quote(cite="[MDN on background image painting order](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background#image_painting_order)") %}
+{% <quote cite="[MDN on background image painting order](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background#image_painting_order)"> %}
 If multiple comma-separated backgrounds are included, they create multiple background layers on top of one another. The first background in the list creates the top layer. If the top layer contains no transparent areas, this is the only layer that will be visible.
 
 The last layer is the bottom layer. The background color is always included in this layer.
-{% end %}
+{% </quote> %}
 
 In sum, the hero background is actually three backgrounds stacked on top of each other!
 
