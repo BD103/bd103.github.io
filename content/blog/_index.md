@@ -20,13 +20,13 @@ toc = true
 # Disable comments.
 comment = false
 # Show copy button in code blocks.
-copy = true
+code_copy = true
 
-outdate_alert = false
+outdated_alert = false
 # About 2 months.
-outdate_alert_days = 60
-outdate_alert_text_before = "This article was last updated "
-outdate_alert_text_after = " days ago and may be out of date."
+outdated_alert_days = 60
+outdated_alert_text_before = "This article was last updated "
+outdated_alert_text_after = " days ago and may be out of date."
 
 # Set the defaults for extra properties
 math = false

@@ -6,7 +6,7 @@ description = "Take a look inside Rust's pointer metadata APIs!"
 tags = ["rust"]
 
 [extra]
-outdate_alert = true
+outdated_alert = true
 +++
 
 # Rust Pointer Metadata
