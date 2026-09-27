@@ -48,11 +48,11 @@ emit_diagnostics(
 )
 ```
 
-{{ <figure src = "diagnostic.png" alt = "A screenshot of a terminal running the above Python code, which the diagnostic printed in the output" caption = "The diagnostic emitted by the Python program, [view text](diagnostic.txt)" height = "200" /> }}
+{{ <figure src = "diagnostic.png" alt = "A screenshot of a terminal running the above Python code, which the diagnostic printed in the output" caption = "The diagnostic emitted by the Python program, [view text](diagnostic.txt)" height = "200" page /> }}
 
 With the diagnostics stage complete, I then implemented Sprocket's grammar API in [#980](https://github.com/stjude-rust-labs/sprocket/pull/980). This API can be used to parse WDL documents into an [event stream](https://docs.rs/wdl/latest/wdl/grammar/parser/enum.Event.html) composed of nodes and tokens[^event-stream]. While not as powerful as a full AST, the event stream is useful for viewing the syntax tree of a WDL document and implementing a basic syntax highlighter, both of which I included as examples in the documentation. I particularly enjoyed writing the syntax highlighter, which outputs stylized HTML:
 
-{{ <figure src = "syntax-highlighter.png" alt = "A screenshot of a browser showing the syntax highlighter WDL document" caption = "The syntax highlighter output, [view HTML](example.wdl.html)" height = "738" /> }}
+{{ <figure src = "syntax-highlighter.png" alt = "A screenshot of a browser showing the syntax highlighter WDL document" caption = "The syntax highlighter output, [view HTML](example.wdl.html)" height = "738" page /> }}
 
 The final stage that I completed over the summer was the AST bindings. The [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree), or AST for short, is Sprocket's typed representation of a WDL document. It is by far the most powerful way to interact with a WDL document programmatically, but also came with two distinct challenges.
 

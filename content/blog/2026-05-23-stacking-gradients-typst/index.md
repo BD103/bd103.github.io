@@ -8,7 +8,7 @@ tags = ["gsoc", "typst", "css"]
 
 In March I wrote a [Google Summer of Code](https://summerofcode.withgoogle.com) proposal for [St. Jude Children's Research Hospital](https://stjude.org). My proposal was specifically geared towards [Sprocket](https://sprocket.bio/), a bioinformatics workflow engine. While typesetting my document, Sprocket's homepage caught my eye.
 
-{{ <figure src = "sprocket-homepage.png" alt = "A screenshot of Sprocket's homepage" caption = "Sprocket's homepage" width = "100%" /> }}
+{{ <figure src = "sprocket-homepage.png" alt = "A screenshot of Sprocket's homepage" caption = "Sprocket's homepage" width = "100%" page /> }}
 
 I really love the gradient in the background of the hero banner. The blend between navy, purple, and blue are iconic, and I wanted to recreate this effect in the title page of my proposal.
 
@@ -85,7 +85,7 @@ I created my proposal using [Typst](https://typst.app/home/), a typesetting syst
 ]
 ```
 
-{{ <figure src = "single-gradient.svg" alt = "A page with a centered placeholder title and subtitle and a single gradient background" width = "50%" /> }}
+{{ <figure src = "single-gradient.svg" alt = "A page with a centered placeholder title and subtitle and a single gradient background" width = "50%" page /> }}
 
 This isn't the end of the world, however, because I found that [`block`](https://typst.app/docs/reference/layout/block/) also has a [`fill` parameter](https://typst.app/docs/reference/layout/block/#parameters-fill). To make a stacked gradient liked Sprocket's homepage, I simply created a `block` inside the `page` with the extra gradient!
 
@@ -124,11 +124,11 @@ This isn't the end of the world, however, because I found that [`block`](https:/
 )
 ```
 
-{{ <figure src = "stacked-gradient.svg" alt = "A page with a centered placeholder title and subtitle and a stacked gradient background" width = "50%" /> }}
+{{ <figure src = "stacked-gradient.svg" alt = "A page with a centered placeholder title and subtitle and a stacked gradient background" width = "50%" page /> }}
 
 Perfect! In the end, I added a few finishing touches and landed with this as my title page:
 
-{{ <figure src = "proposal-title-page.svg" alt = "The front page of my GSoC proposal" width = "50%" /> }}
+{{ <figure src = "proposal-title-page.svg" alt = "The front page of my GSoC proposal" width = "50%" page /> }}
 
 I'm super proud of the final result! It looks professional, with a lot of care put into it. The stacked gradients add a bit of flair that really makes it stand out. This is a great example of the power that Typst affords you, as compared to a word processor like Microsoft Word or Google Docs.
 
