@@ -20,9 +20,8 @@ Windows requires the [HEVC Video Extension](https://www.microsoft.com/en-us/p/he
 
 Because of this, I have a habit of converting HEIC files to PNGs before exporting them from my laptop. This process isn't obvious, however, and many solutions mentioned online suggest using an online service or downloading a sketchy program. In this article I will go over 3 different methods for converting HEIC to PNG using built-in tools in MacOS and iOS. No extra software, no online services, just the vanilla programs shipped by Apple.
 
-{% caution(title = "Caution") %}
-**Do not upload your photos to online image converters.** As a matter of privacy, you have no idea how long those images are stored and what the website operators may be doing with them. It is easier, faster, and more secure to do the conversion locally on your computer.
-{% end %}
+> [!CAUTION]
+> **Do not upload your photos to online image converters.** As a matter of privacy, you have no idea how long those images are stored and what the website operators may be doing with them. It is easier, faster, and more secure to do the conversion locally on your computer.
 
 ## Export from Photos (MacOS)
 
@@ -112,6 +111,5 @@ The iOS version does not give you control over the file format, and from my expe
 
 {{ <figure src = "photos-ios-image.jpeg" alt = "A photo of a pink cherry blossom tree in bloom with a traditional Japanese building visible in the background" /> }}
 
-{% tip(title = "Tip") %}
-If you enjoyed this post, you may be interested Howard Oakley's writing at [The Eclectic Light Company](https://eclecticlight.co/). His blog is a treasure-trove of information on the behind-the-scenes of Macs and MacOS, and has proved invaluable to me time and time again!
-{% end %}
+> [!TIP]
+> If you enjoyed this post, you may be interested Howard Oakley's writing at [The Eclectic Light Company](https://eclecticlight.co/). His blog is a treasure-trove of information on the behind-the-scenes of Macs and MacOS, and has proved invaluable to me time and time again!

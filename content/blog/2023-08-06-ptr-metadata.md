@@ -13,9 +13,8 @@ outdate_alert = true
 
 Welcome back! In my [last blog post](@/blog/2023-06-27-global-allocators.md) I talked about overriding the global allocator. It was reasonably successful, even getting mentioned in [This Month in Rust OSDev](https://rust-osdev.com/this-month/2023-06/) without me suggesting it! That success has inspired me to write about another really interesting feature in the [Rust](https://www.rust-lang.org/) programming language called pointer metadata.
 
-{% caution(title = "Caution") %}
-Some examples in this blog post use the unstable feature [`ptr_metadata`](https://github.com/rust-lang/rust/issues/81513) with Nightly Rust. I have tested all of them with `rustc 1.72.0-nightly (101fa903b 2023-06-04)`, but it may fail to compile if you use a different version. For more information, please see [the Rustup documentation](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust).
-{% end %}
+> [!CAUTION]
+> Some examples in this blog post use the unstable feature [`ptr_metadata`](https://github.com/rust-lang/rust/issues/81513) with Nightly Rust. I have tested all of them with `rustc 1.72.0-nightly (101fa903b 2023-06-04)`, but it may fail to compile if you use a different version. For more information, please see [the Rustup documentation](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust).
 
 ## What is a pointer?
 
@@ -88,9 +87,8 @@ fn main() {
 }
 ```
 
-{% note(title = "Note") %}
-You may argue that the compiler could infer that `dst` is 3 bytes, but imagine scenarios where this wouldn't be possible. A good one that I can think of is taking a `&[u8]` as a function argument. The function needs to work with any slice, no matter its size.
-{% end %}
+> [!NOTE]
+> You may argue that the compiler could infer that `dst` is 3 bytes, but imagine scenarios where this wouldn't be possible. A good one that I can think of is taking a `&[u8]` as a function argument. The function needs to work with any slice, no matter its size.
 
 ## What metadata is stored?
 
