@@ -54,8 +54,8 @@ At this point, it may look like you're done, but don't be fooled! While Preview 
 ...if you open the same image in Firefox or Chromium it will look washed out and gray! Preview created a PNG that only looks correct on certain platforms!
 
 <figure>
-    <img id="image-washed" src="colorsync-uncorrected-washed.png" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however the image looks much more gray than it should, lacking vibrant blues and greens">
-    <img id="image-raw" src="colorsync-uncorrected-raw.png" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however on Firefox and Chrome the image looks much more gray than it should, lacking vibrant blues and greens">
+    <img id="image-washed" src="{{ get_url(path = '@/blog/2026-06-03-correctly-converting-heic-to-png/colorsync-uncorrected-washed.png') }}" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however the image looks much more gray than it should, lacking vibrant blues and greens">
+    <img id="image-raw" src="{{ get_url(path = '@/blog/2026-06-03-correctly-converting-heic-to-png/colorsync-uncorrected-raw.png') }}" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however on Firefox and Chrome the image looks much more gray than it should, lacking vibrant blues and greens">
     <figcaption>
         <div>
             <input type="radio" id="hidden-image-washed" name="hidden-image" value="image-raw" onchange="updateHiddenImage()" checked>
