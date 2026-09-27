@@ -1,5 +1,5 @@
 +++
-template = 'home.html'
+template = "home.html"
 
 [extra]
 # Show footer in home page.
