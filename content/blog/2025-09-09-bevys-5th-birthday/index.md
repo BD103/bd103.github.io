@@ -21,13 +21,13 @@ In late August of 2024, one of the maintainers, [Alice](https://github.com/alice
 
 Now the idea of a Bevy CLI has been around for quite some time, with [an issue opened about it in late 2020](https://github.com/bevyengine/bevy/issues/436). When I saw Alice mention a Bevy CLI, I did some digging and found that specific issue. In the issue description it listed several possible commands, but one of which really caught my attention:
 
-{% quote(cite = "[bevy cli #436](https://github.com/bevyengine/bevy/issues/436)") %}
+{% <quote cite = "[bevy cli #436](https://github.com/bevyengine/bevy/issues/436)"> %}
 - `bevy lint` - possibly checks the project for best practices?
-{% end %}
+{% </quote> %}
 
 So...
 
-{{ figure(src = "nerd-sniping.png", alt = "A comic panel of a truck running someone over", caption = "I was thoroughly nerd-sniped, [via](https://xkcd.com/356/)") }}
+{{ <figure src = "nerd-sniping.png" alt = "A comic panel of a truck running someone over" caption = "I was thoroughly nerd-sniped, [via](https://xkcd.com/356/)" page /> }}
 
 ## Thankfully I Did Not Get Run Over by a Truck[^1]
 

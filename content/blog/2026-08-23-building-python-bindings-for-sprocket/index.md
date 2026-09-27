@@ -12,9 +12,8 @@ mermaid = true
 
 This summer I participated in [Google Summer of Code](https://summerofcode.withgoogle.com/), a program where students are sponsored by Google to work on open source software. My project was to write Python bindings for [Sprocket](https://sprocket.bio/), a bio-informatics workflow engine developed by St. Jude Children's Research Hospital. Specifically, I made Sprocket's [`wdl`](https://crates.io/crates/wdl) parsing and analysis library accessible from Python so that developers could take advantage of Sprocket's advanced tooling without needing to learn Rust.
 
-{% note(title="Note") %}
-This is my [Work Product Submission](https://developers.google.com/open-source/gsoc/help/work-product) for GSoC. While I am posting it on my blog, please know that I am required to mention certain points and that the target audience is the GSoC Admins. I hope you enjoy reading!
-{% end %}
+> [!NOTE]
+> This is my [Work Product Submission](https://developers.google.com/open-source/gsoc/help/work-product) for GSoC. While I am posting it on my blog, please know that I am required to mention certain points and that the target audience is the GSoC Admins. I hope you enjoy reading!
 
 ## What I Did
 
@@ -22,10 +21,10 @@ This is my [Work Product Submission](https://developers.google.com/open-source/g
 
 I planned on writing the Python bindings in four stages: diagnostics, grammar, AST, and linting. The order was important, as each stage built on the work of the previous. Each stage also happens to map to a specific module in the [`wdl` crate](https://docs.rs/wdl/), which the Python bindings mirror[^python-mirroring-rust]. I took advantage of the lovely [PyO3](https://pyo3.rs/) crate to facilitate writing the bindings, as it made building the project much easier than interfacing with [Python's C API](https://docs.python.org/3/extending/index.html) directly.
 
-{% mermaid() %}
+{% <mermaid> %}
 graph LR;
   diagnostics --> grammar --> ast --> lint;
-{% end %}
+{% </mermaid> %}
 
 The first stage was writing bindings for WDL's diagnostic capabilities, which are internally powered by [`codespan-reporting`](https://crates.io/crates/codespan-reporting). All latter stages use diagnostics to report errors and warnings, so being able to handle them from Python is a boon. I originally opened [#911](https://github.com/stjude-rust-labs/sprocket/pull/911) with the diagnostics bindings, but after discussion with my mentor we landed on a better approach that reduced code duplication in [#941](https://github.com/stjude-rust-labs/sprocket/pull/941). This PR made it possible to construct and emit diagnostics to the terminal:
 
@@ -49,11 +48,11 @@ emit_diagnostics(
 )
 ```
 
-{{ figure(src = "diagnostic.png", alt = "A screenshot of a terminal running the above Python code, which the diagnostic printed in the output", caption = "The diagnostic emitted by the Python program, [view text](diagnostic.txt)", height = "200") }}
+{{ <figure src = "diagnostic.png" alt = "A screenshot of a terminal running the above Python code, which the diagnostic printed in the output" caption = "The diagnostic emitted by the Python program, [view text](diagnostic.txt)" height = "200" page /> }}
 
 With the diagnostics stage complete, I then implemented Sprocket's grammar API in [#980](https://github.com/stjude-rust-labs/sprocket/pull/980). This API can be used to parse WDL documents into an [event stream](https://docs.rs/wdl/latest/wdl/grammar/parser/enum.Event.html) composed of nodes and tokens[^event-stream]. While not as powerful as a full AST, the event stream is useful for viewing the syntax tree of a WDL document and implementing a basic syntax highlighter, both of which I included as examples in the documentation. I particularly enjoyed writing the syntax highlighter, which outputs stylized HTML:
 
-{{ figure(src = "syntax-highlighter.png", alt = "A screenshot of a browser showing the syntax highlighter WDL document", caption = "The syntax highlighter output, [view HTML](example.wdl.html)", height = "738") }}
+{{ <figure src = "syntax-highlighter.png" alt = "A screenshot of a browser showing the syntax highlighter WDL document" caption = "The syntax highlighter output, [view HTML](example.wdl.html)" height = "738" page /> }}
 
 The final stage that I completed over the summer was the AST bindings. The [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree), or AST for short, is Sprocket's typed representation of a WDL document. It is by far the most powerful way to interact with a WDL document programmatically, but also came with two distinct challenges.
 

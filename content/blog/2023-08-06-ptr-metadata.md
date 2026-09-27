@@ -6,16 +6,15 @@ description = "Take a look inside Rust's pointer metadata APIs!"
 tags = ["rust"]
 
 [extra]
-outdate_alert = true
+outdated_alert = true
 +++
 
 # Rust Pointer Metadata
 
 Welcome back! In my [last blog post](@/blog/2023-06-27-global-allocators.md) I talked about overriding the global allocator. It was reasonably successful, even getting mentioned in [This Month in Rust OSDev](https://rust-osdev.com/this-month/2023-06/) without me suggesting it! That success has inspired me to write about another really interesting feature in the [Rust](https://www.rust-lang.org/) programming language called pointer metadata.
 
-{% caution(title = "Caution") %}
-Some examples in this blog post use the unstable feature [`ptr_metadata`](https://github.com/rust-lang/rust/issues/81513) with Nightly Rust. I have tested all of them with `rustc 1.72.0-nightly (101fa903b 2023-06-04)`, but it may fail to compile if you use a different version. For more information, please see [the Rustup documentation](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust).
-{% end %}
+> [!CAUTION]
+> Some examples in this blog post use the unstable feature [`ptr_metadata`](https://github.com/rust-lang/rust/issues/81513) with Nightly Rust. I have tested all of them with `rustc 1.72.0-nightly (101fa903b 2023-06-04)`, but it may fail to compile if you use a different version. For more information, please see [the Rustup documentation](https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust).
 
 ## What is a pointer?
 
@@ -29,9 +28,9 @@ After getting compiled, references and raw pointers are semantically equivalent 
 
 All pointers are unsigned integers that represent a location in memory. (I fear the day where someone decides to represent them with floating point numbers.) The amount of bits they use is platform-dependent, but guaranteed to always be the same size as a [`usize`](https://doc.rust-lang.org/std/primitive.usize.html).
 
-{% quote(cite = "[Rust `usize` Documentation](https://doc.rust-lang.org/std/primitive.usize.html)") %}
+{% <quote cite = "[Rust `usize` Documentation](https://doc.rust-lang.org/std/primitive.usize.html)"> %}
 The pointer-sized unsigned integer type.
-{% end %}
+{% </quote> %}
 
 I use an Apple M1 CPU, which has a 64-bit architecture. This means that all `usize`s compiled on my computer will be 64 bits long. 64-bit pointers are the most common nowadays, but some older computers (specifically Windows ones) may use 32-bit pointers instead.
 
@@ -88,9 +87,8 @@ fn main() {
 }
 ```
 
-{% note(title = "Note") %}
-You may argue that the compiler could infer that `dst` is 3 bytes, but imagine scenarios where this wouldn't be possible. A good one that I can think of is taking a `&[u8]` as a function argument. The function needs to work with any slice, no matter its size.
-{% end %}
+> [!NOTE]
+> You may argue that the compiler could infer that `dst` is 3 bytes, but imagine scenarios where this wouldn't be possible. A good one that I can think of is taking a `&[u8]` as a function argument. The function needs to work with any slice, no matter its size.
 
 ## What metadata is stored?
 
@@ -166,4 +164,4 @@ If you have any questions, feel free to comment on [my post](https://users.rust-
 
 Cheers!
 
-{{ figure(src = "https://www.rustacean.net/assets/rustacean-flat-happy.svg", alt = "Ferris the crab, Rust's unofficial mascot, smiling", caption = "Ferris the happy crab", caption = "[via](https://rustacean.net/)", width = "200rem") }}
+{{ <figure src = "https://www.rustacean.net/assets/rustacean-flat-happy.svg" alt = "Ferris the crab, Rust's unofficial mascot, smiling" caption = "Ferris the happy crab" caption = "[via](https://rustacean.net/)" width = "200rem" /> }}

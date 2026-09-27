@@ -21,9 +21,8 @@ The change was simple, the review process went well, and it was merged only a da
 
 It wasn't until December where I began working on the aspect of Bevy that I now specialize in: Github Actions. I modified the workflow that publishes <https://dev-docs.bevyengine.org> to upload an artifact instead of force-pushing to the `gh-pages` branch. It took a few attempts, but in the end its result was safer and _far less cursed_.
 
-{% note(title = "Note") %}
-Github Actions is a continuous integration platform used primarily to test and lint code. It lets you use Github-hosted runners for free for public projects, which I was all for! I setup a lot of CI for my previous hobby projects, so I was already familiar with it before entering the Bevy scene.
-{% end %}
+> [!NOTE]
+>Github Actions is a continuous integration platform used primarily to test and lint code. It lets you use Github-hosted runners for free for public projects, which I was all for! I setup a lot of CI for my previous hobby projects, so I was already familiar with it before entering the Bevy scene.
 
 The ranks of Bevy contributors are chock-full of ECS enthusiasts and rendering ninjas, but how many CI wizards are there? Not many[^1], and so I found my role. I spent a lot of time improve the quality of the CI jobs and their associated `ci` tool.
 

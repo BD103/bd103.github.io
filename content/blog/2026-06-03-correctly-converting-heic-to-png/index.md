@@ -20,43 +20,42 @@ Windows requires the [HEVC Video Extension](https://www.microsoft.com/en-us/p/he
 
 Because of this, I have a habit of converting HEIC files to PNGs before exporting them from my laptop. This process isn't obvious, however, and many solutions mentioned online suggest using an online service or downloading a sketchy program. In this article I will go over 3 different methods for converting HEIC to PNG using built-in tools in MacOS and iOS. No extra software, no online services, just the vanilla programs shipped by Apple.
 
-{% caution(title = "Caution") %}
-**Do not upload your photos to online image converters.** As a matter of privacy, you have no idea how long those images are stored and what the website operators may be doing with them. It is easier, faster, and more secure to do the conversion locally on your computer.
-{% end %}
+> [!CAUTION]
+> **Do not upload your photos to online image converters.** As a matter of privacy, you have no idea how long those images are stored and what the website operators may be doing with them. It is easier, faster, and more secure to do the conversion locally on your computer.
 
 ## Export from Photos (MacOS)
 
 If your photos are stored in iCloud or accessible through the Photos app on MacOS, it's really easy to convert them to PNG. Select the image in Photos and export the HEIC using File → Export → Export 1 Photo.
 
-{{ figure(src = "photos-macos-export-menu.png", alt = "A screenshot of the photo export menu, highlighting the text 'Export 1 Photo'") }}
+{{ <figure src = "photos-macos-export-menu.png" alt = "A screenshot of the photo export menu, highlighting the text 'Export 1 Photo'" page /> }}
 
 Make sure to set "Photo Kind" to "PNG," "Color Profile" to "Most Compatible," and "Size" to "Full Size" in the export dialogue.
 
-{{ figure(src = "photos-macos-export-dialogue.png", alt = "A screenshot of the photo export dialogue") }}
+{{ <figure src = "photos-macos-export-dialogue.png" alt = "A screenshot of the photo export dialogue" page /> }}
 
 Once exported, you're good to go!
 
-{{ figure(src = "photos-macos-image.png", alt = "The final image: a bright sky with clouds and a tree line") }}
+{{ <figure src = "photos-macos-image.png" alt = "The final image: a bright sky with clouds and a tree line" page /> }}
 
 ## Convert with Preview (MacOS)
 
 Preview is also able to convert HEIC to PNG, however you need to use ColorSync Utility for the image to turn out correct. First, open the HEIC file in Preview. Then, select File → Duplicate to create a copy.
 
-{{ figure(src = "preview-duplicate.png", alt = "A screenshot of the file menu, with 'Duplicate' selected", width = "300") }}
+{{ <figure src = "preview-duplicate.png" alt = "A screenshot of the file menu, with 'Duplicate' selected" width = "300" page /> }}
 
 When you go to save the duplicate, make sure to set "Format" to "PNG". This will tell Preview to convert the image to PNG instead of leaving it as a HEIC.
 
-{{ figure(src = "preview-save-as.png", alt = "A screenshot of the file export dialogue, asking where to save the image and in what format") }}
+{{ <figure src = "preview-save-as.png" alt = "A screenshot of the file export dialogue, asking where to save the image and in what format" page /> }}
 
 At this point, it may look like you're done, but don't be fooled! While Preview (and Safari) will show the image as normal...
 
-{{ figure(src = "preview-uncorrected.png", alt = "A screenshot of Preview displaying the image with everything looking normal") }}
+{{ <figure src = "preview-uncorrected.png" alt = "A screenshot of Preview displaying the image with everything looking normal" page /> }}
 
 ...if you open the same image in Firefox or Chromium it will look washed out and gray! Preview created a PNG that only looks correct on certain platforms!
 
 <figure>
-    <img id="image-washed" src="colorsync-uncorrected-washed.png" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however the image looks much more gray than it should, lacking vibrant blues and greens">
-    <img id="image-raw" src="colorsync-uncorrected-raw.png" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however on Firefox and Chrome the image looks much more gray than it should, lacking vibrant blues and greens">
+    <img id="image-washed" src="{{ get_url(path = '@/blog/2026-06-03-correctly-converting-heic-to-png/colorsync-uncorrected-washed.png') }}" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however the image looks much more gray than it should, lacking vibrant blues and greens">
+    <img id="image-raw" src="{{ get_url(path = '@/blog/2026-06-03-correctly-converting-heic-to-png/colorsync-uncorrected-raw.png') }}" alt="A photograph of electricity poles, the sun, and a bird mid-flight, however on Firefox and Chrome the image looks much more gray than it should, lacking vibrant blues and greens">
     <figcaption>
         <div>
             <input type="radio" id="hidden-image-washed" name="hidden-image" value="image-raw" onchange="updateHiddenImage()" checked>
@@ -86,32 +85,31 @@ The reason I believe this image looks bad on Firefox and Chromium is because PNG
 
 Either way, we need to fix this so the PNG looks correct on all platforms. We're going to convert the HDR image to SDR using MacOS's ColorSync Utility. ColorSync Utility is a strange, oft-ignored application for managing color profiles and converting between color spaces. To begin, first open ColorSync Utility, then select File → Open and select the PNG file.
 
-{{ figure(src = "colorsync-open-menu.png", alt = "A screenshot of the file menu, with 'Open' highlighted" width = "300") }}
+{{ <figure src = "colorsync-open-menu.png" alt = "A screenshot of the file menu, with 'Open' highlighted" width = "300" page /> }}
 
 In the new window, select "Match to Profile" and select the "sRGB IEC61966-2.1" color profile[^srgb]. Click "Apply," then save the file.
 
 [^srgb]: [sRGB](https://en.wikipedia.org/wiki/SRGB) is an SDR color space that is the standard for the web. You can generally assume any device in the last 15 years supports it, which is why I chose it here.
 
-{{ figure(src = "colorsync-match-profile.png", alt = "A screenshot of the image open in ColorSync Utility, with 'Match to Profile' and 'sRGB IEC61966-2.1' both selected") }}
+{{ <figure src = "colorsync-match-profile.png" alt = "A screenshot of the image open in ColorSync Utility, with 'Match to Profile' and 'sRGB IEC61966-2.1' both selected" page /> }}
 
 Now, if you open the corrected image in a browser, it will look much much closer to the original.
 
-{{ figure(src = "colorsync-corrected.png", alt = "A photograph of electricity poles, the sun, and a bird mid-flight") }}
+{{ <figure src = "colorsync-corrected.png" alt = "A photograph of electricity poles, the sun, and a bird mid-flight" page /> }}
 
 ## Export from Photos (iOS)
 
 The Photos app on iOS is similar to MacOS, except it doesn't give as much control. When you go to export the image, click the "Options" button at the top of the window.
 
-{{ figure(src = "photos-ios-export.png", alt = "A screenshot of the export image screen in the Photos app", width = "400") }}
+{{ <figure src = "photos-ios-export.png" alt = "A screenshot of the export image screen in the Photos app" width = "400" page /> }}
 
 In the options sheet, make sure to select "Most Compatible" for the format.
 
-{{ figure(src = "photos-ios-export-options.png", alt = "A screenshot of the options menu, with 'Most Compatible' selected. The format selection box is captioned 'Choose Automatic for the best format for the destination or Current to prevent file format conversions. Photos and videos may convert to JPEG, PNG, and H.264 formats if you choose Most Compatible.'", width = "400") }}
+{{ <figure src = "photos-ios-export-options.png" alt = "A screenshot of the options menu, with 'Most Compatible' selected. The format selection box is captioned 'Choose Automatic for the best format for the destination or Current to prevent file format conversions. Photos and videos may convert to JPEG, PNG, and H.264 formats if you choose Most Compatible.'" width = "400" page /> }}
 
 The iOS version does not give you control over the file format, and from my experience it exports JPEGs rather than PNGs. Even still, the resulting image appears correct and does not experience the washed-out behavior from Preview.
 
-{{ figure(src = "photos-ios-image.jpeg", alt = "A photo of a pink cherry blossom tree in bloom with a traditional Japanese building visible in the background") }}
+{{ <figure src = "photos-ios-image.jpeg" alt = "A photo of a pink cherry blossom tree in bloom with a traditional Japanese building visible in the background" page /> }}
 
-{% tip(title = "Tip") %}
-If you enjoyed this post, you may be interested Howard Oakley's writing at [The Eclectic Light Company](https://eclecticlight.co/). His blog is a treasure-trove of information on the behind-the-scenes of Macs and MacOS, and has proved invaluable to me time and time again!
-{% end %}
+> [!TIP]
+> If you enjoyed this post, you may be interested Howard Oakley's writing at [The Eclectic Light Company](https://eclecticlight.co/). His blog is a treasure-trove of information on the behind-the-scenes of Macs and MacOS, and has proved invaluable to me time and time again!
