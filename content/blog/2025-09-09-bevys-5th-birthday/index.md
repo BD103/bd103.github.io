@@ -4,9 +4,6 @@ description = "Reflecting on my contributions to Bevy on its 5th birthday, and h
 
 [taxonomies]
 tags = ["bevy", "bevy_lint", "rust"]
-
-[extra]
-featured = true
 +++
 
 [Bevy](https://bevy.org/) is an open-source game engine built in Rust. On August 10th, 2025, the project lead Cart [celebrated Bevy's 5th birthday with a blog post](https://bevy.org/news/bevys-fifth-birthday/), and I wanted to do the same!
