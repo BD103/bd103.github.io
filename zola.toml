@@ -53,3 +53,5 @@ not_found_recover_text = "$ cd ~"
 
 # Emoji reactions are not setup.
 reaction = false
+
+og_image = "img/og.png"
