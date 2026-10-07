@@ -1,6 +1,7 @@
 +++
 title = "C for Rust Programmers"
 description = "Interesting and unexpected details for Rust programmers learning the C programming language."
+updated = 2026-10-07
 hidden = true # TODO: remove
 
 [taxonomies]
@@ -15,7 +16,7 @@ With the premise set, let's draw the curtain and see what C has to offer!
 
 ## Boolean Is Not* Built-In
 
-The original version of C did not have a primitive type for booleans, instead programs used the integers 0 and 1. This was changed in [C99](https://en.wikipedia.org/wiki/C99), where you can now use booleans by including [`<stdbool.h>`](https://en.cppreference.com/c/header/stdbool)[^_bool]:
+The original version of C did not have a primitive type for booleans, programs instead used the integers 0 and 1. This was changed in [C99](https://en.wikipedia.org/wiki/C99), which added booleans in the optional [`<stdbool.h>`](https://en.cppreference.com/c/header/stdbool) header[^_bool]:
 
 ```c
 #include <stdbool.h>
@@ -30,8 +31,7 @@ int main() {
 
 Even still, `true` and `false` are not literals or keywords like in other languages. Instead, they are definitions that expand to 1 and 0:
 
-```c
-// C99 <stdbool.h>
+```c,name=stdbool.h
 #define true 1
 #define false 0
 ```
@@ -53,7 +53,7 @@ assert_eq!(std::mem::size_of::<&u8>(), 8);
 assert_eq!(std::mem::size_of::<&str>(), 16);
 ```
 
-This approach makes fetching the string length extremely efficient, but requires more memory per `&str` reference. C uses a different approach: it does not store the size of its strings separately, but instead terminates every single string with a null byte (`\0`). This is an intentional trade off that results in a few things:
+This approach makes fetching the string length extremely efficient, but requires more memory per `&str` reference. C uses a different approach: it doesn't store the size of its strings separately, but instead terminates every single string with a null byte (`\0`). This is an intentional trade off that results in a few things:
 
 - C programs don't need to keep track of an extra `size` variable alongside the string[^extra-size-variable]
 - Every single string needs room at the end for a null byte
@@ -139,7 +139,7 @@ I really love Rust's error handling. [`Result`](https://doc.rust-lang.org/stable
 
 C's error handling story, in comparison, is straight up tragic. It seems to boil down to functions returning a "magic integer" like -1 or a null pointer to signal there was an error. You can get a little bit more information by reading [`errno`](https://cppreference.com/c/error/errno), a thread-local integer that can be used to check for specific kinds of errors, but in terms of getting actual error messages and stack traces it is much harder.
 
-When writing C, one of the biggest things you'll notice is that the language will never force you to handle errors. It's up to you to remember that functions can fail. For example, here's a snippet of code [Null-Terminated Strings](#null-terminated-strings):
+When writing C, one of the biggest things you'll notice is that the language will never force you to handle errors. It's up to you to remember that functions can fail. For example, here's a snippet of code from [Null-Terminated Strings](#null-terminated-strings):
 
 ```c,hl_lines=1-2
 // Allocate enough room for the string and its null terminator.
@@ -150,7 +150,7 @@ for (int i = 0; i < len; i++) {
 }
 ```
 
-To new programmers, it's not immediately obvious that [`malloc()`](https://cppreference.com/c/memory/malloc) can fail and return a null pointer. This example could easily segfault if your machine runs out of memory. To fix the code, it should manually check for a null pointer and gracefully exit if one is found:
+To new programmers, it's not immediately obvious that [`malloc()`](https://cppreference.com/c/memory/malloc) can fail and return a null pointer. If your machine runs out of memory, `reversed[i]` will cause a segfault upon being accessed. In order to avoid unhelpful segfaults, the program should check for a null pointer and gracefully exit if one is found:
 
 ```c
 char* reversed = malloc(len + 1);
@@ -161,14 +161,14 @@ if (reversed == NULL) {
 }
 ```
 
-Doing so provides a much better experience than a segfault or other unintentional behavior:
+Doing so provides a much better experience than a segfault, or worse, other unintentional behavior:
 
 ```bash
 $ ./main
 Error: Cannot allocate memory
 ```
 
-Of course, you could always try to recreate Rust's `Result` in C using tagged unions:
+Of course, remembering to check every single allocated pointer isn't an amazing developer experience. An approach I played around with was recreating Rust's `Result` in C using tagged unions:
 
 ```c
 struct MallocResult {
@@ -180,7 +180,11 @@ struct MallocResult {
 };
 ```
 
-It's a complete mess to use, however, and there's still nothing stopping you from immediately accessing `result.value.ptr` without handling the error first. Unfortunately, this seems to be a prime tenet of C that I personally disagree with. C places full trust in the programmer to _do things right™_ and gives few facilities for contracts or safe abstraction.
+It's a complete mess to use, however, and there's _still_ nothing stopping you from immediately accessing `result.value.ptr` without handling the error first. The lack of visibility modifiers like `private` and `public`, which could be used to prevent this, appear to be an intentional design decision. C places full trust in the programmer to _do things right™_ and gives few facilities for contracts or safe abstractions.
+
+I personally disagree with this approach. I'm not some mastermind programming wizard who never makes mistakes. I'd much rather encode program requirements into the type system so that the compiler can check them for me![^fearless-simd] That way, I can be reasonably certain that if the code compiles it was written correctly. But I digress.
+
+[^fearless-simd]: [This blog post on Fearless SIMD](https://shnatsel.github.io/safe-simd-in-rust-even-on-the-inside/) provides a great example of using Rust's type system to guarantee the correctness of code. I highly recommend giving it a read!
 
 ## Field Access Syntax
 
@@ -211,9 +215,9 @@ If your curious, [this Stack Overflow write up](https://stackoverflow.com/a/1336
 
 ## Arrays Become Pointers for Fun
 
-Arrays have some weird nuance to them. Sometimes they are plain values with their length accessible using [`sizeof()`](https://cppreference.com/c/language/sizeof), other times they are pointers with an unknown size. In general, this is determined by whether you are handling the array within the function it was defined.
+Arrays have some weird nuance to them. Sometimes they are plain values with their length accessible using [`sizeof()`](https://cppreference.com/c/language/sizeof), other times they are pointers with an unknown size. In general, this is determined by whether you are handling the array within the function it was defined or not.
 
-For showcase what I mean, here's a very simple C program that prints the size of two arrays:
+To showcase what I mean, here's a very simple C program that prints the size of two arrays:
 
 ```c
 char declared_size[3] = { 1, 2, 3 };
@@ -223,7 +227,7 @@ printf("Declared size (main): %ld bytes\n", sizeof(declared_size));
 printf("Inferred size (main): %ld bytes\n", sizeof(inferred_size));
 ```
 
-When run, this programs tells you that both arrays take 3 bytes of memory:
+When run, this programs tells you that both arrays take 3 bytes of memory. Good!
 
 ```bash
 $ ./main
@@ -254,11 +258,30 @@ Why? Because any array passed through a function is _implicitly converted_ to a 
 void function(char* declared_size, char* inferred_size);
 ```
 
-This is why it confusingly looked like each array was 8 bytes long. The arrays themselves are 3 bytes, but the pointers take up 8 bytes of memory!
+This is why it confusingly looked like each array was 8 bytes long. The arrays themselves are 3 bytes, but the pointers take up 8 bytes of memory! Handily, Clang raises a warning when you run `sizeof()` on the pointer form of an array, making it easier to catch this mistake:
+
+```bash
+$ clang main.c
+06-arrays/main.c:5:59: warning: sizeof on array function parameter will return size of 'char *'
+      instead of 'char[3]' [-Wsizeof-array-argument]
+    5 |     printf("Declared size (function): %ld bytes\n", sizeof(declared_size));
+      |                                                           ^
+06-arrays/main.c:4:20: note: declared here
+    4 | void function(char declared_size[3], char inferred_size[]) {
+      |                    ^
+06-arrays/main.c:6:59: warning: sizeof on array function parameter will return size of 'char *'
+      instead of 'char[]' [-Wsizeof-array-argument]
+    6 |     printf("Inferred size (function): %ld bytes\n", sizeof(inferred_size));
+      |                                                           ^
+06-arrays/main.c:4:43: note: declared here
+    4 | void function(char declared_size[3], char inferred_size[]) {
+      |                                           ^
+2 warnings generated.
+```
 
 ## Oh Yeah References Don't Exist
 
-I'd be remiss if I didn't mention it once. C has no borrow checking, no concept of references. It's all [raw pointers](https://doc.rust-lang.org/stable/std/primitive.pointer.html). This means you can do fun pointer arithmetic like so:
+I'd be remiss if I didn't mention it once. C has no borrow checking, and no concept of references. It's all [raw pointers](https://doc.rust-lang.org/stable/std/primitive.pointer.html). This means you can do fun pointer arithmetic like so:
 
 ```c
 int array[] = { 0, 1, 2, 3, 4, 5 };
@@ -270,6 +293,10 @@ for (int* x = &array[0]; x < &array[6]; x++) {
 ```
 
 However, I'm not sure how good an idea that is. 😅
+
+Either way, be careful when you mess with pointers. Making mistakes with memory results in buffer overflows and out-of-bounds writes, which provide significant threats to the security of your code.
+
+{{ <figure src="vuln-categories-2021.png" alt="A graph visualizing which vulnerability category had the most CVEs between November 2021 and January 2022. Buffer overflow is the third most common, with 346 CVEs, and out-of-bounds writes are the ninth most common, with 204 CVEs. The two categories more common than buffer overflow are denial-of-service with 488 and cross-site scripting with 683." caption="Vulnerability category distribution for CVEs registered between Nov. 2021 and Jan. 2022, [via](https://unit42.paloaltonetworks.com/network-security-trends-cross-site-scripting/)" width="700" page /> }}
 
 ## Conclusion
 
