@@ -3,7 +3,7 @@ title = "BD103's Blog"
 description = "Technical writing on Bevy, Rust, and more"
 default_language = "en"
 theme = "serene"
-# Generate RSS and Atom feeds.
+# Generate Atom feed.
 generate_feeds = true
 feed_filenames = ["feed.xml", "atom.xml"]
 author = "BD103"
@@ -38,7 +38,6 @@ nav = [
   { name = "Tags", path = "/tags" },
   { name = "Source", path = "https://github.com/BD103/bd103.github.io" },
   { name = "RSS", path = "/feed.xml" },
-  { name = "Atom", path = "/atom.xml" },
 ]
 blog_section_path = "/blog"
 
@@ -50,7 +49,7 @@ footer_copyright = "©2026 BD103"
 footer_credits = true
 
 not_found_error_text = "404 Not Found :("
-not_found_recover_text = "« Phone home? »"
+not_found_recover_text = "$ cd ~"
 
 # Emoji reactions are not setup.
 reaction = false
