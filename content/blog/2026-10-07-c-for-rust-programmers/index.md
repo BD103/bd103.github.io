@@ -1,11 +1,9 @@
 +++
 title = "C for Rust Programmers"
 description = "Interesting and unexpected details for Rust programmers learning the C programming language."
-updated = 2026-10-07
-hidden = true # TODO: remove
 
 [taxonomies]
-tags = ["rust"] # TODO: add "c"
+tags = ["rust", "c"]
 +++
 
 The very first systems programming language I ever learned was Rust. This is uncommon compared to many other programmers; you're more likely to find someone who learned C or C++ first before coming to Rust. As such, there are plenty of "Rust for C Programmers" articles on the internet, but little to no "C for Rust Programmers" articles out there.
@@ -300,7 +298,7 @@ Either way, be careful when you mess with pointers. Making mistakes with memory 
 
 ## Conclusion
 
-I hope you enjoyed this article! I've honestly had a lot of fun learning C. And while I doubt I'll reach for it for personal projects, it's absolutely a crucial language to know as a systems programmer.
+I hope you enjoyed this article! I've honestly had a lot of fun learning C. And while I doubt I'll reach for it for personal projects, it's absolutely a crucial language to know as a systems programmer. All the examples in this blog are [available on Github](https://github.com/BD103/C-for-Rust-Programmers), if you'd like to mess with them yourself!
 
 Until next time,
 
