@@ -38,7 +38,6 @@ nav = [
   { name = "Posts", path = "/blog" },
   { name = "Tags", path = "/tags" },
   { name = "Source", path = "https://github.com/BD103/bd103.github.io" },
-  { name = "RSS", path = "/feed.xml" },
 ]
 blog_section_path = "/blog"
 
