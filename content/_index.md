@@ -12,6 +12,4 @@ recent_more_text = "More »"
 date_format = "%Y-%m-%d"
 +++
 
-Welcome to my website! I'm BD103, and I'm an open-sourced contributor with a strong interest in game development, tooling, and infrastructure.
-
-I've been an active contributor and community member of [Bevy](https://bevy.org), a game engine written in [Rust](https://rust-lang.org), since November 2023. You'll find many of my projects and blog posts are related to Bevy and Rust in general!
+Welcome to my website! My name is Bryan Deep, although I go by BD103 online. I'm an open-sourced developer with a strong interest in systems, tooling, and infrastructure. In the past I've worked on [Sprocket](https://github.com/stjude-rust-labs/sprocket), spearheading the [Python bindings project](@/blog/2026-08-23-building-python-bindings-for-sprocket/index.md) as part of Google Summer of Code, and the [Bevy game engine](https://github.com/bevyengine/bevy), creating the [Bevy Linter](https://github.com/TheBevyFlock/bevy_cli) alongside the Bevy CLI working group.

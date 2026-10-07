@@ -24,13 +24,14 @@ dark_theme = "catppuccin-mocha"
 paths_keep_dates = true
 
 [extra]
-name = "BD103"
-handle = "bd103"
-bio = "Rust enthusiast and Bevy contributor"
+name = "Bryan Deep"
+handle = "BD103"
+bio = "Building systems in Rust"
 avatar = "img/avatar.png"
 links = [
   { name = "GitHub", icon = "github", url = "https://github.com/BD103" },
   { name = "Mastodon", icon = "mastodon", url = "https://hachyderm.io/@bd103", rel_me = true },
+  { name = "LinkedIn", icon = "linkedin", url = "https://www.linkedin.com/in/bryan-deep/" },
 ]
 
 nav = [
