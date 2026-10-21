@@ -1,9 +1,13 @@
 +++
-title = "Mitigating eMudhra Compromise on Ungoogled Chromium"
-description = "How to mitigate the eMudhra intermediate CA compromise on Ungoogled Chromium, which hasn't yet published a patch"
+title = "Mitigating eMudhra Private Key Compromise on Ungoogled Chromium"
+description = "How to mitigate the eMudhra intermediate CA private key compromise on Ungoogled Chromium, which hasn't yet published a patch"
 
 [taxonomies]
 tags = ["security"]
+
+[extra]
+outdated_alert = true
+outdated_alert_days = 14
 +++
 
 I don't use Chrome, as I dislike Google's blatant disrespect for my privacy, so instead I use [Ungoogled Chromium](https://ungoogled-software.github.io/) as my browser[^firefox]. Because Ungoogled Chromium is a community-run project, they are slower to respond to security incidents.
